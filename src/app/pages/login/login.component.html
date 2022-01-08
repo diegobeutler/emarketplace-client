@@ -1,0 +1,81 @@
+<form (ngSubmit)="onSubmit()"  [formGroup]="loginForm!">
+
+  <div class="wrapper fadeInDown">
+    <div id="formContent">
+      <!-- Tabs Titles -->
+
+      <!-- Icon -->
+      <div class="fadeIn first">
+        <i class="fas fa-store-alt"  id="icon">E-marketplace</i>
+        <i class="fa fa-store-alt fa-2x"  id="icon">E-marketplace</i>
+        <i class="fa fa-trash fa-2x" >E-marketplace</i>
+      </div>
+
+      <!-- Login Form -->
+      <form>
+        <input type="text" id="login" class="fadeIn second" name="login" placeholder="login">
+        <input type="text" id="password" class="fadeIn third" name="login" placeholder="password">
+        <input type="submit" class="fadeIn fourth" value="Log In">
+      </form>
+
+      <!-- Remind Passowrd -->
+      <div id="formFooter">
+        <a class="underlineHover" href="#">Forgot Password?</a>
+      </div>
+
+    </div>
+  </div>
+</form>
+
+<!--<div class="wrapper fadeInDown">-->
+<!--  <div id="formContent">-->
+<!--    &lt;!&ndash; Tabs Titles &ndash;&gt;-->
+
+<!--    &lt;!&ndash; Icon &ndash;&gt;-->
+<!--    <div class="fadeIn first">-->
+<!--      <img src="http://danielzawadzki.com/codepen/01/icon.svg" id="icon" alt="User Icon" />-->
+<!--    </div>-->
+
+<!--    &lt;!&ndash; Login Form &ndash;&gt;-->
+<!--    <form>-->
+<!--      <input type="text" id="login" class="fadeIn second" name="login" placeholder="login">-->
+<!--      <input type="text" id="password" class="fadeIn third" name="login" placeholder="password">-->
+<!--      <input type="submit" class="fadeIn fourth" value="Log In">-->
+<!--    </form>-->
+
+<!--    &lt;!&ndash; Remind Passowrd &ndash;&gt;-->
+<!--    <div id="formFooter">-->
+<!--      <a class="underlineHover" href="#">Forgot Password?</a>-->
+<!--    </div>-->
+
+<!--  </div>-->
+<!--</div>-->
+
+<!--<div class="wrapper fadeInDown">-->
+<!--  <div id="formContent">-->
+<!--    &lt;!&ndash; Tabs Titles &ndash;&gt;-->
+
+<!--    &lt;!&ndash; Icon &ndash;&gt;-->
+<!--    <div class="fadeIn first">-->
+<!--      <img alt="UTFPR" th:src="@{/images/logo.png}"/>-->
+<!--    </div>-->
+
+<!--    &lt;!&ndash; Login Form &ndash;&gt;-->
+<!--    <form th:action="@{/login}" method="POST">-->
+<!--      <input type="text" id="username" class="fadeIn second" name="username" placeholder="usuário">-->
+
+<!--      <input type="password" id="password" class="fadeIn third" name="password" placeholder="senha">-->
+
+<!--      <input type="submit" class="fadeIn fourth" value="Entrar">-->
+<!--      <div class="alert alert-danger" th:if="${#bools.isTrue(param.error)}">-->
+<!--        O usuário e/ou senha inválido(s)!-->
+<!--      </div>-->
+<!--    </form>-->
+
+<!--    &lt;!&ndash; Remind Passowrd &ndash;&gt;-->
+<!--    <div id="formFooter">-->
+<!--      <a class="underlineHover" href="#">Esqueceu a senha?</a>-->
+<!--    </div>-->
+
+<!--  </div>-->
+<!--</div>-->
