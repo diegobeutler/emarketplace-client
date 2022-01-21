@@ -10,6 +10,13 @@ import {PanelModule} from "primeng/panel";
 import {AutoCompleteModule} from "primeng/autocomplete";
 import {UsuarioFormComponent} from "./usuario-form.component";
 import {UsuarioService} from "./usuario.service";
+import {NgxMaskModule} from "ngx-mask";
+import {EnderecoModule} from "../endereco/endereco.module";
+import {
+  DisabledLabelAndSpanModule
+} from "../../shared/components/dierective/disabledLabelSpan/disabled-label-and-span.module";
+import {TooltipModule} from "primeng/tooltip";
+import {FileModule} from "../../shared/components/file/file.module";
 
 const routes: Routes = [
   { path: '', component: UsuarioFormComponent }
@@ -25,9 +32,15 @@ const routes: Routes = [
     RouterModule,
     ButtonModule,
     RouterModule.forChild(routes),
+    NgxMaskModule.forRoot(),
+
     PanelModule,
     ReactiveFormsModule,
-    AutoCompleteModule
+    AutoCompleteModule,
+    EnderecoModule,
+    DisabledLabelAndSpanModule,
+    TooltipModule,
+    FileModule
   ],
   declarations: [
     UsuarioFormComponent,
@@ -36,4 +49,4 @@ const routes: Routes = [
     UsuarioService,
   ],
 })
-export class LoginModule { }
+export class UsuarioModule { }

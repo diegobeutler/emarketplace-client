@@ -18,8 +18,8 @@ export abstract class CrudService<T> {
         public http: HttpClient,
     ) { }
 
-    public salvar(registro: T): Observable<void> {
-        return this.http.post<void>(this.baseUrl + this.url + '/salvar', registro);
+    public salvar(registro: T): Observable<T> {
+        return this.http.post<T>(this.baseUrl + this.url, registro);
     }
 
     public pesquisarTodos(): Observable<T[]> {

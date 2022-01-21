@@ -1,7 +1,7 @@
 import {Cidade} from "../../endereco/models/cidade";
 import {Permissao} from "../../../shared/models/permissao";
 
-export interface Usuario {
+export class Usuario {
   id?: number;
   apelido: string;
   sobrenome: string;
@@ -14,4 +14,6 @@ export interface Usuario {
   // interesses?: Categoria[];
 
   cidade: Cidade;// ter um card de endereço
+
+  deleteImage: boolean;
 }

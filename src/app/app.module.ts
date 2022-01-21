@@ -7,19 +7,24 @@ import {HttpClientModule} from "@angular/common/http";
 import {ToolbarComponent} from './shared/components/toolbar/toolbar.component';
 import {UsuarioFormComponent} from './pages/usuario/usuario-form.component';
 import {CardModule} from "primeng/card";
+import {NgxMaskModule} from "ngx-mask";
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
     AppComponent,
     ToolbarComponent
   ],
-    imports: [
-        BrowserModule,
-        AppRoutingModule,
-        HttpClientModule,
-        CardModule
-    ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    HttpClientModule,
+    CardModule,
+    BrowserAnimationsModule,
+
+  ],
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}

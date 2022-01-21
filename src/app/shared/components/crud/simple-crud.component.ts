@@ -2,54 +2,72 @@ import {Directive, Injectable, Injector, OnDestroy, OnInit, ViewChild} from '@an
 import {CrudService} from "./crud.service";
 import {Observable, of} from "rxjs";
 import {debounceTime, distinctUntilChanged, map, take} from "rxjs/operators";
-import {ActivatedRoute} from "@angular/router";
 import {NgForm} from "@angular/forms";
 import {CrudComponent} from "./crud-component";
+import {ActivatedRoute, Router} from "@angular/router";
+import {Location} from "@angular/common";
 
 @Injectable()
 export abstract class SimpleCrudComponent<T> implements CrudComponent<T>, OnInit {
 
   @ViewChild(NgForm, {static: false}) public form: NgForm;
   public registro: T;
-  protected route: ActivatedRoute;
+  protected router: Router;
+  protected activatedRoute: ActivatedRoute;
+  protected location: Location;
 
 
   protected constructor(protected service: CrudService<T>,
                         protected injector: Injector) {
+    this.activatedRoute = this.injector.get(ActivatedRoute);
+    this.router = this.injector.get(Router);
+    this.location = this.injector.get(Location);
     this.novoRegistro();
   }
 
   loading: boolean;
+
   ngOnInit(): void {
     this.beforeOnInit();
     this.inicializar();
   }
 
   public inicializar() {
-    const id = this.route.snapshot.paramMap.get('id');
-
-    if (id) {
-      // carrega o registro
-      this.carregar(+id);
-    } else {
-      this.novoRegistro();
-      this.resetForm();
-    }
+    this.activatedRoute.queryParams.subscribe(e => {
+      if (e['id']) {
+        this.carregar(e['id']);
+      } else {
+        this.novoRegistro();
+        this.afterCriarNovoRegistro();
+      }
+    });
   }
 
   protected novoRegistro(): void {
-      this.registro = {} as T;
+    this.registro = {} as T;
   }
 
   public salvar(registro: T): void {
     if (this.validarForm()) {
       this.beforeSave();
       this.loading = true;
-      this.service.salvar(registro).subscribe(() => {
+      this.service.salvar(registro).subscribe(e => {
         this.loading = false;
         // this.snackBar.open('O registro foi incluído com sucesso!', 'Ok');
-        this.novoRegistro();
-        this.resetForm();
+        // this.novoRegistro();
+        // this.afterCriarNovoRegistro();
+
+        let url = this.router.url;
+        if (!this.registro['id']) {
+          this.registro = e;
+          if (url.indexOf("/form") > -1) {
+            this.location.go(url + "?id=" + this.registro['id']);
+          }
+        } else {
+          this.registro = e;
+        }
+        this.afterSave();
+
       }, error => {
         console.log(error);
         this.loading = false;
@@ -68,7 +86,7 @@ export abstract class SimpleCrudComponent<T> implements CrudComponent<T>, OnInit
       this.loading = false;
       // this.snackBar.open('O registro foi excluído com sucesso!', 'Ok');
       this.novoRegistro();
-      this.resetForm();
+      this.afterCriarNovoRegistro();
     }, error => {
       this.loading = false;
       // this.snackBar.open(errorTransform(error), 'Ok');
@@ -76,7 +94,7 @@ export abstract class SimpleCrudComponent<T> implements CrudComponent<T>, OnInit
   }
 
   validarForm(): boolean {
-   return this.form.valid || this.form.status === 'DISABLED';
+    return this.form.valid || this.form.status === 'DISABLED';
   }
 
   public carregar(id: number): void {
@@ -85,6 +103,8 @@ export abstract class SimpleCrudComponent<T> implements CrudComponent<T>, OnInit
       // this.loading = false;
       if (e) {
         this.registro = e;
+        this.afterCarregarRegistroExistente();
+
       } else {
         this.novoRegistro();
       }
@@ -98,7 +118,7 @@ export abstract class SimpleCrudComponent<T> implements CrudComponent<T>, OnInit
 
   getTooltip$(...values: any[]): Observable<string> {
     return of(values).pipe(
-      debounceTime(250),
+      debounceTime(200),
       map(value => {
         if (value[0]) {
           return value.join(" | ")
@@ -113,10 +133,16 @@ export abstract class SimpleCrudComponent<T> implements CrudComponent<T>, OnInit
   beforeOnInit(): void {
   }
 
-  public resetForm(): void {
+  afterCarregarRegistroExistente(): void {
+  }
+
+  public afterCriarNovoRegistro(): void {
   }
 
   public beforeSave(): void {
   }
 
+  public afterSave() {
+
+  }
 }

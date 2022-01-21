@@ -1,0 +1,30 @@
+.divImagem{
+  width: 250px!important;
+  height: 250px!important;
+}
+
+.edit-image{
+  position: absolute;
+  top: 50%;
+  right: 53%;
+}
+
+.delete-image{
+  position: absolute;
+  top: 50%;
+  right: 41%;
+}
+
+.icon-image{
+  display: none;
+}
+
+.divImagem:hover .icon-image{
+  display: block;
+}
+
+.teste {
+  opacity: 0.95;
+  pointer-events: none !important;
+}
+

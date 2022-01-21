@@ -1,0 +1,180 @@
+<!--<app-breadcrumb text="Usuário"-->
+<!--                [displayRemove]="showRemover"-->
+<!--                (onDelete)="remover()"-->
+<!--                [displayInativar]="!!registro.id"-->
+<!--                [id]="registro.id"-->
+<!--                [inativo]="registro.inativo"-->
+<!--                (onAtivarInativar)="ativarInativar($event)">-->
+<!--  <div button class="button-fixed">-->
+<!--    <app-novo (onClick)="reset()"></app-novo>-->
+<!--    <app-voltar (onClick)="cancelar()"></app-voltar>-->
+<!--    <app-salvar (onClick)="gravarUsuario()" [id]="registro.id"></app-salvar>-->
+<!--  </div>-->
+<!--</app-breadcrumb>-->
+
+<p-card>
+  <p-header>
+    Usuário
+    <!--    <div *ngIf="registro.inativo" class="card-inativo">(Inativo)</div>-->
+  </p-header>
+
+  <form id="form" #form="ngForm" class="my-form">
+
+    <div class="row">
+      <div class="col-12 col-md col-xl-4">
+        <div class="form-group">
+          <label for="imagem" class="w-100">Imagem</label>
+          <div class="position-relative divImagem">
+            <img id="imagem" [src]="registro.imagem" class="image img-thumbnail divImagem"/>
+            <i (click)="showUpfile()" class="pi pi-pencil edit-image icon-image"></i>
+            <i (click)="deleteFile()" [ngClass]="((isDefaultImage()? 'disabled ': '') +'pi pi-trash delete-image icon-image')" ></i>
+          </div>
+          <div style='height: 0px;width: 0px; overflow:hidden;'><input id="upfile" type="file"
+                                                                       value="upload" (change)="selectFile($event)"/>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-12 col-md col-xl-4">
+        <div class="form-group">
+          <label for="apelido">Apelido</label>
+          <span class="obrigatorio">*</span>
+          <input type="text"
+                 name="apelido"
+                 id="apelido"
+                 validation
+                 maxlength="20"
+                 pInputText
+                 required
+                 [(ngModel)]="registro.apelido"/>
+        </div>
+      </div>
+
+      <div class="col-12 col-md col-xl-4">
+        <div class="form-group">
+          <label for="email">E-mail</label>
+          <span class="obrigatorio">*</span>
+          <input type="email"
+                 name="email"
+                 id="email"
+                 validation
+                 pInputText
+                 required
+                 [(ngModel)]="registro.email"/>
+        </div>
+      </div>
+
+      <div class="col-12 col-md col-xl-4">
+        <div class="form-group">
+          <label for="telefone" i18n="@@telefone">Telefone</label>
+          <span class="obrigatorio">*</span>
+          <input [(ngModel)]="registro.telefone"
+                 mask="(00) 0 0000-0000 || (00) 0000-0000"
+                 id="telefone"
+                 pInputText
+                 maxlength="16"
+                 name="telefone"
+                 type="text"
+                 required
+                 validation/>
+        </div>
+      </div>
+
+      <div class="col-12 col-md col-xl-4">
+        <div class="form-group">
+          <label for="estado">Estado</label>
+          <span class="obrigatorio">*</span>
+          <p-autoComplete name="estado"
+                          id="estado"
+                          validation
+                          required
+                          [dropdown]="true"
+                          [forceSelection]="true"
+                          [(ngModel)]="estado"
+                          field="nome"
+                          [suggestions]="estados"
+                          (onClear)="estado = null"
+                          (completeMethod)="estadoComplete($event)"
+                          [title]="getTooltip$(estado?.uf, estado?.nome)  | async"
+                          [pTooltip]="getTooltip$(estado?.uf, estado?.nome)  | async">
+
+            <ng-template let-estado pTemplate="estado">
+              <span class="autocomplete-id w-35-px">{{estado?.uf}}</span>
+              <span>{{estado?.nome}}</span>
+            </ng-template>
+          </p-autoComplete>
+        </div>
+      </div>
+
+
+      <div class="col-12 col-md col-xl-4">
+        <div class="form-group" [disabledLabelAndSpan]="!estado">
+          <label for="cidade">Cidade</label>
+          <span class="obrigatorio">*</span>
+          <p-autoComplete name="cidade"
+                          id="cidade"
+                          validation
+                          required
+                          [dropdown]="true"
+                          [forceSelection]="true"
+                          [(ngModel)]="registro.cidade"
+                          field="nome"
+                          [suggestions]="cidades"
+                          [disabled]="!estado"
+                          (onClear)="registro.cidade = null"
+                          (completeMethod)="cidadeComplete($event)"
+                          [pTooltip]="getTooltip$(registro?.cidade?.estado?.uf, registro?.cidade?.nome) | async"
+                          [title]="getTooltip$(registro?.cidade?.estado?.uf, registro?.cidade?.nome) | async">
+            <ng-template let-cidade pTemplate="cidade">
+              <span>{{cidade?.nome}}</span>
+            </ng-template>
+          </p-autoComplete>
+        </div>
+      </div>
+      <div class="col-12 col-md col-xl-4">
+        <div class="form-group">
+          <label for="apelido">Usuário</label>
+          <span class="obrigatorio">*</span>
+          <input type="text"
+                 name="username"
+                 id="username"
+                 validation
+                 maxlength="20"
+                 pInputText
+                 required
+                 [(ngModel)]="registro.username"/>
+        </div>
+      </div>
+      <div class="col-12 col-md col-xl-4">
+        <div class="form-group">
+          <label for="password">Senha</label>
+          <input type="password"
+                 pInputText
+                 [(ngModel)]="registro.password"
+                 class="login-input"
+                 validation
+                 required
+                 name="password"
+                 id="password">
+
+        </div>
+      </div>
+
+
+            <button type="button"
+                    (click)="salvar(registro)"
+                    class="btn btn-link ripple">
+              <span i18n="@@salvar">Salvar</span>
+            </button>
+      <!--      <div class="space-card"></div>-->
+    </div>
+  </form>
+  <!--  id?: number;-->
+  <!--  apelido: string;-->
+  <!--  sobrenome: string;-->
+  <!--  imagem: string;-->
+  <!--  email: string;-->
+  <!--  telefone: string;-->
+  <!--  username: string;-->
+  <!--  password: string;-->
+</p-card>
