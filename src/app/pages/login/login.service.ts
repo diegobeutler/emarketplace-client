@@ -1,17 +1,16 @@
-import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable, Subject, Subscription, interval } from 'rxjs';
+import {Injectable} from '@angular/core';
+import {Router} from '@angular/router';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {interval, Observable, Subject, Subscription} from 'rxjs';
 
 // environment
-import { environment } from 'src/environments/environment';
+import {environment} from 'src/environments/environment';
 
 
 // aplicação
 import {LoginRequest} from '../../shared/models/login-request';
 
-// @Injectable({ providedIn: 'root' })
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class LoginService {
 
     /**

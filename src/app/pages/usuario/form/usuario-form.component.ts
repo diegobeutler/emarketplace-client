@@ -1,12 +1,13 @@
-import {Component, ElementRef, Injector, OnInit, ViewChild} from '@angular/core';
-import {SimpleCrudComponent} from "../../shared/components/crud/simple-crud.component";
-import {Usuario} from "./models/usuario";
-import {UsuarioService} from "./usuario.service";
-import {EstadoService} from "../endereco/estado.service";
-import {Estado} from "../endereco/models/estado";
-import {Cidade} from "../endereco/models/cidade";
-import {CidadeService} from "../endereco/cidade.service";
-import {FileService} from "../../shared/components/file/file.service";
+import {Component, Injector, OnInit} from '@angular/core';
+import {SimpleCrudComponent} from "../../../shared/components/crud/simple-crud.component";
+import {Usuario} from "../models/usuario";
+import {UsuarioService} from "../usuario.service";
+import {EstadoService} from "../../endereco/estado.service";
+import {Estado} from "../../endereco/models/estado";
+import {Cidade} from "../../endereco/models/cidade";
+import {CidadeService} from "../../endereco/cidade.service";
+import {FileService} from "../../../shared/components/file/file.service";
+// import {LoginService} from "../../login/login.service";
 
 const DEFAULT_IMAGE = 'https://s3.sa-east-1.amazonaws.com/e-marketplace/images/users/defaultImage.jpg';
 
@@ -31,22 +32,25 @@ export class UsuarioFormComponent extends SimpleCrudComponent<Usuario> implement
 
   ngOnInit(): void {
     super.ngOnInit();
+  }
+  aft
+  erCarregarRegistroExistente(): void {
     this.estado = this.registro?.cidade?.estado;
   }
 
-  estadoComplete(event: any) {
+  estadoComplete(event: any): void {
     this.estadoService.completeByNomeOrUf(event.query).subscribe(e => this.estados = e);
   }
 
-  cidadeComplete(event: any) {
+  cidadeComplete(event: any): void {
     this.cidadeService.completeByEstadoAndNome(this.estado?.id, event.query).subscribe(e => this.cidades = e);
   }
 
-  afterCriarNovoRegistro() {
+  afterCriarNovoRegistro(): void {
     this.registro.imagem = DEFAULT_IMAGE;
   }
 
-  deleteFile() {
+  deleteFile(): void {
     if (!this.registro.imagem.startsWith("data") && this.registro.id) {
       this.registro.deleteImage = true;
     }
@@ -54,7 +58,7 @@ export class UsuarioFormComponent extends SimpleCrudComponent<Usuario> implement
   }
 
 
-  selectFile(event: any) {
+  selectFile(event: any): void {
     const file = event.target.files[0];
     if (file) {
       this.registro.deleteImage = false;
@@ -67,16 +71,15 @@ export class UsuarioFormComponent extends SimpleCrudComponent<Usuario> implement
     }
   }
 
-  showUpfile() {
+  showUpfile(): void {
     // @ts-ignore
     document.getElementById("upfile").click();
   }
 
   isDefaultImage(): boolean {
-    return this.registro.imagem.indexOf('defaultImage') > 0;
+    return this.registro?.imagem?.indexOf('defaultImage') > 0;
   }
 
   afterSave() {
-    // this.router.navigateByUrl('login');
   }
 }

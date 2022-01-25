@@ -1,2 +1,101 @@
-/* You can add global styles to this file, and also import other style files */
-//@import "../node_modules/@fortawesome/fontawesome-free/scss/fontawesome.scss";
+@import "variables";
+body{
+  background: #eff3f8;
+}
+* {
+  font-family: $primary-font;
+}
+.id {
+  border-right: 1px solid $borderColor;
+  display: inline-block;
+  min-width: 40px;
+  margin-right: 10px;
+}
+
+.w-35-px {
+  width:35px;
+}
+
+.obrigatorio {
+  padding-left: 6px;
+}
+
+.disabled {
+  opacity: 0.65;
+  pointer-events: none;
+}
+
+.p-0-30-porcent{
+  padding: 0 30%;
+}
+
+
+//primeng
+body .p-autocomplete-dd  .p-button{
+  padding: 0;
+}
+
+body .p-card {
+  border-radius: 0.25em !important;
+}
+
+.p-card .p-card-body {
+  padding: 0;
+  clear: left;
+}
+
+.p-card .p-card-content {
+  padding: 10px 25px 15px 25px;
+}
+
+p-card p-header {
+  height: 50px;
+  font-size: 18px;
+  float: left;
+  width: 100%;
+  color: black;
+  border-bottom: 1px solid darkgrey;
+  padding: 15px 20px;
+  font-weight: 400;
+}
+
+.p-inputtext:enabled:focus{
+  outline: 0 none;
+  outline-offset: 0;
+  box-shadow: 0 0 0 0.045rem $purple-shadow;
+  border-color: $purple;
+}
+
+.p-inputtext:enabled:hover{
+  border-color: $purple;
+}
+
+.p-inputtext {
+  width: 100%;
+  height: 2.2rem;
+    font-family: Lato,Helvetica,sans-serif;
+    font-size: 1rem;
+    color: #043d75;
+    background: #fff;
+    padding: 0.75rem 0.75rem;
+    border: 1px solid #d3dbe3;
+    transition: background-color .2s,color .2s,border-color .2s,box-shadow .2s;
+    appearance: none;
+    border-radius: 6px;
+}
+
+.p-password{
+  width: 100%;
+}
+
+.p-float-label .p-password-input{
+  padding-left: 40px!important;
+}
+
+.p-input-icon-left .pi-unlock{
+  z-index: 1;
+}
+
+.p-autocomplete {
+  width: 100%;
+}

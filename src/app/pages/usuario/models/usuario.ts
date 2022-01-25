@@ -12,6 +12,7 @@ export class Usuario {
   password: string;
   permissoes?: Permissao[];
   // interesses?: Categoria[];
+  ehInstituicao: boolean;
 
   cidade: Cidade;// ter um card de endereço
 

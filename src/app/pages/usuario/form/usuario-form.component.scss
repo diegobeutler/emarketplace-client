@@ -23,8 +23,11 @@
   display: block;
 }
 
-.teste {
-  opacity: 0.95;
-  pointer-events: none !important;
+.p-0-20-porcent{
+  padding: 0 20% !important;
+}
+
+.p-field-checkbox > label, .p-field-radiobutton > label {
+  width: 100%;
 }
 

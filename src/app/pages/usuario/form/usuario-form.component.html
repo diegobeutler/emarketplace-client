@@ -1,70 +1,69 @@
-<!--<app-breadcrumb text="Usuário"-->
-<!--                [displayRemove]="showRemover"-->
-<!--                (onDelete)="remover()"-->
-<!--                [displayInativar]="!!registro.id"-->
-<!--                [id]="registro.id"-->
-<!--                [inativo]="registro.inativo"-->
-<!--                (onAtivarInativar)="ativarInativar($event)">-->
-<!--  <div button class="button-fixed">-->
-<!--    <app-novo (onClick)="reset()"></app-novo>-->
-<!--    <app-voltar (onClick)="cancelar()"></app-voltar>-->
-<!--    <app-salvar (onClick)="gravarUsuario()" [id]="registro.id"></app-salvar>-->
-<!--  </div>-->
-<!--</app-breadcrumb>-->
-
-<p-card>
-  <p-header>
-    Usuário
-    <!--    <div *ngIf="registro.inativo" class="card-inativo">(Inativo)</div>-->
-  </p-header>
-
-  <form id="form" #form="ngForm" class="my-form">
-
+<form id="form" #form="ngForm" class="my-form p-0-20-porcent">
+  <p-card>
+    <p-header>
+      Dados Pessoais
+    </p-header>
     <div class="row">
-      <div class="col-12 col-md col-xl-4">
+      <div class="col-12 col-md col-xl-3">
         <div class="form-group">
-          <label for="imagem" class="w-100">Imagem</label>
           <div class="position-relative divImagem">
             <img id="imagem" [src]="registro.imagem" class="image img-thumbnail divImagem"/>
             <i (click)="showUpfile()" class="pi pi-pencil edit-image icon-image"></i>
-            <i (click)="deleteFile()" [ngClass]="((isDefaultImage()? 'disabled ': '') +'pi pi-trash delete-image icon-image')" ></i>
+            <i (click)="deleteFile()"
+               [ngClass]="((isDefaultImage()? 'disabled ': '') +'pi pi-trash delete-image icon-image')"></i>
           </div>
-          <div style='height: 0px;width: 0px; overflow:hidden;'><input id="upfile" type="file"
-                                                                       value="upload" (change)="selectFile($event)"/>
+          <div [hidden]="true"><input id="upfile" type="file" value="upload" (change)="selectFile($event)"/>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 col-md col-xl-3">
+        <div class="form-group">
+          <div class="p-field-checkbox text-center">
+            <label for="ehInstituicao">Instituição</label>
+            <p-checkbox
+              [(ngModel)]="registro.ehInstituicao"
+              binary="true"
+              inputId="ehInstituicao"
+              name="ehInstituicao"></p-checkbox>
           </div>
         </div>
       </div>
 
-      <div class="col-12 col-md col-xl-4">
+      <div class="col-12 col-md col-xl-6">
         <div class="form-group">
-          <label for="apelido">Apelido</label>
+          <label for="apelido">{{registro.ehInstituicao ? 'Razão Social' : 'Apelido'}}</label>
           <span class="obrigatorio">*</span>
           <input type="text"
                  name="apelido"
                  id="apelido"
-                 validation
-                 maxlength="20"
                  pInputText
                  required
                  [(ngModel)]="registro.apelido"/>
         </div>
       </div>
-
-      <div class="col-12 col-md col-xl-4">
+    </div>
+  </p-card>
+  <div class="separador-card"></div>
+  <p-card>
+    <p-header>
+      Contato
+    </p-header>
+    <div class="row">
+      <div class="col-12 col-md col-xl-6">
         <div class="form-group">
           <label for="email">E-mail</label>
           <span class="obrigatorio">*</span>
           <input type="email"
                  name="email"
                  id="email"
-                 validation
+                 [email]="true"
                  pInputText
                  required
                  [(ngModel)]="registro.email"/>
         </div>
       </div>
 
-      <div class="col-12 col-md col-xl-4">
+      <div class="col-12 col-md col-xl-6">
         <div class="form-group">
           <label for="telefone" i18n="@@telefone">Telefone</label>
           <span class="obrigatorio">*</span>
@@ -75,18 +74,23 @@
                  maxlength="16"
                  name="telefone"
                  type="text"
-                 required
-                 validation/>
+                 required/>
         </div>
       </div>
-
-      <div class="col-12 col-md col-xl-4">
+    </div>
+  </p-card>
+  <div class="separador-card"></div>
+  <p-card>
+    <p-header>
+      Endereço
+    </p-header>
+    <div class="row">
+      <div class="col-12 col-md col-xl-6">
         <div class="form-group">
           <label for="estado">Estado</label>
           <span class="obrigatorio">*</span>
           <p-autoComplete name="estado"
                           id="estado"
-                          validation
                           required
                           [dropdown]="true"
                           [forceSelection]="true"
@@ -95,25 +99,23 @@
                           [suggestions]="estados"
                           (onClear)="estado = null"
                           (completeMethod)="estadoComplete($event)"
+                          (onSelect)="registro.cidade = null"
                           [title]="getTooltip$(estado?.uf, estado?.nome)  | async"
                           [pTooltip]="getTooltip$(estado?.uf, estado?.nome)  | async">
-
             <ng-template let-estado pTemplate="estado">
-              <span class="autocomplete-id w-35-px">{{estado?.uf}}</span>
+              <span class="id w-35-px">{{estado?.uf}}</span>
               <span>{{estado?.nome}}</span>
             </ng-template>
           </p-autoComplete>
         </div>
       </div>
 
-
-      <div class="col-12 col-md col-xl-4">
+      <div class="col-12 col-md col-xl-6">
         <div class="form-group" [disabledLabelAndSpan]="!estado">
           <label for="cidade">Cidade</label>
           <span class="obrigatorio">*</span>
           <p-autoComplete name="cidade"
                           id="cidade"
-                          validation
                           required
                           [dropdown]="true"
                           [forceSelection]="true"
@@ -131,50 +133,63 @@
           </p-autoComplete>
         </div>
       </div>
-      <div class="col-12 col-md col-xl-4">
+    </div>
+  </p-card>
+  <div *ngIf="!registro?.id" class="separador-card"></div>
+  <p-card *ngIf="!registro?.id">
+    <p-header>
+      Dados para Login
+    </p-header>
+    <div class="row">
+      <div class="col-12 col-md col-xl-6">
         <div class="form-group">
-          <label for="apelido">Usuário</label>
+          <label for="username">Usuário</label>
           <span class="obrigatorio">*</span>
           <input type="text"
                  name="username"
                  id="username"
-                 validation
-                 maxlength="20"
                  pInputText
                  required
                  [(ngModel)]="registro.username"/>
         </div>
       </div>
-      <div class="col-12 col-md col-xl-4">
-        <div class="form-group">
-          <label for="password">Senha</label>
-          <input type="password"
-                 pInputText
-                 [(ngModel)]="registro.password"
-                 class="login-input"
-                 validation
-                 required
-                 name="password"
-                 id="password">
 
+      <div class="col-12 col-md col-xl-6">
+        <div class="form-group">
+          <label>Senha</label>
+          <span class="obrigatorio">*</span>
+          <p-password
+            name="password"
+            [(ngModel)]="registro.password"
+            [toggleMask]="true"
+            required
+            [inputId]="'password'"
+            [weakLabel]="'Fraca'"
+            [mediumLabel]="'Média'"
+            [strongLabel]="'Forte'"
+            [promptLabel]="'Adicione uma senha'"
+            [mediumRegex]="'^(((?=.*[a-z])(?=.*[A-Z]))|((?=.*[a-z])(?=.*[0-9]))|((?=.*[A-Z])(?=.*[0-9])))(?=.{4,}).'"
+            [strongRegex]="'^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.{6,})'"
+            validatePassword>
+            <ng-template pTemplate="header">
+              <h6>Escolha sua senha</h6>
+            </ng-template>
+            <ng-template pTemplate="footer">
+              <p-divider></p-divider>
+              <p class="p-mt-2">A senha deve conter:</p>
+              <ul class="p-pl-2 p-ml-2 p-mt-0" style="line-height: 1.5">
+                <li>Pelo menos uma letra minúscula</li>
+                <li>Pelo menos uma letra maiúscula</li>
+                <li>Pelo menos um número</li>
+                <li>No mínimo 6 caracteres</li>
+              </ul>
+            </ng-template>
+          </p-password>
         </div>
       </div>
-
-
-            <button type="button"
-                    (click)="salvar(registro)"
-                    class="btn btn-link ripple">
-              <span i18n="@@salvar">Salvar</span>
-            </button>
-      <!--      <div class="space-card"></div>-->
     </div>
-  </form>
-  <!--  id?: number;-->
-  <!--  apelido: string;-->
-  <!--  sobrenome: string;-->
-  <!--  imagem: string;-->
-  <!--  email: string;-->
-  <!--  telefone: string;-->
-  <!--  username: string;-->
-  <!--  password: string;-->
-</p-card>
+  </p-card>
+  <div class="col-12 text-center pt-3 pb-3">
+    <p-button label="Salvar" icon="pi pi-check" (click)="salvar(registro)"></p-button>
+  </div>
+</form>

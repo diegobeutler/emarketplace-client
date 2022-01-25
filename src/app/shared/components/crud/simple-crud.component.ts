@@ -1,8 +1,8 @@
-import {Directive, Injectable, Injector, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {Injectable, Injector, OnInit, ViewChild} from '@angular/core';
 import {CrudService} from "./crud.service";
 import {Observable, of} from "rxjs";
 import {debounceTime, distinctUntilChanged, map, take} from "rxjs/operators";
-import {NgForm} from "@angular/forms";
+import {FormControl, NgForm} from "@angular/forms";
 import {CrudComponent} from "./crud-component";
 import {ActivatedRoute, Router} from "@angular/router";
 import {Location} from "@angular/common";
@@ -28,7 +28,6 @@ export abstract class SimpleCrudComponent<T> implements CrudComponent<T>, OnInit
   loading: boolean;
 
   ngOnInit(): void {
-    this.beforeOnInit();
     this.inicializar();
   }
 
@@ -48,7 +47,8 @@ export abstract class SimpleCrudComponent<T> implements CrudComponent<T>, OnInit
   }
 
   public salvar(registro: T): void {
-    if (this.validarForm()) {
+    // $(".col-focus").removeClass("col-focus");
+    if (this.isValidForm()) {
       this.beforeSave();
       this.loading = true;
       this.service.salvar(registro).subscribe(e => {
@@ -73,6 +73,13 @@ export abstract class SimpleCrudComponent<T> implements CrudComponent<T>, OnInit
         this.loading = false;
         // this.snackBar.open(errorTransform(error) + '', 'Ok');
       });
+    } else {
+      if (this.form.status !== 'DISABLED') {
+        for (const eachControl in this.form.controls) {
+          (<FormControl>this.form.controls[eachControl]).markAsDirty();
+          (<FormControl>this.form.controls[eachControl]).updateValueAndValidity();
+        }
+      }
     }
   }
 
@@ -93,7 +100,7 @@ export abstract class SimpleCrudComponent<T> implements CrudComponent<T>, OnInit
     });
   }
 
-  validarForm(): boolean {
+  isValidForm(): boolean {
     return this.form.valid || this.form.status === 'DISABLED';
   }
 
@@ -133,7 +140,7 @@ export abstract class SimpleCrudComponent<T> implements CrudComponent<T>, OnInit
   beforeOnInit(): void {
   }
 
-  afterCarregarRegistroExistente(): void {
+  public afterCarregarRegistroExistente(): void {
   }
 
   public afterCriarNovoRegistro(): void {

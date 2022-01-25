@@ -8,7 +8,7 @@ import {DropdownModule} from "primeng/dropdown";
 import {ButtonModule} from "primeng/button";
 import {PanelModule} from "primeng/panel";
 import {AutoCompleteModule} from "primeng/autocomplete";
-import {UsuarioFormComponent} from "./usuario-form.component";
+import {UsuarioFormComponent} from "./form/usuario-form.component";
 import {UsuarioService} from "./usuario.service";
 import {NgxMaskModule} from "ngx-mask";
 import {EnderecoModule} from "../endereco/endereco.module";
@@ -17,6 +17,16 @@ import {
 } from "../../shared/components/dierective/disabledLabelSpan/disabled-label-and-span.module";
 import {TooltipModule} from "primeng/tooltip";
 import {FileModule} from "../../shared/components/file/file.module";
+import {TokenInterceptor} from "../../shared/interceptors/token-interceptor.interceptor";
+import {HTTP_INTERCEPTORS} from "@angular/common/http";
+import {PasswordModule} from "primeng/password";
+import {DividerModule} from "primeng/divider";
+import {ResetPasswordComponent} from './reset-password/reset-password.component';
+import {UpdatePasswordComponent} from './update-password/update-password.component';
+import {CheckboxModule} from "primeng/checkbox";
+import {
+  PasswordValidationModule
+} from "../../shared/components/dierective/passwordValidation/password-validation.module";
 
 const routes: Routes = [
   { path: '', component: UsuarioFormComponent }
@@ -40,13 +50,23 @@ const routes: Routes = [
     EnderecoModule,
     DisabledLabelAndSpanModule,
     TooltipModule,
-    FileModule
+    FileModule,
+    PasswordModule,
+    DividerModule,
+    CheckboxModule,
+    PasswordValidationModule
   ],
   declarations: [
     UsuarioFormComponent,
+    ResetPasswordComponent,
+    UpdatePasswordComponent,
   ],
   providers: [
     UsuarioService,
+    TokenInterceptor,
+
+    // interceptors
+    { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true, },
   ],
 })
 export class UsuarioModule { }

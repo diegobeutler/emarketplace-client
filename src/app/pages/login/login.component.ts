@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {Component, ViewChild} from '@angular/core';
+import {NgForm} from '@angular/forms';
+import {LoginService} from "./login.service";
+import {LoginRequest} from "../../shared/models/login-request";
 
 
 @Component({
@@ -7,22 +9,35 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
-export class LoginComponent  implements OnInit {
+export class LoginComponent {
 
-  loginForm!: FormGroup;
+  @ViewChild(NgForm, {static: false}) form!: NgForm;
+  registro: LoginRequest = {} as LoginRequest;
 
-  submitted = false;
-
-  ngOnInit(): void {
-    this.loginForm = new FormGroup({
-      login: new FormControl('', Validators.required),
-      password: new FormControl('', Validators.required)
-    });
+  // submitted = false;
+  constructor(private loginService: LoginService) {
   }
 
-  onSubmit(): void {
-    this.submitted = true;
-    alert(JSON.stringify(this.loginForm.value));
+
+  acessar(): void {
+    if (this.form.valid) {
+      this.loginService.login(this.registro).subscribe(() => {
+        alert("logou com sucesso")
+        // this.loading = false;
+        // this.dialog.closeAll();
+      }, error => {
+        console.log(error)
+        // this.form.enable();
+        // this.loading = false;
+        // this.snackBar.open(errorTransform(error), 'Ok');
+      });
+
+    }
+    // this.submitted = true;
+    // alert(JSON.stringify(this.form.value));
   }
 
+  login() {
+
+  }
 }

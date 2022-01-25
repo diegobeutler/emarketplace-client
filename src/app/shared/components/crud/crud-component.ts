@@ -10,6 +10,6 @@ export interface CrudComponent<T> {
 
     remover(registroId: number): void;
 
-    validarForm(): boolean;
+    isValidForm(): boolean;
 
 }
