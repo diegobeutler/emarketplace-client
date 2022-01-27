@@ -1,0 +1,10 @@
+<div [hidden]="!show" class="background-loader"></div>
+  <div [hidden]="!show" class="loader text-center">
+    <span i18n="@@carregando">{{message}}</span>
+    <p-progressBar
+      mode="indeterminate"
+      [style]="{ height: '12px' }"
+    ></p-progressBar>
+  </div>
+
+

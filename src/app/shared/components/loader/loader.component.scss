@@ -1,0 +1,29 @@
+@import "../../../../variables";
+.background-loader {
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  background-color: #ffffff9f;
+  z-index: 99999;
+}
+.loader {
+  position: fixed;
+  font-size: 18px;
+  width: 25%;
+  height: 4.5%;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 999999;
+}
+.loader span {
+  font: $primary-font;
+  position: relative;
+  top: -20px;
+  color: $purple;
+  z-index: 9999999;
+  font-weight: 800;
+  font-size: 22px;
+}
