@@ -10,6 +10,10 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {TokenInterceptor} from "./shared/interceptors/token-interceptor.interceptor";
 import {MenubarModule} from "primeng/menubar";
 import {ButtonModule} from "primeng/button";
+import {MessageService} from "primeng/api";
+import {ToastModule} from "primeng/toast";
+import {LoaderService} from "./shared/components/loader/loader.service";
+import {LoaderModule} from "./shared/components/loader/loader.module";
 
 @NgModule({
   declarations: [
@@ -23,13 +27,17 @@ import {ButtonModule} from "primeng/button";
     CardModule,
     BrowserAnimationsModule,
     MenubarModule,
-    ButtonModule
+    ButtonModule,
+    ToastModule,
+    LoaderModule
 
   ],
   providers: [
+    MessageService,
     TokenInterceptor,
     // interceptors
     { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true, },
+    LoaderService,
   ],
   bootstrap: [AppComponent]
 })

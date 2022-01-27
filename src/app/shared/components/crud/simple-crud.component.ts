@@ -6,6 +6,9 @@ import {FormControl, NgForm} from "@angular/forms";
 import {CrudComponent} from "./crud-component";
 import {ActivatedRoute, Router} from "@angular/router";
 import {Location} from "@angular/common";
+import {MessageService} from "primeng/api";
+import {LoaderService} from "../loader/loader.service";
+import {errorTransform} from "../../pipes/error-transform";
 
 @Injectable()
 export abstract class SimpleCrudComponent<T> implements CrudComponent<T>, OnInit {
@@ -15,6 +18,8 @@ export abstract class SimpleCrudComponent<T> implements CrudComponent<T>, OnInit
   protected router: Router;
   protected activatedRoute: ActivatedRoute;
   protected location: Location;
+  protected messageService: MessageService;
+  protected loaderService: LoaderService
 
 
   protected constructor(protected service: CrudService<T>,
@@ -22,10 +27,10 @@ export abstract class SimpleCrudComponent<T> implements CrudComponent<T>, OnInit
     this.activatedRoute = this.injector.get(ActivatedRoute);
     this.router = this.injector.get(Router);
     this.location = this.injector.get(Location);
+    this.messageService = this.injector.get(MessageService);
+    this.loaderService = this.injector.get(LoaderService)
     this.novoRegistro();
   }
-
-  loading: boolean;
 
   ngOnInit(): void {
     this.inicializar();
@@ -37,26 +42,20 @@ export abstract class SimpleCrudComponent<T> implements CrudComponent<T>, OnInit
         this.carregar(e['id']);
       } else {
         this.novoRegistro();
-        this.afterCriarNovoRegistro();
       }
     });
   }
 
   protected novoRegistro(): void {
     this.registro = {} as T;
+    this.afterCriarNovoRegistro();
   }
 
   public salvar(registro: T): void {
-    // $(".col-focus").removeClass("col-focus");
     if (this.isValidForm()) {
+      this.loaderService.show(true, 'Aguarde, salvando...');
       this.beforeSave();
-      this.loading = true;
       this.service.salvar(registro).subscribe(e => {
-        this.loading = false;
-        // this.snackBar.open('O registro foi incluído com sucesso!', 'Ok');
-        // this.novoRegistro();
-        // this.afterCriarNovoRegistro();
-
         let url = this.router.url;
         if (!this.registro['id']) {
           this.registro = e;
@@ -67,11 +66,12 @@ export abstract class SimpleCrudComponent<T> implements CrudComponent<T>, OnInit
           this.registro = e;
         }
         this.afterSave();
+        this.loaderService.show(false);
+        this.messageService.add({severity: 'success', detail: 'Registro salvo com sucesso!'});
 
       }, error => {
-        console.log(error);
-        this.loading = false;
-        // this.snackBar.open(errorTransform(error) + '', 'Ok');
+        this.loaderService.show(false);
+        this.messageService.add({severity: 'error', detail: errorTransform(error)});
       });
     } else {
       if (this.form.status !== 'DISABLED') {
@@ -88,15 +88,15 @@ export abstract class SimpleCrudComponent<T> implements CrudComponent<T>, OnInit
    * @param registroId Id do registro a ser removido
    */
   public remover(registroId: number): void {
-    this.loading = true;
+    this.loaderService.show(true, 'Aguarde, excluindo...');
     this.service.remover(registroId).subscribe(() => {
-      this.loading = false;
-      // this.snackBar.open('O registro foi excluído com sucesso!', 'Ok');
       this.novoRegistro();
       this.afterCriarNovoRegistro();
+      this.loaderService.show(false);
+      this.messageService.add({severity: 'success', detail: 'Registro excluído com sucesso!'});
     }, error => {
-      this.loading = false;
-      // this.snackBar.open(errorTransform(error), 'Ok');
+      this.loaderService.show(false);
+      this.messageService.add({severity: 'error', detail: errorTransform(error)});
     });
   }
 
@@ -105,21 +105,19 @@ export abstract class SimpleCrudComponent<T> implements CrudComponent<T>, OnInit
   }
 
   public carregar(id: number): void {
-    // this.loading = true;
+    this.loaderService.show(true);
     this.service.carregar(id).subscribe(e => {
-      // this.loading = false;
       if (e) {
         this.registro = e;
         this.afterCarregarRegistroExistente();
-
       } else {
         this.novoRegistro();
       }
-
+      this.loaderService.show(false);
       // this.form.reset(res);
     }, error => {
-      // this.loading = false;
-      // this.snackBar.open(errorTransform(error), 'Ok');
+      this.loaderService.show(false);
+      this.messageService.add({severity: 'error', detail: errorTransform(error)});
     });
   }
 

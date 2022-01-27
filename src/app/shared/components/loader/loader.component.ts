@@ -8,11 +8,12 @@ import {LoaderService} from "./loader.service";
 })
 export class LoaderComponent {
   show = false;
-  message = "Aguarde, carregando..."
+  message: string;
 
   constructor(private loaderService: LoaderService) {
-    this.loaderService.observableShow().subscribe(value => {
-      this.show = value;
+    this.loaderService.observableShow().subscribe(e => {
+      this.show = e[0];
+      this.message = e[1] || 'Aguarde, carregando...';
     });
   }
 }

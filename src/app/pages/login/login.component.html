@@ -22,8 +22,20 @@
         <div class="form-group">
            <span class="p-float-label p-input-icon-left col-12">
                 <i class="pi pi-unlock" ></i>
-                <p-password class="col-12"  name="password" [(ngModel)]="registro.password" id="inputtext-left" [toggleMask]="true"></p-password>
-                <label for="inputtext-left">Senha</label>
+                <p-password class="col-12"
+                            [inputId]="'password'"
+                            name="password"
+                            [(ngModel)]="registro.password"
+                            [mediumRegex]="'^(((?=.*[a-z])(?=.*[A-Z]))|((?=.*[a-z])(?=.*[0-9]))|((?=.*[A-Z])(?=.*[0-9])))(?=.{4,}).'"
+                            [strongRegex]="'^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.{6,})'"
+                            id="component-password"
+                            [toggleMask]="true"
+                            [promptLabel]="'Adicione uma senha'"
+                            [weakLabel]="'Fraca'"
+                            [mediumLabel]="'Média'"
+                            [strongLabel]="'Forte'"
+                            validatePassword></p-password>
+                <label for="component-password">Senha</label>
 
             </span>
           <div class="text-end">
@@ -42,5 +54,15 @@
       </div>
     </div>
 
+    <!-- Loading -->
+    <div class="d-flex justify-center">
+      <p-progressBar mode="indeterminate" [style]="{'height': '6px'}"></p-progressBar>
+    </div>
   </p-card>
+  <div class="d-flex justify-center">
+    <p-progressBar mode="indeterminate" [style]="{'height': '6px'}"></p-progressBar>
+  </div>
 </form>
+<div class="d-flex justify-center">
+  <p-progressBar mode="indeterminate" [style]="{'height': '6px'}"></p-progressBar>
+</div>

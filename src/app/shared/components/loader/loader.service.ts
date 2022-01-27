@@ -4,13 +4,13 @@ import {Observable, Subject} from "rxjs";
 @Injectable()
 export class LoaderService {
 
-  private subjectShow: Subject<boolean> = new Subject();
+  private subjectShow: Subject<[boolean, string?]> = new Subject();
 
-  show(show: boolean): void {
-    this.subjectShow.next(show);
+  show(show: boolean, message?: string): void {
+    this.subjectShow.next([show, message]);
   }
 
-  observableShow(): Observable<boolean> {
+  observableShow(): Observable<[boolean, string?]> {
     return this.subjectShow.asObservable();
   }
 

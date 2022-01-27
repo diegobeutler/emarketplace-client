@@ -150,6 +150,7 @@ export class LoginService {
         this._loginEvent.next(false);
         this.stopRefreshInterval();
         this._router.navigateByUrl('').then(res => res);
+        window.location.reload();
     }
 
 }

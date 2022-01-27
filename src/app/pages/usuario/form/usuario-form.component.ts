@@ -7,7 +7,8 @@ import {Estado} from "../../endereco/models/estado";
 import {Cidade} from "../../endereco/models/cidade";
 import {CidadeService} from "../../endereco/cidade.service";
 import {FileService} from "../../../shared/components/file/file.service";
-// import {LoginService} from "../../login/login.service";
+import * as $ from 'jquery';
+import {errorTransform} from "../../../shared/pipes/error-transform";
 
 const DEFAULT_IMAGE = 'https://s3.sa-east-1.amazonaws.com/e-marketplace/images/users/defaultImage.jpg';
 
@@ -16,7 +17,7 @@ const DEFAULT_IMAGE = 'https://s3.sa-east-1.amazonaws.com/e-marketplace/images/u
   templateUrl: './usuario-form.component.html',
   styleUrls: ['./usuario-form.component.scss']
 })
-export class UsuarioFormComponent extends SimpleCrudComponent<Usuario> implements OnInit {
+export class UsuarioFormComponent extends SimpleCrudComponent<Usuario>{
   estados: Estado[];
   estado: Estado;
   cidades: Cidade[];
@@ -30,11 +31,7 @@ export class UsuarioFormComponent extends SimpleCrudComponent<Usuario> implement
     super(service, injector);
   }
 
-  ngOnInit(): void {
-    super.ngOnInit();
-  }
-  aft
-  erCarregarRegistroExistente(): void {
+  afterCarregarRegistroExistente(): void {
     this.estado = this.registro?.cidade?.estado;
   }
 
@@ -72,8 +69,7 @@ export class UsuarioFormComponent extends SimpleCrudComponent<Usuario> implement
   }
 
   showUpfile(): void {
-    // @ts-ignore
-    document.getElementById("upfile").click();
+    $("#upfile").click();
   }
 
   isDefaultImage(): boolean {
@@ -81,5 +77,15 @@ export class UsuarioFormComponent extends SimpleCrudComponent<Usuario> implement
   }
 
   afterSave() {
+  }
+
+  validarCadastro() {
+    this.loaderService.show(true);
+    this.service.validarCadastro(this.registro.id!).subscribe(e => {
+      this.messageService.add({severity: 'success', detail: 'Registro validado com sucesso'});
+    },error => {
+      this.loaderService.show(false);
+      this.messageService.add({severity: 'error', detail: errorTransform(error)});
+    })
   }
 }

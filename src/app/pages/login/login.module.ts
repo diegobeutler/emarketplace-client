@@ -10,6 +10,10 @@ import {ButtonModule} from 'primeng/button';
 import {PanelModule} from 'primeng/panel';
 import {AutoCompleteModule} from "primeng/autocomplete";
 import {PasswordModule} from "primeng/password";
+import {ProgressBarModule} from "primeng/progressbar";
+import {
+    PasswordValidationModule
+} from "../../shared/components/dierective/passwordValidation/password-validation.module";
 
 const routes: Routes = [
   { path: '', component: LoginComponent }
@@ -28,7 +32,9 @@ const routes: Routes = [
         PanelModule,
         ReactiveFormsModule,
         AutoCompleteModule,
-        PasswordModule
+        PasswordModule,
+        ProgressBarModule,
+        PasswordValidationModule
     ],
   declarations: [
     LoginComponent,

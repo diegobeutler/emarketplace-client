@@ -1,7 +1,5 @@
 export interface CrudComponent<T> {
 
-    loading: boolean;
-
     inicializar(): void;
 
     salvar(registro: T): void;

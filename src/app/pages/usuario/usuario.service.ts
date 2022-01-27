@@ -23,12 +23,22 @@ export class UsuarioService extends CrudService<Usuario> {
     return this.http.get<Usuario>(this.baseUrl + this.url + '/logado');
   }
 
-  /**
-   * @description Sobreescreve o método do CrudService para impedir requests indevidos
-   */
-  public carregar(id: number): Observable<Usuario> {
-    return this.logado();
-  }
+  //
+  // /**
+  //  * @description Sobreescreve o método do CrudService para impedir requests indevidos
+  //  */
+  // // @ts-ignore todo melhorar
+  // public carregar(id: number): Observable<Usuario> {
+  //   this.logado().subscribe(e => {
+  //     const ehAdmin = e.permissoes?.find(p => p.nome=='ROLE_ADMIN');
+  //     if(ehAdmin){
+  //       return super.carregar(id);
+  //     } else{
+  //       return this.logado();
+  //     }
+  //   },
+  //   error => {return this.logado()});
+  // }
 
 
   public enviarEmailResetPassword(username: string): Observable<any>{
@@ -36,7 +46,11 @@ export class UsuarioService extends CrudService<Usuario> {
   }
 
 
-  updatePassword(passwordDto: PasswordDto) {
+  updatePassword(passwordDto: PasswordDto): Observable<any> {
     return this.http.post<any>(`${this.baseUrl}${ this.url}/updatePassword`, passwordDto);
+  }
+
+  validarCadastro(id: number):  Observable<void> {
+    return this.http.post<void>(`${this.baseUrl}${ this.url}/validate`, id);
   }
 }

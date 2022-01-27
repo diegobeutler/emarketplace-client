@@ -11,17 +11,19 @@ export class DisabledLabelAndSpanDirective implements DoCheck {
 
   ngDoCheck(): void {
     const label = this.elementRef.nativeElement.querySelector('label');
-    const span = this.elementRef.nativeElement.querySelector('span');
+    const span = this.elementRef.nativeElement.getElementsByClassName('obrigatorio')[0];
     if (this.disabledLabelAndSpan) {
       if (span) {
         span.style.display = 'none';
       }
-      label.classList.add('disabled');
+      if (label)
+        label.classList.add('disabled');
     } else {
       if (span) {
         span.style.display = 'inline';
       }
-      label.classList.remove('disabled');
+      if (label)
+        label.classList.remove('disabled');
     }
   }
 }

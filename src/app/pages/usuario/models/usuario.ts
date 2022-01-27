@@ -12,9 +12,11 @@ export class Usuario {
   password: string;
   permissoes?: Permissao[];
   // interesses?: Categoria[];
-  ehInstituicao: boolean;
-
   cidade: Cidade;// ter um card de endereço
+  ativo: boolean;
 
+  //variáveis de controle
+  ehInstitution: boolean;
+  vadationInstitution = false;
   deleteImage: boolean;
 }
