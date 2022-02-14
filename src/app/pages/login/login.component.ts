@@ -3,7 +3,6 @@ import {FormControl, NgForm} from '@angular/forms';
 import {LoginService} from "./login.service";
 import {LoginRequest} from "../../shared/models/login-request";
 import {MessageService} from "primeng/api";
-import {errorTransform} from "../../shared/pipes/error-transform";
 import {LoaderService} from "../../shared/components/loader/loader.service";
 import * as $ from 'jquery';
 
@@ -27,12 +26,10 @@ export class LoginComponent {
     if (this.form.valid) {
       this.loaderService.show(true, "Aguarde, autenticando...");
       this.loginService.login(this.registro).subscribe(() => {
-
         this.loaderService.show(false);
-        this.messageService.add({severity: 'success', detail: 'Usuário autenticado com sucesso!'});
-      }, error => {
+      }, () => {
         this.loaderService.show(false);
-        this.messageService.add({severity: 'error', detail: errorTransform(error)});
+        this.messageService.add({severity: 'error', detail: 'Usuário ou senha incorreto'});
       });
 
     } else {// todo melhorar, isolar em uma classe util

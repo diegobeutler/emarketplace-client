@@ -1,6 +1,6 @@
 import {HttpClient} from '@angular/common/http';
 import {Injectable} from '@angular/core';
-import {Observable} from 'rxjs';
+import {Observable, Subject} from 'rxjs';
 
 // shared
 import {CrudService} from 'src/app/shared/components/crud/crud.service';
@@ -41,12 +41,12 @@ export class UsuarioService extends CrudService<Usuario> {
   // }
 
 
-  public enviarEmailResetPassword(username: string): Observable<any>{
+  public enviarEmailResetPassword(username: string): Observable<void>{
     return this.http.post<any>(`${this.baseUrl}${ this.url}/resetPassword`, username);
   }
 
 
-  updatePassword(passwordDto: PasswordDto): Observable<any> {
+  updatePassword(passwordDto: PasswordDto): Observable<void> {
     return this.http.post<any>(`${this.baseUrl}${ this.url}/updatePassword`, passwordDto);
   }
 

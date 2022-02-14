@@ -20,6 +20,7 @@ export abstract class SimpleCrudComponent<T> implements CrudComponent<T>, OnInit
   protected location: Location;
   protected messageService: MessageService;
   protected loaderService: LoaderService
+  protected hiddenForm = true;
 
 
   protected constructor(protected service: CrudService<T>,

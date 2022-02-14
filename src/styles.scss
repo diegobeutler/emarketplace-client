@@ -25,12 +25,49 @@ body{
   pointer-events: none;
 }
 
-.p-0-30-porcent{
-  padding: 0 30%;
+.width-card-p-35{
+  max-width: 35%;
+  margin: auto;
+}
+
+.width-card-p-35 .p-card{
+  min-width: 280px;
+}
+
+//primeng
+
+//// talvezz isolar para a toolbar.scss
+.p-menubar{
+  background: $purple;
+}
+
+.p-menubar .p-menubar-root-list > .p-menuitem > .p-menuitem-link .p-menuitem-text {
+  color: $white;
+}
+
+.p-menuitem-link .p-menuitem-icon {
+  color: $white!important;
+}
+
+.p-submenu-icon{
+  color: $white!important;
+}
+
+p-button:enabled:hover {
+  background: #7a38a7;
+  color: #000;
+  border-color: #7a38a7;
+}
+
+.p-menuitem-link:hover {
+  background: none!important;
+}
+.p-menubar{
+  border-radius: 0!important;
 }
 
 
-//primeng
+////////////
 body .p-autocomplete-dd  .p-button{
   padding: 0;
 }

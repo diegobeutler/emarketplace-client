@@ -45,7 +45,6 @@ export class LoginService {
 
     /**
      * @description Retorna true se o usuário estiver autenticado
-     * // TODO: tipar
      */
     public get isAuthenticated(): boolean {
         return !!localStorage.getItem('access_token');
@@ -82,8 +81,7 @@ export class LoginService {
 
                 observer.next(this.isAuthenticated);
                 observer.complete();
-
-                window.location.reload();
+              window.location.replace('');
             }, error => {
                 observer.error(error);
                 observer.complete();
@@ -150,7 +148,7 @@ export class LoginService {
         this._loginEvent.next(false);
         this.stopRefreshInterval();
         this._router.navigateByUrl('').then(res => res);
-        window.location.reload();
+        window.location.replace('');
     }
 
 }

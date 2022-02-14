@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {MenuItem} from "primeng/api";
+import {MenuItem, MessageService} from "primeng/api";
 import {LoginService} from "../../../pages/login/login.service";
+import {UsuarioService} from "../../../pages/usuario/usuario.service";
 
 @Component({
   selector: 'app-toolbar',
@@ -9,105 +10,83 @@ import {LoginService} from "../../../pages/login/login.service";
 })
 export class ToolbarComponent implements OnInit {
 
-  constructor(private loginService: LoginService) { }
+  constructor(private loginService: LoginService, private usuarioService: UsuarioService, private messageService: MessageService) { }
   //
   id  =14;
   items: MenuItem[];
+  item: MenuItem;
+  usuarioLogado;
 
   ngOnInit() {
 
+    // this.toolbarService.changeItemsToolbarSubject();
+    this.usuarioService.logado().subscribe( e => {// todo melhorar
 
-    this.items = [
-      {
-        label:'Login',
-        icon:'pi pi-fw pi-sign-in',
-        url: '/login'
-      },
-      {
-        label:'Usuário',
-        icon:'pi pi-fw pi-user',
-        items:[
+        this.items = [
           {
-            label:'Cadastrar-se',
-            icon:'pi pi-fw pi-user-plus',
-            url: ' /usuario/form'
+            label:'Login',
+            icon:'pi pi-fw pi-sign-in',
+            url: '/login'
           },
           {
-            label:'Perfil',
-            icon:'pi pi-fw pi-user-edit',
-            url: ' /usuario/form?id=14'
-
-          }
-        ]
-      },
-      {
-        label:'Anúncios',
-        items:[
-          {
-            label:'Anunciar',
-            icon:'pi pi-fw pi-volume-up',
-            url: ''
-
-          },
-          {
-            label:'Comprar',
-            icon:'pi pi-fw pi-shopping-cart',
+            label:'Usuário',
+            icon:'pi pi-fw pi-user',
             items:[
               {
-                label:'Filter',
-                icon:'pi pi-fw pi-filter',
-                items:[
-                  {
-                    label:'Print',
-                    icon:'pi pi-fw pi-print'
-                  }
-                ]
-              },
-              {
-                icon:'pi pi-fw pi-bars',
-                label:'List'
+                label:'Cadastrar-se',
+                icon:'pi pi-fw pi-user-plus',
+                url: ' /usuario/form'
               }
             ]
-          }
-        ]
-      },
-      // {
-      //   label:'Events',
-      //   icon:'pi pi-fw pi-calendar',
-      //   items:[
-      //     {
-      //       label:'Edit',
-      //       icon:'pi pi-fw pi-pencil',
-      //       items:[
-      //         {
-      //           label:'Save',
-      //           icon:'pi pi-fw pi-calendar-plus'
-      //         },
-      //         {
-      //           label:'Delete',
-      //           icon:'pi pi-fw pi-calendar-minus'
-      //         },
-      //
-      //       ]
-      //     },
-      //     {
-      //       label:'Archieve',
-      //       icon:'pi pi-fw pi-calendar-times',
-      //       items:[
-      //         {
-      //           label:'Remove',
-      //           icon:'pi pi-fw pi-calendar-minus'
-      //         }
-      //       ]
-      //     }
-      //   ]
-      // },
-      // {
-      //   label:'Sair',
-      //   icon:'pi pi-fw pi-sign-out',
-      //   url:'/logout'
-      // }
-    ];
+          },
+          {
+            label:'Anúncios',
+            items:[
+              {
+                label:'Anunciar',
+                icon:'pi pi-fw pi-volume-up',
+                url: ''
+
+              },
+              {
+                label:'Comprar',
+                icon:'pi pi-fw pi-shopping-cart',
+                items:[
+                  {
+                    label:'Filter',
+                    icon:'pi pi-fw pi-filter',
+                    items:[
+                      {
+                        label:'Print',
+                        icon:'pi pi-fw pi-print'
+                      }
+                    ]
+                  },
+                  {
+                    icon:'pi pi-fw pi-bars',
+                    label:'List'
+                  }
+                ]
+              }
+            ]
+          },
+        ];
+
+
+        this.usuarioLogado = e;
+        if(e) {
+          // const index = this.items.findIndex(i => i.label=='Usuário')
+          // @ts-ignore
+          this.items[1].items.push({
+            label:'Perfil',
+            icon:'pi pi-fw pi-user-edit',
+            url: ' /usuario/form?id=' + e.id
+
+          });
+          console.log(this.items)
+        }
+      })
+
   }
 
   logout(): void {

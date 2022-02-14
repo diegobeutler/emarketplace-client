@@ -1,13 +1,12 @@
-<p-menubar [model]="items">
-  <ng-template pTemplate="start">
-    <img src="https://e-marketplace.s3.sa-east-1.amazonaws.com/images/users/14.png" height="40" class="p-mr-2">
-  </ng-template>
+<p-menubar [model]="items" >
+<!--  <ng-template pTemplate="start">-->
+<!--    <img src="https://e-marketplace.s3.sa-east-1.amazonaws.com/images/users/14.png" height="40" class="p-mr-2">-->
+<!--  </ng-template>-->
   <ng-template pTemplate="end">
 <!--    <input type="text" pInputText placeholder="Search">-->
 <!--    <i  class="pi pi-fw pi-sign-out" >Sair</i>-->
     <div>
-
-      <p-button class="p-menubar-button p-menuitem p-menuitem-link p-ripple p-menuitem-text" label="Sair" icon="pi pi-fw pi-sign-out" (onClick)="logout()" ></p-button>
+      <p-button class="p-menubar-button p-menuitem p-menuitem-link p-ripple p-menuitem-text p-0" label="Sair" icon="pi pi-fw pi-sign-out" (onClick)="logout()" ></p-button>
     </div>
 
   </ng-template>

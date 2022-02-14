@@ -1,4 +1,4 @@
-<form id="form" #form="ngForm" class="my-form p-0-30-porcent mt-5">
+<form id="form" #form="ngForm" class="my-form width-card-p-35 mt-5">
   <p-card >
     <p-header>
       Login
@@ -47,7 +47,7 @@
       </div>
     </div>
     <div class="col-12 text-center pt-3">
-      <p-button label="Acessar" icon="pi pi-check" (click)="acessar()"></p-button>
+      <p-button label="Acessar" icon="pi pi-check" [disabled]="loginService.isAuthenticated" (click)="acessar()"></p-button>
       <div class="row  col-12 mt-2">
         <small>Não é cadastrado ? <a class="small_a"
                                      href="/usuario/form">Cadastre-se</a></small>
