@@ -10,9 +10,11 @@ import {UsuarioService} from "../../../pages/usuario/usuario.service";
 })
 export class ToolbarComponent implements OnInit {
 
-  constructor(private loginService: LoginService, private usuarioService: UsuarioService, private messageService: MessageService) { }
+  constructor(private loginService: LoginService, private usuarioService: UsuarioService, private messageService: MessageService) {
+  }
+
   //
-  id  =14;
+  id = 14;
   items: MenuItem[];
   item: MenuItem;
   usuarioLogado;
@@ -20,72 +22,75 @@ export class ToolbarComponent implements OnInit {
   ngOnInit() {
 
     // this.toolbarService.changeItemsToolbarSubject();
-    this.usuarioService.logado().subscribe( e => {// todo melhorar
+    this.usuarioService.logado().subscribe(e => {// todo melhorar
 
-        this.items = [
-          {
-            label:'Login',
-            icon:'pi pi-fw pi-sign-in',
-            url: '/login'
-          },
-          {
-            label:'Usuário',
-            icon:'pi pi-fw pi-user',
-            items:[
-              {
-                label:'Cadastrar-se',
-                icon:'pi pi-fw pi-user-plus',
-                url: ' /usuario/form'
-              }
-            ]
-          },
-          {
-            label:'Anúncios',
-            items:[
-              {
-                label:'Anunciar',
-                icon:'pi pi-fw pi-volume-up',
-                url: ''
+      this.items = [
+        {
+          label: 'Login',
+          icon: 'pi pi-fw pi-sign-in',
+          url: '/login'
+        },
+        {
+          label: 'Usuário',
+          icon: 'pi pi-fw pi-user',
+          items: []
+        },
+        {
+          label: 'Anúncios',
+          items: [
+            {
+              label: 'Anunciar',
+              icon: 'pi pi-fw pi-volume-up',
+              url: 'anuncio/form'
 
-              },
-              {
-                label:'Comprar',
-                icon:'pi pi-fw pi-shopping-cart',
-                items:[
-                  {
-                    label:'Filter',
-                    icon:'pi pi-fw pi-filter',
-                    items:[
-                      {
-                        label:'Print',
-                        icon:'pi pi-fw pi-print'
-                      }
-                    ]
-                  },
-                  {
-                    icon:'pi pi-fw pi-bars',
-                    label:'List'
-                  }
-                ]
-              }
-            ]
-          },
-        ];
+            },
+            {
+              label: 'Comprar',
+              icon: 'pi pi-fw pi-shopping-cart',
+              items: [
+                {
+                  label: 'Filter',
+                  icon: 'pi pi-fw pi-filter',
+                  items: [
+                    {
+                      label: 'Print',
+                      icon: 'pi pi-fw pi-print'
+                    }
+                  ]
+                },
+                {
+                  icon: 'pi pi-fw pi-bars',
+                  label: 'List',
+                  url:'anuncio/list'
+                }
+              ]
+            }
+          ]
+        },
+      ];
 
 
-        this.usuarioLogado = e;
-        if(e) {
-          // const index = this.items.findIndex(i => i.label=='Usuário')
-          // @ts-ignore
-          this.items[1].items.push({
-            label:'Perfil',
-            icon:'pi pi-fw pi-user-edit',
-            url: ' /usuario/form?id=' + e.id
+      this.usuarioLogado = e;
+      if (e) {
+        // const index = this.items.findIndex(i => i.label=='Usuário')
+        // @ts-ignore
+        this.items[1].items.push({
+          label: 'Perfil',
+          icon: 'pi pi-fw pi-user-edit',
+          url: ' /usuario/form?id=' + e.id
 
-          });
-          console.log(this.items)
-        }
-      })
+        });
+        console.log(this.items)
+      } else {
+        // @ts-ignore
+        this.items[1].items.push({
+          label: 'Cadastrar-se',
+          icon: 'pi pi-fw pi-user-plus',
+          url: ' /usuario/form'
+        })
+      }
+
+    });
 
   }
 

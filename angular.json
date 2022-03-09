@@ -40,7 +40,8 @@
               "node_modules/primeicons/primeicons.css",
               "node_modules/primeng/resources/primeng.min.css",
               "node_modules/primeng/resources/themes/bootstrap4-light-purple/theme.css",
-              "src/styles.scss"
+              "src/styles.scss",
+              "src/primeng.scss"
             ],
             "scripts": ["node_modules/jquery/dist/jquery.min.js"]
           },
@@ -108,7 +109,8 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.scss"
+              "src/styles.scss",
+              "src/primeng.scss"
             ],
             "scripts": []
           }

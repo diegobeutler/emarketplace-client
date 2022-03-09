@@ -9,7 +9,7 @@ export class Anuncio {
   id?: number;
   titulo: string;
   descricao: string;
-  caracteristicas: JSON[];// ver talvez usar um map<string, string>
+  caracteristicas: JSON;// ver talvez usar um map<string, string>
   operacao: Operacao;
   status: Status;
   valor: number;
@@ -20,5 +20,8 @@ export class Anuncio {
   usuarioDestino: Usuario;
   usuarioInstituicao: Usuario;
   categoria: Categoria;
+
+  // variáveis de controle
+  readOnly: false;
 
 }

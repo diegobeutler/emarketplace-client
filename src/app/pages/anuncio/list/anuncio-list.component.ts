@@ -9,14 +9,15 @@ import {ActivatedRoute} from "@angular/router";
 })
 export class AnuncioListComponent implements OnInit {
 
-  constructor(private messageService: MessageService, private activatedRoute: ActivatedRoute) { }
+  constructor(private messageService: MessageService) { }
 
   ngOnInit(): void {
-    this.activatedRoute.queryParamMap.subscribe(paramMap => {
-      if (paramMap.has('showLoginSucess')) {
-        this.messageService.add({severity: 'success', detail: 'Usuário autenticado com sucesso!'});
-      }
-      });
+    // alert('teste')
+    // this.activatedRoute.queryParamMap.subscribe(paramMap => {
+    //   if (paramMap.has('showLoginSucess')) {
+    //     this.messageService.add({severity: 'success', detail: 'Usuário autenticado com sucesso!'});
+    //   }
+    //   });
   }
 
 }
