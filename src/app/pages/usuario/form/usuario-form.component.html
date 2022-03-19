@@ -8,9 +8,9 @@
         <div class="form-group" >
           <div class="position-relative divImagem ms-sm-auto me-sm-auto">
             <img id="imagem" [src]="registro.imagem" class="image img-thumbnail divImagem"/>
-            <i (click)="showUpfile()" [ngClass]="((registro.vadationInstitution  ? 'disabled ': '') + 'pi pi-pencil edit-image icon-image')"></i>
+            <i (click)="showUpfile()" [ngClass]="((registro.vadationInstitution  ? 'disabled ': '') + 'btn pi pi-pencil edit-image icon-image')"></i>
             <i (click)="deleteFile()"
-               [ngClass]="(((isDefaultImage() || registro.vadationInstitution  ) ? 'disabled ': '') +'pi pi-trash delete-image icon-image')"></i>
+               [ngClass]="(((isDefaultImage() || registro.vadationInstitution  ) ? 'disabled ': '') +'btn pi pi-trash delete-image icon-image')"></i>
           </div>
           <div [hidden]="true"><input id="upfile" type="file" value="upload" (change)="selectFile($event)"/>
           </div>

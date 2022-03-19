@@ -9,19 +9,18 @@
 //}
 
 .edit-image{
-  position: absolute;
-  top: 50%;
-  right: 53%;
+  right: 102px;
 }
 
 .delete-image{
-  position: absolute;
-  top: 50%;
-  right: 41%;
+  right: 68px;
 }
 
 .icon-image{
   display: none;
+  position: absolute;
+  top: 44%;
+  padding: 3px 6px;
 }
 
 .divImagem:hover .icon-image{

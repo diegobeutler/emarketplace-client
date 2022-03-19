@@ -12,7 +12,7 @@ import {AutoCompleteModule} from "primeng/autocomplete";
 import {PasswordModule} from "primeng/password";
 import {ProgressBarModule} from "primeng/progressbar";
 import {
-    PasswordValidationModule
+  PasswordValidationModule
 } from "../../shared/components/dierective/passwordValidation/password-validation.module";
 
 const routes: Routes = [

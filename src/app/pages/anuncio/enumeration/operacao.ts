@@ -1,6 +1,7 @@
 export enum Operacao {
-  DOACAO,
-  EMPRESTIMO,
-  TROCA,
-  VENDA,
+  DOACAO = 'Doação',
+  EMPRESTIMO = 'Empréstimo',
+  TROCA = 'Troca',
+  VENDA = 'Venda',
+  // DOACAO_ITEM = 'Doação Item',
 }

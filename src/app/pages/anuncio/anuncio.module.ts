@@ -11,12 +11,14 @@ import {NgModule} from "@angular/core";
 import {CardModule} from "primeng/card";
 import {FileUploadModule} from "primeng/fileupload";
 import {
-    DisabledLabelAndSpanModule
+  DisabledLabelAndSpanModule
 } from "../../shared/components/dierective/disabledLabelSpan/disabled-label-and-span.module";
 import {InputTextModule} from "primeng/inputtext";
 import {InputTextareaModule} from "primeng/inputtextarea";
 import {TableModule} from "primeng/table";
-import { CaracteristicasComponent } from './form/caracteristicas/caracteristicas.component';
+import {CaracteristicasComponent} from './form/caracteristicas/caracteristicas.component';
+import {AutoCompleteModule} from "primeng/autocomplete";
+import {DropdownModule} from "primeng/dropdown";
 
 
 const routes: Routes = [
@@ -34,6 +36,8 @@ const routes: Routes = [
         InputTextModule,
         InputTextareaModule,
         TableModule,
+        AutoCompleteModule,
+        DropdownModule,
     ],
   declarations: [
     AnuncioComponent,

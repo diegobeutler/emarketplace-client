@@ -14,9 +14,7 @@ import {MessageService} from "primeng/api";
 import {ToastModule} from "primeng/toast";
 import {LoaderService} from "./shared/components/loader/loader.service";
 import {LoaderModule} from "./shared/components/loader/loader.module";
-import { AnuncioListComponent } from './pages/anuncio/list/anuncio-list.component';
-import { AnuncioFormComponent } from './pages/anuncio/form/anuncio-form.component';
-import { AnuncioComponent } from './pages/anuncio/anuncio.component';
+import {FormsModule} from "@angular/forms";
 
 @NgModule({
   declarations: [
@@ -32,7 +30,8 @@ import { AnuncioComponent } from './pages/anuncio/anuncio.component';
     MenubarModule,
     ButtonModule,
     ToastModule,
-    LoaderModule
+    LoaderModule,
+    FormsModule
 
   ],
   providers: [

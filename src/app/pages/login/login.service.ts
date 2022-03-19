@@ -81,7 +81,7 @@ export class LoginService {
 
                 observer.next(this.isAuthenticated);
                 observer.complete();
-              window.location.replace('');
+                window.location.replace('');
             }, error => {
                 observer.error(error);
                 observer.complete();

@@ -1,1 +1,93 @@
-<p>anuncio-form works!</p>
+<form id="form" #form="ngForm" class="my-form p-0-20-porcent">
+  <p-card>
+    <p-header>
+      Cabeçalho
+    </p-header>
+    <div class="row">
+      <div class="col-12">
+        <div class="form-group" [disabledLabelAndSpan] = "registro.readOnly">
+          <label for="titulo">Título</label>
+          <span class="obrigatorio">*</span>
+          <input type="text"
+                 name="titulo"
+                 id="titulo"
+                 [disabled]="registro.readOnly "
+                 pInputText
+                 required
+                 [(ngModel)]="registro.titulo"/>
+        </div>
+      </div>
+      </div>
+    <div class="row">
+      <div class="col-12">
+        <div class="form-group" [disabledLabelAndSpan] = "registro.readOnly">
+          <label for="descricao">Descrição</label>
+          <span class="obrigatorio">*</span>
+          <textarea [(ngModel)]="registro.descricao"
+                 id="descricao"
+                 [disabled]="registro.readOnly "
+                 name="descricao"
+                 type="text"
+                 rows="2"
+                 cols="30"
+                 pInputTextarea
+                 autoResize="autoResize"
+                 required></textarea>
+
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12 col-md col-xl-6">
+        <div class="form-group" [disabledLabelAndSpan]="false">
+          <label for="operacao">Operação</label>
+          <span class="obrigatorio">*</span>
+          <p-dropdown name="operacao"
+                          id="operacao"
+                          required
+                          [(ngModel)]="registro.operacao"
+                          [options]="operacoesOptions"
+                          [disabled]="false">
+          </p-dropdown>
+        </div>
+      </div>
+    </div>
+
+  </p-card>
+
+  <div class="separador-card"></div>
+  <p-card>
+    <p-header>
+      Imagens
+    </p-header>
+    <div class="row">
+      <div class="col-12 ">
+        <div class="form-group" >
+          <h5>Adicione uma ou mais imagens ao anúncio</h5>
+          <p-fileUpload name="demo[]"
+                        customUpload="true"
+                        (uploadHandler)="onUpload($event)"
+                        multiple="multiple"
+                        accept="image/*"
+                        maxFileSize="1000000"
+                        [chooseLabel]="'Selecionar'"
+                        [uploadLabel]="'Carregar'"
+                        [cancelLabel]="'Limpar'"
+                        [cancelIcon]="' pi pi-trash'">
+            <ng-template pTemplate="content">
+              <ul *ngIf="uploadedFiles?.length">
+                <li *ngFor="let file of uploadedFiles">{{file.name}} - {{file.size}} bytes</li>
+              </ul>
+            </ng-template>
+          </p-fileUpload>
+        </div>
+      </div>
+    </div>
+  </p-card>
+
+  <div class="separador-card"></div>
+  <app-caracteristicas [(caracteristicas)]="caracteristicas"></app-caracteristicas>
+  <div class="col-12 text-center pt-3 pb-3">
+    <p-button label="Salvar" icon="pi pi-check" (click)="salvar(registro)"></p-button>
+  </div>
+</form>

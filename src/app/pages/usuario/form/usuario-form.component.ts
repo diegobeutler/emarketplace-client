@@ -1,4 +1,4 @@
-import {Component, Injector, OnInit} from '@angular/core';
+import {Component, Injector} from '@angular/core';
 import {SimpleCrudComponent} from "../../../shared/components/crud/simple-crud.component";
 import {Usuario} from "../models/usuario";
 import {UsuarioService} from "../usuario.service";

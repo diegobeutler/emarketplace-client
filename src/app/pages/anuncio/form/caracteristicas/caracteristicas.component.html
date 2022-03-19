@@ -1,0 +1,52 @@
+<p-card>
+  <p-header>Características</p-header>
+
+  <p-table #table
+           [value]="caracteristicas">
+    <ng-template pTemplate="header">
+      <tr>
+        <th class="w-p-45">Informação</th>
+        <th class="w-p-45">Valor</th>
+        <th class="w-p-10"></th>
+
+      </tr>
+    </ng-template>
+    <ng-template let-rowData pTemplate="body" let-columns="columns" let-rowIndex="rowIndex">
+      <tr class="table-body-line">
+        <td>
+          <div class="form-group">
+            <input type="text"
+                   [id]="'caracteristicaKey' + rowIndex"
+                   [name]="'caracteristicaKey' + rowIndex"
+                   (ngModelChange)="change()"
+                   pInputText
+                   required
+                   [(ngModel)]="rowData.key"/>
+          </div>
+        </td>
+        <td>
+          <div class="form-group">
+            <input type="text"
+                   [id]="'caracteristicaValue' + rowIndex"
+                   [name]="'caracteristicaValue' + rowIndex"
+                   (ngModelChange)="change()"
+                   pInputText
+                   required
+                   [(ngModel)]="rowData.value"/>
+          </div>
+        </td>
+
+        <td>
+          <i class="btn pi pi-trash "
+             (click)="remover(rowIndex)"></i>
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+  <p-footer>
+    <div class="col-12 text-center pt-3 pb-3">
+      <p-button label="Adicionar" icon="pi pi-plus" (click)="adicionar()"></p-button>
+    </div>
+
+  </p-footer>
+</p-card>
