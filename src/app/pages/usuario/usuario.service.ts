@@ -45,7 +45,6 @@ export class UsuarioService extends CrudService<Usuario> {
     return this.http.post<any>(`${this.baseUrl}${ this.url}/resetPassword`, username);
   }
 
-
   updatePassword(passwordDto: PasswordDto): Observable<void> {
     return this.http.post<any>(`${this.baseUrl}${ this.url}/updatePassword`, passwordDto);
   }

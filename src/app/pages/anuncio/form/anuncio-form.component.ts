@@ -4,7 +4,7 @@ import {Anuncio} from "../models/anuncio";
 import {AnuncioService} from "../anuncio.service";
 import {KeyValue} from "@angular/common";
 import {SelectItem} from "primeng/api";
-import {OptionsUtils} from "../../../shared/utils/OptionsUtils";
+import {OptionsUtils} from '../../../shared/utils/OptionsUtils';
 import {Operacao} from "../enumeration/operacao";
 
 @Component({
@@ -24,8 +24,8 @@ export class AnuncioFormComponent extends SimpleCrudComponent<Anuncio> implement
   }
 
   ngOnInit(): void {
+    super.ngOnInit();
     this.caracteristicas = this.arrayByJson(this.registro.caracteristicas);
-    this.caracteristicas = this.caracteristicas;
   }
 
   onUpload($event: any) {
