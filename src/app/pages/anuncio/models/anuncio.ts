@@ -1,7 +1,7 @@
 import {Operacao} from "../enumeration/operacao";
 import {Status} from "../enumeration/status";
 import {Usuario} from "../../usuario/models/usuario";
-import {Categoria} from "./Categoria";
+import {Categoria} from "../../categoria/models/categoria";
 import {ImagemAnuncio} from "./ImagemAnuncio";
 
 export class Anuncio {

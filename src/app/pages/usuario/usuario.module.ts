@@ -16,7 +16,6 @@ import {
   DisabledLabelAndSpanModule
 } from "../../shared/components/dierective/disabledLabelSpan/disabled-label-and-span.module";
 import {TooltipModule} from "primeng/tooltip";
-import {FileModule} from "../../shared/components/file/file.module";
 import {TokenInterceptor} from "../../shared/interceptors/token-interceptor.interceptor";
 import {HTTP_INTERCEPTORS} from "@angular/common/http";
 import {PasswordModule} from "primeng/password";
@@ -43,17 +42,16 @@ const routes: Routes = [
     ButtonModule,
     RouterModule.forChild(routes),
     NgxMaskModule.forRoot(),
-
     PanelModule,
     ReactiveFormsModule,
+    CheckboxModule,
+    TooltipModule,
+    DividerModule,
+    PasswordModule,
     AutoCompleteModule,
+
     EnderecoModule,
     DisabledLabelAndSpanModule,
-    TooltipModule,
-    FileModule,
-    PasswordModule,
-    DividerModule,
-    CheckboxModule,
     PasswordValidationModule
   ],
   declarations: [

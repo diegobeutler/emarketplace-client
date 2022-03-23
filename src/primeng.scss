@@ -85,12 +85,17 @@ p-card p-header {
   height: 2.2rem;
   font-family: Lato, Helvetica, sans-serif;
   font-size: 1rem;
-  color: #043d75;
+  color: #202b36;
   background: #fff;
-  padding: 0.75rem 0.75rem;
+  //padding: 0.75rem 0.75rem;
   border: 1px solid #d3dbe3;
   transition: background-color .2s, color .2s, border-color .2s, box-shadow .2s;
   appearance: none;
+  border-radius: 6px;
+}
+
+.p-dropdown {
+  width: 100%;
   border-radius: 6px;
 }
 

@@ -19,26 +19,31 @@ import {TableModule} from "primeng/table";
 import {CaracteristicasComponent} from './form/caracteristicas/caracteristicas.component';
 import {AutoCompleteModule} from "primeng/autocomplete";
 import {DropdownModule} from "primeng/dropdown";
+import {TooltipModule} from "primeng/tooltip";
+import {CategoriaModule} from "../categoria/categoria.module";
 
 
 const routes: Routes = [
-  { path: '', component: AnuncioComponent }
+  {path: '', component: AnuncioComponent}
 ];
 
 @NgModule({
-    imports: [
-        CommonModule,
-        FormsModule,
-        RouterModule.forChild(routes),
-        CardModule,
-        FileUploadModule,
-        DisabledLabelAndSpanModule,
-        InputTextModule,
-        InputTextareaModule,
-        TableModule,
-        AutoCompleteModule,
-        DropdownModule,
-    ],
+  imports: [
+    CommonModule,
+    FormsModule,
+    RouterModule.forChild(routes),
+    CardModule,
+    FileUploadModule,
+    InputTextModule,
+    InputTextareaModule,
+    TableModule,
+    AutoCompleteModule,
+    DropdownModule,
+    TooltipModule,
+
+    DisabledLabelAndSpanModule,
+    CategoriaModule
+  ],
   declarations: [
     AnuncioComponent,
     AnuncioFormComponent,
@@ -50,7 +55,8 @@ const routes: Routes = [
     TokenInterceptor,
 
     // interceptors
-    { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true, },
+    {provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true,},
   ],
 })
-export class AnuncioModule { }
+export class AnuncioModule {
+}

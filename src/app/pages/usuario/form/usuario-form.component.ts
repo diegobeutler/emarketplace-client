@@ -6,7 +6,6 @@ import {EstadoService} from "../../endereco/estado.service";
 import {Estado} from "../../endereco/models/estado";
 import {Cidade} from "../../endereco/models/cidade";
 import {CidadeService} from "../../endereco/cidade.service";
-import {FileService} from "../../../shared/components/file/file.service";
 import * as $ from 'jquery';
 import {errorTransform} from "../../../shared/pipes/error-transform";
 
@@ -26,7 +25,6 @@ export class UsuarioFormComponent extends SimpleCrudComponent<Usuario>{
   constructor(protected service: UsuarioService,
               private estadoService: EstadoService,
               private cidadeService: CidadeService,
-              private fileService: FileService,
               injector: Injector) {
     super(service, injector);
   }

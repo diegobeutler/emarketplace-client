@@ -12,8 +12,9 @@ const routes: Routes = [
   {path: 'usuario/resetPassWord', component: ResetPasswordComponent},
   {path: 'usuario/changePassword', component: UpdatePasswordComponent},
   {path: '', loadChildren: () => import('./pages/anuncio/anuncio.module').then(mod => mod.AnuncioModule)},
-  {path: 'anuncio/form', component: AnuncioFormComponent},// rever
-  {path: 'anuncio/list', component: AnuncioListComponent},// rever
+  {path: 'anuncio/form',  loadChildren: () => import('./pages/anuncio/anuncio.module').then(mod => mod.AnuncioModule)},// rever
+  // {path: 'anuncio/form', component: AnuncioFormComponent},// rever
+  // {path: 'anuncio/list', component: AnuncioListComponent},// rever
 ];
 
 @NgModule({

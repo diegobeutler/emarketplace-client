@@ -6,6 +6,8 @@ import {KeyValue} from "@angular/common";
 import {SelectItem} from "primeng/api";
 import {OptionsUtils} from '../../../shared/utils/OptionsUtils';
 import {Operacao} from "../enumeration/operacao";
+import {CategoriaService} from "../../categoria/categoria.service";
+import {Categoria} from "../../categoria/models/categoria";
 
 @Component({
   selector: 'app-anuncio-form',
@@ -16,8 +18,10 @@ export class AnuncioFormComponent extends SimpleCrudComponent<Anuncio> implement
   uploadedFiles: any[] = [];
   caracteristicas: Array<KeyValue<string, string>>;
   operacoesOptions: SelectItem[];
+  categorias: Categoria[];
 
   constructor(protected anuncioService: AnuncioService,
+              private categoriaService: CategoriaService,
               injector: Injector) {
     super(anuncioService, injector);
     this.operacoesOptions = OptionsUtils.getOptions(Operacao);
@@ -26,6 +30,10 @@ export class AnuncioFormComponent extends SimpleCrudComponent<Anuncio> implement
   ngOnInit(): void {
     super.ngOnInit();
     this.caracteristicas = this.arrayByJson(this.registro.caracteristicas);
+  }
+
+  categoriaComplete(event: any): void {
+    this.categoriaService.completeByDescricao(event.query).subscribe(e => this.categorias = e);
   }
 
   onUpload($event: any) {

@@ -40,14 +40,37 @@
     <div class="row">
       <div class="col-12 col-md col-xl-6">
         <div class="form-group" [disabledLabelAndSpan]="false">
+          <label for="categoria">Categoria</label>
+          <span class="obrigatorio">*</span>
+          <p-autoComplete name="categoria"
+                          id="categoria"
+                          required
+                          [dropdown]="true"
+                          [forceSelection]="true"
+                          [(ngModel)]="registro.categoria"
+                          field="descricao"
+                          [suggestions]="categorias"
+                          [disabled]="false"
+                          (onClear)="registro.categoria = null"
+                          (completeMethod)="categoriaComplete($event)"
+                          [pTooltip]="getTooltip$(registro.categoria?.descricao) | async"
+                          [title]="getTooltip$(registro?.categoria?.descricao) | async">
+            <ng-template let-categoria pTemplate="categoria">
+              <span>{{categoria?.descricao}}</span>
+            </ng-template>
+          </p-autoComplete>
+        </div>
+      </div>
+      <div class="col-12 col-md col-xl-6">
+        <div class="form-group" [disabledLabelAndSpan]="false">
           <label for="operacao">Operação</label>
           <span class="obrigatorio">*</span>
           <p-dropdown name="operacao"
-                          id="operacao"
-                          required
-                          [(ngModel)]="registro.operacao"
-                          [options]="operacoesOptions"
-                          [disabled]="false">
+                      id="operacao"
+                      required
+                      [(ngModel)]="registro.operacao"
+                      [options]="operacoesOptions"
+                      [disabled]="false">
           </p-dropdown>
         </div>
       </div>
