@@ -12,9 +12,7 @@ import {UsuarioFormComponent} from "./form/usuario-form.component";
 import {UsuarioService} from "./usuario.service";
 import {NgxMaskModule} from "ngx-mask";
 import {EnderecoModule} from "../endereco/endereco.module";
-import {
-  DisabledLabelAndSpanModule
-} from "../../shared/components/dierective/disabledLabelSpan/disabled-label-and-span.module";
+import {DisabledLabelAndSpanModule} from "../../shared/dierective/disabledLabelSpan/disabled-label-and-span.module";
 import {TooltipModule} from "primeng/tooltip";
 import {TokenInterceptor} from "../../shared/interceptors/token-interceptor.interceptor";
 import {HTTP_INTERCEPTORS} from "@angular/common/http";
@@ -23,37 +21,35 @@ import {DividerModule} from "primeng/divider";
 import {ResetPasswordComponent} from './reset-password/reset-password.component';
 import {UpdatePasswordComponent} from './update-password/update-password.component';
 import {CheckboxModule} from "primeng/checkbox";
-import {
-  PasswordValidationModule
-} from "../../shared/components/dierective/passwordValidation/password-validation.module";
+import {PasswordValidationModule} from "../../shared/dierective/passwordValidation/password-validation.module";
 
 const routes: Routes = [
   { path: '', component: UsuarioFormComponent }
 ];
 
 @NgModule({
-  imports: [
-    CommonModule,
-    CardModule,
-    FormsModule,
-    InputTextModule,
-    DropdownModule,
-    RouterModule,
-    ButtonModule,
-    RouterModule.forChild(routes),
-    NgxMaskModule.forRoot(),
-    PanelModule,
-    ReactiveFormsModule,
-    CheckboxModule,
-    TooltipModule,
-    DividerModule,
-    PasswordModule,
-    AutoCompleteModule,
+    imports: [
+        CommonModule,
+        CardModule,
+        FormsModule,
+        InputTextModule,
+        DropdownModule,
+        RouterModule,
+        ButtonModule,
+        RouterModule.forChild(routes),
+        NgxMaskModule.forRoot(),
+        PanelModule,
+        ReactiveFormsModule,
+        CheckboxModule,
+        TooltipModule,
+        DividerModule,
+        PasswordModule,
+        AutoCompleteModule,
 
-    EnderecoModule,
-    DisabledLabelAndSpanModule,
-    PasswordValidationModule
-  ],
+        EnderecoModule,
+        DisabledLabelAndSpanModule,
+        PasswordValidationModule
+    ],
   declarations: [
     UsuarioFormComponent,
     ResetPasswordComponent,

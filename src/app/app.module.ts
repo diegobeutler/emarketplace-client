@@ -15,7 +15,11 @@ import {ToastModule} from "primeng/toast";
 import {LoaderService} from "./shared/components/loader/loader.service";
 import {LoaderModule} from "./shared/components/loader/loader.module";
 import {FormsModule} from "@angular/forms";
+import {NgxCurrencyModule} from "ngx-currency";
+import {customCurrencyMaskConfig} from "./shared/config/currency.mask.config";
 
+// @ts-ignore
+// @ts-ignore
 @NgModule({
   declarations: [
     AppComponent,
@@ -31,7 +35,8 @@ import {FormsModule} from "@angular/forms";
     ButtonModule,
     ToastModule,
     LoaderModule,
-    FormsModule
+    FormsModule,
+    NgxCurrencyModule.forRoot(customCurrencyMaskConfig),
 
   ],
   providers: [

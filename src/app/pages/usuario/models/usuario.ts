@@ -3,7 +3,7 @@ import {Permissao} from "../../../shared/models/permissao";
 
 export class Usuario {
   id?: number;
-  apelido: string;
+  nome: string;
   sobrenome: string;
   imagem: string;
   email: string;

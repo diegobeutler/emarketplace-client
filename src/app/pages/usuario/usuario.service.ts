@@ -52,4 +52,8 @@ export class UsuarioService extends CrudService<Usuario> {
   validarCadastro(id: number):  Observable<void> {
     return this.http.post<void>(`${this.baseUrl}${ this.url}/validate`, id);
   }
+
+  completeByInstituicaoAndNome(query: string): Observable<Usuario[]> {
+    return  this.http.get<Usuario[]>(`${this.baseUrl}${ this.url}/complete-by-instituicao-and-nome?query=${query}`)
+  }
 }

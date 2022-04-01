@@ -13,7 +13,7 @@ export class Anuncio {
   operacao: Operacao;
   status: Status;
   categoria: Categoria;
-  valor: number;
+  valor: number = 0;
   produtosTroca: string;
   dataPublicacao: Date;
   dataDevolocao: Date;

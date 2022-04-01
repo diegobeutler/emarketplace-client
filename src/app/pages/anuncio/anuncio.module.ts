@@ -10,9 +10,7 @@ import {HTTP_INTERCEPTORS} from "@angular/common/http";
 import {NgModule} from "@angular/core";
 import {CardModule} from "primeng/card";
 import {FileUploadModule} from "primeng/fileupload";
-import {
-  DisabledLabelAndSpanModule
-} from "../../shared/components/dierective/disabledLabelSpan/disabled-label-and-span.module";
+import {DisabledLabelAndSpanModule} from "../../shared/dierective/disabledLabelSpan/disabled-label-and-span.module";
 import {InputTextModule} from "primeng/inputtext";
 import {InputTextareaModule} from "primeng/inputtextarea";
 import {TableModule} from "primeng/table";
@@ -21,6 +19,10 @@ import {AutoCompleteModule} from "primeng/autocomplete";
 import {DropdownModule} from "primeng/dropdown";
 import {TooltipModule} from "primeng/tooltip";
 import {CategoriaModule} from "../categoria/categoria.module";
+import {MoneyFormatPipeModule} from "../../shared/pipes/moneyFormat/moneyFormat.pipe.module";
+import {CalendarModule} from "primeng/calendar";
+import {OnlyNumberModule} from "../../shared/dierective/onlyNumber/onlyNumber.module";
+import {NgxCurrencyModule} from "ngx-currency";
 
 
 const routes: Routes = [
@@ -28,35 +30,44 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [
-    CommonModule,
-    FormsModule,
-    RouterModule.forChild(routes),
-    CardModule,
-    FileUploadModule,
-    InputTextModule,
-    InputTextareaModule,
-    TableModule,
-    AutoCompleteModule,
-    DropdownModule,
-    TooltipModule,
+    imports: [
+        CommonModule,
+        FormsModule,
+        RouterModule.forChild(routes),
+        CardModule,
+        FileUploadModule,
+        InputTextModule,
+        InputTextareaModule,
+        TableModule,
+        AutoCompleteModule,
+        DropdownModule,
+        TooltipModule,
 
-    DisabledLabelAndSpanModule,
-    CategoriaModule
-  ],
-  declarations: [
-    AnuncioComponent,
-    AnuncioFormComponent,
-    AnuncioListComponent,
-    CaracteristicasComponent,
-  ],
-  providers: [
-    AnuncioService,
-    TokenInterceptor,
 
-    // interceptors
-    {provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true,},
-  ],
+        DisabledLabelAndSpanModule,
+        CategoriaModule,
+        MoneyFormatPipeModule,
+
+        CalendarModule,
+        OnlyNumberModule,
+        NgxCurrencyModule,
+    ],
+    declarations: [
+        AnuncioComponent,
+        AnuncioFormComponent,
+        AnuncioListComponent,
+        CaracteristicasComponent,
+    ],
+    providers: [
+        AnuncioService,
+        TokenInterceptor,
+
+        // interceptors
+        {provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true,},
+    ],
+    exports: [
+        AnuncioFormComponent
+    ]
 })
 export class AnuncioModule {
 }

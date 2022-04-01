@@ -29,6 +29,9 @@
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.app.json",
             "aot": false,
+            "allowedCommonJsDependencies": [
+              "lodash"
+            ],
             "inlineStyleLanguage": "scss",
             "assets": [
               "src/favicon.ico",

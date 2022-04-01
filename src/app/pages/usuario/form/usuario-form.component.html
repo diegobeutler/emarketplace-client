@@ -7,7 +7,7 @@
       <div class="col-12 col-md col-xl-4 col-xxl-2">
         <div class="form-group" >
           <div class="position-relative divImagem ms-sm-auto me-sm-auto">
-            <img id="imagem" [src]="registro.imagem" class="image img-thumbnail divImagem"/>
+            <img id="imagem" [src]="registro.imagem" class="image img-thumbnail divImagem" alt="Image Profile"/>
             <i (click)="showUpfile()" [ngClass]="((registro.vadationInstitution  ? 'disabled ': '') + 'btn pi pi-pencil edit-image icon-image')"></i>
             <i (click)="deleteFile()"
                [ngClass]="(((isDefaultImage() || registro.vadationInstitution  ) ? 'disabled ': '') +'btn pi pi-trash delete-image icon-image')"></i>
@@ -40,7 +40,7 @@
                  [disabled]="registro.vadationInstitution "
                  pInputText
                  required
-                 [(ngModel)]="registro.apelido"/>
+                 [(ngModel)]="registro.nome"/>
         </div>
       </div>
     </div>

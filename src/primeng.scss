@@ -45,6 +45,10 @@ body .p-autocomplete-dd .p-button {
   padding: 0;
 }
 
+body .p-calendar-w-btn .p-button{
+  padding: 0;
+}
+
 body .p-card {
   border-radius: 0.25em !important;
 }
@@ -87,15 +91,10 @@ p-card p-header {
   font-size: 1rem;
   color: #202b36;
   background: #fff;
-  //padding: 0.75rem 0.75rem;
+  padding: 0.75rem 0.75rem;
   border: 1px solid #d3dbe3;
   transition: background-color .2s, color .2s, border-color .2s, box-shadow .2s;
   appearance: none;
-  border-radius: 6px;
-}
-
-.p-dropdown {
-  width: 100%;
   border-radius: 6px;
 }
 
@@ -107,6 +106,14 @@ p-card p-header {
   width: 100%;
 }
 
+.p-calendar {
+  width: 100%;
+}
+
+.p-autocomplete {
+  width: 100%;
+}
+
 .p-float-label .p-password-input {
   padding-left: 40px !important;
 }
@@ -115,6 +122,4 @@ p-card p-header {
   z-index: 1;
 }
 
-.p-autocomplete {
-  width: 100%;
-}
+
