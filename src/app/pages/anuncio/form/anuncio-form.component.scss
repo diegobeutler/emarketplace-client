@@ -1,3 +1,34 @@
 .col-12 .form-group label{
   padding-top: 10px;
 }
+
+.my-file-upload-buttonbar {
+  background: #efefef;
+  padding: 1rem 1.25rem;
+  border: 1px solid #dee2e6;
+  color: #212529;
+  border-top: 0 none;
+  border-bottom-right-radius: 4px;
+  border-bottom-left-radius: 4px;
+  text-align: center;
+}
+.my-file-upload-content{
+  position: relative;
+  background: #ffffff;
+  padding: 2rem 1rem;
+  border: 1px solid #dee2e6;
+  color: #212529;
+  border-top-right-radius: 4px;
+  border-top-left-radius: 4px
+}
+
+.my-fileupload-row {
+  display: flex;
+  align-items: center;
+}
+
+.my-file-upload-content .my-fileupload-row > div {
+  padding: 1rem 1rem;
+  flex: 1 1 auto;
+  width: 33%;
+}

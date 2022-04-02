@@ -165,21 +165,24 @@
       <div class="col-12 ">
         <div class="form-group">
           <h5>Adicione uma ou mais imagens ao anúncio</h5>
-          <p-fileUpload customUpload="true"
-                        (uploadHandler)="onUpload($event)"
-                        multiple="multiple"
-                        accept="image/*"
-                        maxFileSize="1000000"
-                        [chooseLabel]="'Selecionar'"
-                        [uploadLabel]="'Carregar'"
-                        [cancelLabel]="'Limpar'"
-                        [cancelIcon]="' pi pi-trash'">
-            <ng-template pTemplate="content">
-              <ul *ngIf="uploadedFiles?.length">
-                <li *ngFor="let file of uploadedFiles">{{file.name}} - {{file.size}} bytes</li>
-              </ul>
-            </ng-template>
-          </p-fileUpload>
+          <div class="my-file-upload-content">
+            <div *ngFor="let imagem of registro.imagens" class="my-fileupload-row">
+              <div><img [src]="imagem.url" width="80" alt="image product" class="img-thumbnail"></div>
+              <div class="text-center">{{imagem.nome}}</div>
+              <div class="text-end">
+                <button type="button" class="p-button p-component p-button-icon-only"
+                        (click)="removerImage(imagem)"><span
+                  class="p-button-icon pi pi-times"
+                  aria-hidden="true"></span><span
+                  aria-hidden="true" class="p-button-label">&nbsp;</span></button>
+              </div>
+            </div>
+          </div>
+          <div class="my-file-upload-buttonbar">
+            <p-button type="file" label="Selecionar" icon="pi pi-plus" (click)="showUpfile()"></p-button>
+            <div [hidden]="true"><input id="upfile" type="file" value="upload" (change)="onUpload($event)" multiple
+                                        accept="image/*"/></div>
+          </div>
         </div>
       </div>
     </div>
