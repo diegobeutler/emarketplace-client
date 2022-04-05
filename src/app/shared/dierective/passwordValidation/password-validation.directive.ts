@@ -15,8 +15,7 @@ export class PasswordValidationDirective implements Validator {
     // expressão regular para senha forte
     const regexSenhaForte = new RegExp('^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.{6,})');
     const senha = c.value;
-    if (!senha || senha.match(regexSenhaForte)){
-
+    if (senha.match(regexSenhaForte)){
       $("#password").removeClass('ng-dirty ng-invalid');
       // @ts-ignore
       return null;

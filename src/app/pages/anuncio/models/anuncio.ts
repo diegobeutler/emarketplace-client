@@ -18,8 +18,8 @@ export class Anuncio {
   dataPublicacao: Date;
   dataDevolocao: Date;
   usuarioOrigem: Usuario;
-  usuarioDestino: Usuario;
-  usuarioInstituicao: Usuario;
+  usuarioDestino?: Usuario;
+  usuarioInstituicao?: Usuario;
 
   // variáveis de controle
   readOnly: false;

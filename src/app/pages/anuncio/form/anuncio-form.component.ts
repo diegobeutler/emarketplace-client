@@ -25,7 +25,8 @@ export class AnuncioFormComponent extends SimpleCrudComponent<Anuncio> {
   categorias: Categoria[];
   instituicoes: Usuario[];
   fileTeste: File;
-  readonly operacoesHasValor = [Operacao.DOACAO_VALOR, Operacao.VENDA, Operacao.EMPRESTIMO];
+  readonly operacoesValorRequerid = [Operacao.DOACAO_VALOR, Operacao.VENDA];
+  readonly operacoesHasValor = [ Operacao.EMPRESTIMO].concat(this.operacoesValorRequerid);
   readonly operacoesHasInstituicao = [Operacao.DOACAO_VALOR, Operacao.DOACAO_PRODUTO];
 
   constructor(protected anuncioService: AnuncioService,
@@ -37,32 +38,10 @@ export class AnuncioFormComponent extends SimpleCrudComponent<Anuncio> {
 
   afterCarregarRegistroExistente(): void{
     this.caracteristicas = this.arrayByJson(this.registro.caracteristicas);
-    if(this.registro.imagens?.length){
-      // this.uploadedFiles = this.registro.imagens.map((imagemAnuncio) => imagemAnuncio.url);
-      // fetch(this.registro.imagens[0].url)
-      //   .then(res => res.blob()) // Gets the response and returns it as a blob
-      //   .then(blob => {
-      //     // Here's where you get access to the blob
-      //     // And you can use it for whatever you want
-      //     // Like calling ref().put(blob)
-      //     var reader = new FileReader();
-      //     reader.readAsDataURL(blob);
-      //
-      //     // Here, I use it to make an image appear on the page
-      //     // let objectURL = URL.createObjectURL(blob);
-      //     // let myImage = new Image();
-      //     // myImage.src = objectURL;
-      //     // document.getElementById('myImg').appendChild(myImage)
-      //   });
-      // // fetch("https://URL/file")
-      // //   .then((r)=>{r.text().then((d)=>{this.fileTeste = d})})
-      // // this.anuncioService.getImageByUrl(this.registro.imagens[0].url).subscribe((file) =>{
-      // //   this.fileTeste = file;
-      // // })
-    }
   }
   afterCriarNovoRegistro(): void{
     this.registro.imagens = [];
+    this.resetValoresOperacoes();
   }
 
   categoriaComplete(event: any): void {
@@ -111,7 +90,7 @@ export class AnuncioFormComponent extends SimpleCrudComponent<Anuncio> {
     return JSON.parse(JSON.stringify(jsonObject));
   }
 
-  beforeSave() {
+  beforeSave(): void {
     this.registro.caracteristicas = this.jsonByArray(this.caracteristicas);
     this.registro.operacao = (<Operacao>this.registro.operacao);
   }
@@ -124,23 +103,39 @@ export class AnuncioFormComponent extends SimpleCrudComponent<Anuncio> {
     return super.isValidForm();
   }
 
-  showValor() {
+  showValor(): boolean {
     return this.operacoesHasValor.includes(this.registro?.operacao);
   }
 
-  showDataDevolucao() {
+  showDataDevolucao(): boolean {
     return Operacao.EMPRESTIMO === this.registro?.operacao;
   }
 
-  showProdutosTroca() {
+  showProdutosTroca(): boolean {
     return Operacao.TROCA === this.registro?.operacao;
   }
 
-  showInstituicao() {
+  showInstituicao(): boolean {
     return this.operacoesHasInstituicao.includes(this.registro.operacao);
   }
 
-  removerImage(imagemRemover: ImagemAnuncio) {
+  removerImage(imagemRemover: ImagemAnuncio): void {
     this.registro.imagens = this.registro.imagens.filter( imagem => imagem!=imagemRemover);
+  }
+
+  valorRequered(): boolean {
+    return this.operacoesValorRequerid.includes(this.registro.operacao)
+  }
+
+  disableRemover(): boolean {
+    return !!this.registro?.usuarioDestino;
+  }
+
+  resetValoresOperacoes(){
+    this.registro.valor = 0;
+    this.registro.dataDevolocao = new Date();
+    this.registro.produtosTroca = '';
+    this.registro.produtosTroca = '';
+    this.registro.usuarioInstituicao = undefined;
   }
 }

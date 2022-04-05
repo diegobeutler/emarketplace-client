@@ -1,3 +1,4 @@
+<div class="separador-card"></div>
 <form id="form" #form="ngForm" class="my-form p-0-20-porcent">
   <p-card>
     <p-header>
@@ -195,7 +196,7 @@
     </div>
   </p-card>
   <div class="col-12 text-center pt-3 pb-3">
-    <p-button *ngIf="registro.vadationInstitution; else btnSalvar" label="Validar Cadastro" icon="pi pi-check" (click)="validarCadastro()"></p-button>
+    <p-button *ngIf="registro.vadationInstitution; else btnSalvar" [disabled] = "registro.ativo" label="Validar Cadastro" icon="pi pi-check" (click)="validarCadastro()"></p-button>
     <ng-template #btnSalvar><p-button label="Salvar" icon="pi pi-check" (click)="salvar(registro)"></p-button></ng-template>
   </div>
 </form>

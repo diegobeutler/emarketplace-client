@@ -1,3 +1,4 @@
+<div class="separador-card"></div>
 <form id="form" #form="ngForm" class="my-form p-0-20-porcent">
   <p-card>
     <p-header>
@@ -70,6 +71,8 @@
                           [(ngModel)]="registro.operacao"
                           [dropdown]="true"
                           [forceSelection]="true"
+                          (onClear)="resetValoresOperacoes()"
+                          (onSelect)="resetValoresOperacoes()"
                           [suggestions]="operacoesSugestions"
                           (completeMethod)="operacaoComplete($event)"
                           [pTooltip]="getTooltip$(registro.operacao?.toString()) | async"
@@ -83,16 +86,17 @@
       <div *ngIf="showValor()" class="col-12 col-md col-xl-6">
         <div class="form-group" [disabledLabelAndSpan]="false">
           <label for="valor">Valor</label>
+          <span *ngIf="valorRequered()"class="obrigatorio">*</span>
           <input name="valor"
                  id="valor"
                  maxlength="12"
                  currencyMask
                  pInputText
                  [disabled]="false"
+                 [required] = "valorRequered()"
                  [ngModel]="registro.valor"/>
         </div>
       </div>
-      <!--    currencyMask ver...-->
       <div *ngIf="showDataDevolucao()" class="col-12 col-md col-xl-6">
         <div class="form-group" [disabledLabelAndSpan]="false">
           <label for="dataDevolucao">
@@ -109,9 +113,6 @@
                       name="dataDevolucao"></p-calendar>
         </div>
       </div>
-<!--    </div>-->
-
-<!--    <div class="row">-->
       <div *ngIf="showProdutosTroca()" class="col-12">
         <div class="form-group" [disabledLabelAndSpan]="registro.readOnly">
           <label for="produtosTroca">Produtos Aceitos na Troca</label>
@@ -128,8 +129,6 @@
                     required></textarea>
         </div>
       </div>
-<!--    </div>-->
-<!--    <div class="row">-->
       <div  *ngIf="showInstituicao()" class="col-12 col-md col-xl-6">
         <div class="form-group" [disabledLabelAndSpan]="false">
           <label for="instituicao">Instituição</label>

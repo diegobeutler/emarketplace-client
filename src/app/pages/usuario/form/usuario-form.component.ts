@@ -81,6 +81,8 @@ export class UsuarioFormComponent extends SimpleCrudComponent<Usuario>{
     this.loaderService.show(true);
     this.service.validarCadastro(this.registro.id!).subscribe(e => {
       this.messageService.add({severity: 'success', detail: 'Registro validado com sucesso'});
+      this.registro.ativo = true;
+      this.loaderService.show(false);
     },error => {
       this.loaderService.show(false);
       this.messageService.add({severity: 'error', detail: errorTransform(error)});
