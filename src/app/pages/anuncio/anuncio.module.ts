@@ -1,7 +1,6 @@
 import {AnuncioComponent} from "./anuncio.component";
 import {RouterModule, Routes} from "@angular/router";
 import {AnuncioFormComponent} from "./form/anuncio-form.component";
-import {AnuncioListComponent} from "./list/anuncio-list.component";
 import {CommonModule} from "@angular/common";
 import {FormsModule} from "@angular/forms";
 import {AnuncioService} from "./anuncio.service";
@@ -23,6 +22,8 @@ import {MoneyFormatPipeModule} from "../../shared/pipes/moneyFormat/moneyFormat.
 import {CalendarModule} from "primeng/calendar";
 import {OnlyNumberModule} from "../../shared/dierective/onlyNumber/onlyNumber.module";
 import {NgxCurrencyModule} from "ngx-currency";
+import {AnuncioCardComponent} from './list/card/anuncio-card/anuncio-card.component';
+import {AnunciosComponent} from './list/anuncios/anuncios.component';
 
 
 const routes: Routes = [
@@ -30,33 +31,34 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    imports: [
-        CommonModule,
-        FormsModule,
-        RouterModule.forChild(routes),
-        CardModule,
-        FileUploadModule,
-        InputTextModule,
-        InputTextareaModule,
-        TableModule,
-        AutoCompleteModule,
-        DropdownModule,
-        TooltipModule,
+  imports: [
+    CommonModule,
+    FormsModule,
+    RouterModule.forChild(routes),
+    CardModule,
+    FileUploadModule,
+    InputTextModule,
+    InputTextareaModule,
+    TableModule,
+    AutoCompleteModule,
+    DropdownModule,
+    TooltipModule,
 
 
-        DisabledLabelAndSpanModule,
-        CategoriaModule,
-        MoneyFormatPipeModule,
+    DisabledLabelAndSpanModule,
+    CategoriaModule,
+    MoneyFormatPipeModule,
 
-        CalendarModule,
-        OnlyNumberModule,
-        NgxCurrencyModule,
-    ],
+    CalendarModule,
+    OnlyNumberModule,
+    NgxCurrencyModule,
+  ],
     declarations: [
         AnuncioComponent,
         AnuncioFormComponent,
-        AnuncioListComponent,
         CaracteristicasComponent,
+        AnuncioCardComponent,
+        AnunciosComponent,
     ],
     providers: [
         AnuncioService,
@@ -65,9 +67,9 @@ const routes: Routes = [
         // interceptors
         {provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true,},
     ],
-    exports: [
-        AnuncioFormComponent
-    ]
+  exports: [
+    AnuncioFormComponent
+  ]
 })
 export class AnuncioModule {
 }

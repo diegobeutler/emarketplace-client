@@ -23,7 +23,7 @@ import {customCurrencyMaskConfig} from "./shared/config/currency.mask.config";
 @NgModule({
   declarations: [
     AppComponent,
-    ToolbarComponent,
+    ToolbarComponent
   ],
   imports: [
     BrowserModule,

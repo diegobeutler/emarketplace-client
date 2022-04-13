@@ -21,10 +21,9 @@ import * as $ from 'jquery';
 export class AnuncioFormComponent extends SimpleCrudComponent<Anuncio> {
    uploadedFiles: any[] = [];
   caracteristicas: Array<KeyValue<string, string>> = [];
-  operacoesSugestions: Operacao[];
   categorias: Categoria[];
+  operacoesSugestions: Operacao[];
   instituicoes: Usuario[];
-  fileTeste: File;
   readonly operacoesValorRequerid = [Operacao.DOACAO_VALOR, Operacao.VENDA];
   readonly operacoesHasValor = [ Operacao.EMPRESTIMO].concat(this.operacoesValorRequerid);
   readonly operacoesHasInstituicao = [Operacao.DOACAO_VALOR, Operacao.DOACAO_PRODUTO];

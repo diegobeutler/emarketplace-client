@@ -1,10 +1,11 @@
 import {HttpClient} from '@angular/common/http';
 import {Injectable} from '@angular/core';
-import {Observable, Subject} from 'rxjs';
+import {Observable} from 'rxjs';
 
 // shared
 import {CrudService} from 'src/app/shared/components/crud/crud.service';
 import {Anuncio} from "./models/anuncio";
+import {AnuncioFilter} from "./list/filter/models/anuncioFilter";
 
 // aplicação
 
@@ -13,5 +14,9 @@ export class AnuncioService extends CrudService<Anuncio> {
 
   constructor(public http: HttpClient) {
     super('anuncio', http);
+  }
+
+  findAnunciosByFilter(filter: AnuncioFilter): Observable<Anuncio[]> {
+    return this.http.post<Anuncio[]>(`${this.baseUrl}${this.url}/filter`, filter);
   }
 }

@@ -38,7 +38,7 @@ export class UsuarioFormComponent extends SimpleCrudComponent<Usuario>{
   }
 
   cidadeComplete(event: any): void {
-    this.cidadeService.completeByEstadoAndNome(this.estado?.id, event.query).subscribe(e => this.cidades = e);
+    this.cidadeService.completeByEstadoAndNome(this.estado?.id!, event.query).subscribe(e => this.cidades = e);
   }
 
   afterCriarNovoRegistro(): void {
@@ -87,5 +87,10 @@ export class UsuarioFormComponent extends SimpleCrudComponent<Usuario>{
       this.loaderService.show(false);
       this.messageService.add({severity: 'error', detail: errorTransform(error)});
     })
+  }
+
+  clearEstado(): void {
+    this.estado = null!;
+    this.registro.cidade = null!;
   }
 }

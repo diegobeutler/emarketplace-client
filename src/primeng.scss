@@ -3,6 +3,7 @@
 .p-menubar {
   background: $purple;
   border-radius: 0 !important;
+  height: $height-toolbar !important;
 }
 
 .p-menuitem-icon {
@@ -13,12 +14,12 @@
   color: $white !important;
 }
 
-.p-menubar-end .p-button:enabled:hover {// todo mudar aqui caso queira colocar efeito no botão do toolbar
+.p-menubar-end .p-button:enabled:hover { // todo mudar aqui caso queira colocar efeito no botão do toolbar
   background: none;
   border-color: transparent;
 }
 
-.p-menubar-end .p-button:enabled:focus {// todo mudar aqui caso queira colocar efeito no botão do toolbar
+.p-menubar-end .p-button:enabled:focus {
   background: none;
   border-color: transparent;
 }
@@ -35,17 +36,18 @@
   background: none;
 }
 
-.p-menubar .p-submenu-list{
-  padding: 0!important;
+.p-menubar .p-submenu-list {
+  padding: 0 !important;
   background: $purple-submenu;
 }
+
 //// toolbar end
 
 body .p-autocomplete-dd .p-button {
   padding: 0;
 }
 
-body .p-calendar-w-btn .p-button{
+body .p-calendar-w-btn .p-button {
   padding: 0;
 }
 
@@ -120,6 +122,24 @@ p-card p-header {
 
 .p-input-icon-left .pi-unlock {
   z-index: 1;
+}
+
+.p-sidebar {
+  top: 64px !important;
+  width:450px!important;
+}
+
+.p-sidebar-header {
+  display: none !important;
+}
+
+.p-sidebar-content {
+  position: absolute;
+  height: calc(100% - #{$height-toolbar});
+}
+
+.p-tooltip {
+  z-index: 99999999 !important;
 }
 
 

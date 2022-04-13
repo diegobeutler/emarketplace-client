@@ -103,7 +103,7 @@
                           field="nome"
                           [suggestions]="estados"
                           [disabled]="registro.vadationInstitution "
-                          (onClear)="estado = null"
+                          (onClear)="clearEstado()"
                           (completeMethod)="estadoComplete($event)"
                           (onSelect)="registro.cidade = null"
                           [title]="getTooltip$(estado?.uf, estado?.nome)  | async"

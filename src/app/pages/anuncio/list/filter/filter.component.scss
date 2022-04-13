@@ -1,0 +1,25 @@
+.btn-filter {
+  position: absolute;
+  bottom: 30px;
+  right: 30px;
+}
+
+.btn-filter-sidebar{
+  position: absolute;
+  bottom: 30px;
+}
+.btn-apply-filter {
+  left: 85px;
+}
+
+.btn-clear-filter {
+  right: 85px;
+}
+
+::ng-deep .btn-filter-sidebar .p-button{
+  width: 115px!important;
+}
+
+.col-12 .form-group label{
+  padding-top: 10px;
+}
