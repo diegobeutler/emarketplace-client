@@ -23,3 +23,12 @@
 .col-12 .form-group label{
   padding-top: 10px;
 }
+
+.p-field-checkbox > label, .p-field-radiobutton > label {
+  margin-left: 0.5rem;
+}
+.p-field-checkbox{
+  line-height: 1!important;
+  padding-top: 10px;
+}
+

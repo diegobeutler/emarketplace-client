@@ -1,5 +1,5 @@
 export enum Status {
-  DISPONIVEL,
-  EM_NEGOCIACAO,
-  FINALIZADO,
+  DISPONIVEL = "Disponível",
+  EM_NEGOCIACAO = "Em Negociação",
+  FINALIZADO = "Finalizado",
 }

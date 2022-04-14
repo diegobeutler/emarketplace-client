@@ -1,118 +1,119 @@
 <p-sidebar [(visible)]="showFilter" [baseZIndex]="10000">
   <h3 class="pt-3">Filtros</h3>
   <div class="row">
-
-<!--    <div class="col-12 pt-2">-->
-<!--      <div class="form-group" [disabledLabelAndSpan]="false">-->
-<!--        <label for="valor">Código</label>-->
-<!--        <input name="valor"-->
-<!--               id="valor"-->
-<!--               maxlength="12"-->
-<!--               currencyMask-->
-<!--               pInputText-->
-<!--               [disabled]="false"-->
-<!--               [ngModel]="filter.id"/>-->
-<!--      </div>-->
-<!--    </div>-->
-
-      <div class="col-12 pt-2">
-        <div class="form-group">
-          <label for="titulo">Título</label>
-          <input type="text"
-                 name="titulo"
-                 id="titulo"
-                 pInputText
-                 [(ngModel)]="filter.titulo"/>
-        </div>
-      </div>
-
-
-      <div class="col-12 pt-2">
-        <div class="form-group" >
-          <label for="descricao">Descrição</label>
-          <input type="text"
-                 name="descricao"
-                 id="descricao"
-                 pInputText
-                 onlyNumber
-                 [(ngModel)]="filter.descricao"/>
-        </div>
-        </div>
-      </div>
-
-      <div class="col-12 pt-2">
-        <div class="form-group">
-          <label for="categoria">Categoria</label>
-          <p-autoComplete name="categoria"
-                          id="categoria"
-                          [dropdown]="true"
-                          [forceSelection]="true"
-                          [(ngModel)]="filter.categoria"
-                          field="descricao"
-                          [suggestions]="categorias"
-                          (onClear)="filter.categoria = null"
-                          (completeMethod)="categoriaComplete($event)"
-                          [pTooltip]="getTooltip$(filter.categoria?.descricao) | async"
-                          [title]="getTooltip$(filter?.categoria?.descricao) | async">
-            <ng-template let-categoria pTemplate="categoria">
-              <span>{{categoria?.descricao}}</span>
-            </ng-template>
-          </p-autoComplete>
-        </div>
-      <div class="col-12 pt-2">
-        <div class="form-group">
-          <label for="operacao">Operação</label>
-          <p-autoComplete name="operacao"
-                          id="operacao"
-                          [(ngModel)]="filter.operacao"
-                          [dropdown]="true"
-                          [forceSelection]="true"
-                          (onClear)="filter.operacao = null"
-                          [suggestions]="operacoesSugestions"
-                          (completeMethod)="operacaoComplete($event)"
-                          [pTooltip]="getTooltip$(filter.operacao?.toString()) | async"
-                          [title]="getTooltip$(filter?.operacao?.toString()) | async">>
-          </p-autoComplete>
-        </div>
+    <div class="col-12 pt-2">
+      <div class="form-group">
+        <label for="titulo">Título</label>
+        <input type="text"
+               name="titulo"
+               id="titulo"
+               pInputText
+               [(ngModel)]="filter.titulo"/>
       </div>
     </div>
 
-  <div class="col-12 pt-2">
-    <div class="form-group">
-      <label>
-        Data de Publicação
-      </label>
-      <div class="row">
-        <div class="col-5">
-          <p-calendar [(ngModel)]="filter.dataPublicacaoMin"
-                      [yearNavigator]="true"
-                      [monthNavigator]="true"
-                      [showIcon]="true"
-                      [yearRange]="'2022:2100'"
-                      dataType="string"
-                      dateFormat="dd/mm/yy"
-                      id="dataPublicacaoMin"
-                      name="dataPublicacaoMin"></p-calendar>
-        </div>
-        <div class="col-2 text-center">
-          <label>até</label>
-        </div>
-        <div class="col-5">
 
-          <p-calendar [(ngModel)]="filter.dataPublicacaoMax"
-                      [yearNavigator]="true"
-                      [monthNavigator]="true"
-                      [showIcon]="true"
-                      [yearRange]="'2022:2100'"
-                      dataType="string"
-                      dateFormat="dd/mm/yy"
-                      id="dataPublicacaoMax"
-                      name="dataPublicacaoMax"></p-calendar>
-        </div>
+    <div class="col-12 pt-2">
+      <div class="form-group">
+        <label for="descricao">Descrição</label>
+        <input type="text"
+               name="descricao"
+               id="descricao"
+               pInputText
+               [(ngModel)]="filter.descricao"/>
       </div>
     </div>
 
-  </div>
+    <div class="col-12 pt-2">
+      <div class="form-group">
+        <label for="categoria">Categoria</label>
+        <p-autoComplete name="categoria"
+                        id="categoria"
+                        [dropdown]="true"
+                        [forceSelection]="true"
+                        [(ngModel)]="filter.categoria"
+                        field="descricao"
+                        [suggestions]="categorias"
+                        (onClear)="filter.categoria = null"
+                        (completeMethod)="categoriaComplete($event)"
+                        [pTooltip]="getTooltip$(filter.categoria?.descricao) | async"
+                        [title]="getTooltip$(filter?.categoria?.descricao) | async">
+          <ng-template let-categoria pTemplate="categoria">
+            <span>{{categoria?.descricao}}</span>
+          </ng-template>
+        </p-autoComplete>
+      </div>
+    </div>
+
+    <div class="col-12 pt-2">
+      <div class="form-group">
+        <label for="operacao">Operação</label>
+        <p-autoComplete name="operacao"
+                        id="operacao"
+                        [(ngModel)]="filter.operacao"
+                        [dropdown]="true"
+                        [forceSelection]="true"
+                        (onClear)="filter.operacao = null"
+                        [suggestions]="operacoesSugestions"
+                        (completeMethod)="operacaoComplete($event)"
+                        [pTooltip]="getTooltip$(filter.operacao?.toString()) | async"
+                        [title]="getTooltip$(filter?.operacao?.toString()) | async">>
+        </p-autoComplete>
+      </div>
+    </div>
+
+    <div class="col-12 pt-2">
+      <div class="form-group">
+        <label for="status">Status</label>
+        <p-autoComplete name="status"
+                        id="status"
+                        [(ngModel)]="filter.status"
+                        [dropdown]="true"
+                        [forceSelection]="true"
+                        (onClear)="filter.status = null"
+                        [suggestions]="statusSugestions"
+                        (completeMethod)="statusComplete($event)"
+                        [pTooltip]="getTooltip$(filter.status?.toString()) | async"
+                        [title]="getTooltip$(filter?.status?.toString()) | async">>
+        </p-autoComplete>
+      </div>
+    </div>
+
+    <div class="col-12 pt-2">
+      <div class="form-group">
+        <label>
+          Data de Publicação
+        </label>
+        <div class="row">
+          <div class="col-5">
+            <p-calendar [(ngModel)]="filter.dataPublicacaoMin"
+                        [yearNavigator]="true"
+                        [monthNavigator]="true"
+                        [showIcon]="true"
+                        [yearRange]="'2022:2100'"
+                        dataType="string"
+                        dateFormat="dd/mm/yy"
+                        id="dataPublicacaoMin"
+                        name="dataPublicacaoMin"></p-calendar>
+          </div>
+          <div class="col-2 text-center">
+            <label>até</label>
+          </div>
+          <div class="col-5">
+            <p-calendar [(ngModel)]="filter.dataPublicacaoMax"
+                        [yearNavigator]="true"
+                        [monthNavigator]="true"
+                        [showIcon]="true"
+                        [yearRange]="'2022:2100'"
+                        appendTo="body"
+                        dataType="string"
+                        dateFormat="dd/mm/yy"
+                        id="dataPublicacaoMax"
+                        name="dataPublicacaoMax"></p-calendar>
+          </div>
+        </div>
+      </div>
+    </div>
 
     <div class="col-12 pt-2">
       <div class="form-group">
@@ -159,23 +160,39 @@
       </div>
     </div>
 
-<!--<div class="row">-->
-  <p-button class="btn-filter-sidebar btn-apply-filter" label="Filtrar" icon="pi pi-check" (click)="filtrar()"></p-button>
-  <p-button class="btn-filter-sidebar btn-clear-filter" label="Limpar" icon="pi pi-check" (click)="filtrar()"></p-button>
+    <div *ngIf="isAuthenticated" class="row pt-2">
+      <div class="col-6">
+        <div class="form-group">
+          <div class="p-field-checkbox">
+            <p-checkbox
+              [(ngModel)]="filter.anunciei"
+              (onChange)="filter.adquiri = false"
+              binary="true"></p-checkbox>
+            <label>Anunciei</label>
+          </div>
+        </div>
+      </div>
 
-<!--</div>-->
+      <div class="col-6">
+        <div class="form-group">
+          <div class="p-field-checkbox">
+            <p-checkbox
+              [(ngModel)]="filter.adquiri"
+              (onChange)="filter.anunciei = false"
+              binary="true"></p-checkbox>
+            <label>Adquiri</label>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
 
 
+  <p-button class="btn-filter-sidebar btn-apply-filter" label="Filtrar" icon="pi pi-check"
+            (click)="applyFilter()"></p-button>
+  <p-button class="btn-filter-sidebar btn-clear-filter" label="Limpar" icon="pi pi-check"
+            (click)="resetFilter()"></p-button>
 </p-sidebar>
 
-<!--<p-sidebar [(visible)]="visibleSidebar2" position="right" [baseZIndex]="10000">-->
-<!--  <h3>Right Sidebar</h3>-->
-<!--</p-sidebar>-->
-
-
 <p-button type="button" class="btn-filter" (click)="showFilter = true" icon="pi pi-filter"></p-button>
-<!--<p-button type="button" class="p-mr-2" (click)="visibleSidebar2 = true" icon="pi pi-arrow-left"></p-button>-->
-<!--<p-button type="button" class="p-mr-2" (click)="visibleSidebar3 = true" icon="pi pi-arrow-down"></p-button>-->
-<!--<p-button type="button" class="p-mr-2" (click)="visibleSidebar4 = true" icon="pi pi-arrow-up"></p-button>-->
-<!--<p-button type="button" class="p-mr-2" (click)="visibleSidebar5 = true" icon="pi pi-th-large"></p-button>-->
-

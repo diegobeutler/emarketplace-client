@@ -12,6 +12,8 @@ import {Categoria} from "../../../categoria/models/categoria";
 import {Operacao} from "../../enumeration/operacao";
 import {SuggestionsUtils} from "../../../../shared/utils/suggestionsUtils";
 import {CategoriaService} from "../../../categoria/categoria.service";
+import {LoginService} from "../../../login/login.service";
+import {Status} from "../../enumeration/status";
 
 @Component({
   selector: 'app-filter',
@@ -22,6 +24,7 @@ export class FilterComponent implements OnInit {
 
   filter: AnuncioFilter;
   showFilter: boolean;
+  isAuthenticated:boolean;
   @Output()
   anuncios = new EventEmitter<Anuncio[]>();
 
@@ -29,15 +32,18 @@ export class FilterComponent implements OnInit {
   cidades: Cidade[];
   categorias: Categoria[];
   operacoesSugestions: Operacao[];
+  statusSugestions: Status[];
 
   constructor(private anuncioService: AnuncioService,
               private estadoService: EstadoService,
               private categoriaService: CategoriaService,
+              private loginService: LoginService,
               private cidadeService: CidadeService) {
   }
 
   ngOnInit(): void {
     this.filter = new AnuncioFilter();
+    this.isAuthenticated = this.loginService.isAuthenticated;
   }
 
   estadoComplete(event: any): void {
@@ -56,6 +62,10 @@ export class FilterComponent implements OnInit {
     this.operacoesSugestions = SuggestionsUtils.filter(Operacao, event.query);
   }
 
+  statusComplete(event: any): void {
+    this.statusSugestions = SuggestionsUtils.filter(Status, event.query);
+  }
+
 
   clearEstado(): void {
     this.filter.estado = null!;
@@ -63,7 +73,7 @@ export class FilterComponent implements OnInit {
   }
 
 
-  filtrar() {
+  applyFilter() {
     this.anuncioService.findAnunciosByFilter(this.filter)
       .subscribe( anuncios => this.anuncios.emit(anuncios));
   }
@@ -80,5 +90,9 @@ export class FilterComponent implements OnInit {
       distinctUntilChanged(),
       take(1)
     );
+  }
+
+  resetFilter() {
+    this.filter = new AnuncioFilter();
   }
 }

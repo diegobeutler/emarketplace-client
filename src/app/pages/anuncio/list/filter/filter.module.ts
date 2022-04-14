@@ -14,24 +14,26 @@ import {OnlyNumberModule} from "../../../../shared/dierective/onlyNumber/onlyNum
 import {CategoriaModule} from "../../../categoria/categoria.module";
 import {InputTextModule} from "primeng/inputtext";
 import {CalendarModule} from "primeng/calendar";
+import {CheckboxModule} from "primeng/checkbox";
 
 
 @NgModule({
   declarations: [FilterComponent],
-  imports: [
-    CommonModule,
-    SidebarModule,
-    ButtonModule,
-    AutoCompleteModule,
-    TooltipModule,
-    DisabledLabelAndSpanModule,
-    FormsModule,
-    EnderecoModule,
-    OnlyNumberModule,
-    CategoriaModule,
-    InputTextModule,
-    CalendarModule,
-  ],
+    imports: [
+        CommonModule,
+        SidebarModule,
+        ButtonModule,
+        AutoCompleteModule,
+        TooltipModule,
+        DisabledLabelAndSpanModule,
+        FormsModule,
+        EnderecoModule,
+        OnlyNumberModule,
+        CategoriaModule,
+        InputTextModule,
+        CalendarModule,
+        CheckboxModule,
+    ],
   exports: [
     FilterComponent
   ]

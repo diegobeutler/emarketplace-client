@@ -12,8 +12,8 @@ export class AnuncioFilter {
   descricao: string;
   operacao: Operacao;
   status: Status;
-  autor: Usuario;
-  adquirente: Usuario;
+  anunciei: boolean;
+  adquiri: boolean;
   dataPublicacaoMin: Date;
   dataPublicacaoMax: Date;
   categoria: Categoria;
