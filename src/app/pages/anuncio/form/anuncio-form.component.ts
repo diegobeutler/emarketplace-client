@@ -12,6 +12,7 @@ import {Usuario} from "../../usuario/models/usuario";
 // @ts-ignore
 import {ImagemAnuncio} from "../models/imagemAnuncio";
 import * as $ from 'jquery';
+import {errorTransform} from "../../../shared/pipes/error-transform";
 
 @Component({
   selector: 'app-anuncio-form',
@@ -19,7 +20,6 @@ import * as $ from 'jquery';
   styleUrls: ['./anuncio-form.component.scss']
 })
 export class AnuncioFormComponent extends SimpleCrudComponent<Anuncio> {
-   uploadedFiles: any[] = [];
   caracteristicas: Array<KeyValue<string, string>> = [];
   categorias: Categoria[];
   operacoesSugestions: Operacao[];
@@ -27,6 +27,8 @@ export class AnuncioFormComponent extends SimpleCrudComponent<Anuncio> {
   readonly operacoesValorRequerid = [Operacao.DOACAO_VALOR, Operacao.VENDA];
   readonly operacoesHasValor = [ Operacao.EMPRESTIMO].concat(this.operacoesValorRequerid);
   readonly operacoesHasInstituicao = [Operacao.DOACAO_VALOR, Operacao.DOACAO_PRODUTO];
+  showDialog: boolean = false;
+  emailInstituicao: any;
 
   constructor(protected anuncioService: AnuncioService,
               private categoriaService: CategoriaService,
@@ -136,5 +138,17 @@ export class AnuncioFormComponent extends SimpleCrudComponent<Anuncio> {
     this.registro.produtosTroca = '';
     this.registro.produtosTroca = '';
     this.registro.usuarioInstituicao = undefined;
+  }
+
+  convidar() {
+    this.loaderService.show(true, "Aguarde, enviando...");
+    this.anuncioService.convidarInstituicao(this.emailInstituicao).subscribe(e => {
+      this.loaderService.show(false);
+      this.showDialog = false;
+      this.messageService.add({severity: 'success', detail: "Convite enviado com sucesso!"});
+    }, error => {
+      this.loaderService.show(false);
+      this.messageService.add({severity: 'error', detail: errorTransform(error)})
+    });
   }
 }

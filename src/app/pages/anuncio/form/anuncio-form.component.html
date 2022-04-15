@@ -150,6 +150,9 @@
               <span>{{instituicao?.nome}}</span>
             </ng-template>
           </p-autoComplete>
+          <div class="text-end">
+            <small>Não está listada? <a class="small_a" (click)="showDialog=true">Convide</a></small>
+          </div>
         </div>
       </div>
     </div>
@@ -193,3 +196,32 @@
     <p-button label="Salvar" icon="pi pi-check" (click)="salvar(registro)"></p-button>
   </div>
 </form>
+<p-dialog header="Convide uma instituição" [(visible)]="showDialog" [baseZIndex]="10000" [style]="{width: '50vw', maxWidth:'600px', minWidth:'400px'}">
+    <div class="row">
+      <div class="col-12">
+        <small>Para convidar uma instituição, informe um e-mail que entraremos em contato passando as instruções e solcitando que a mesma cadastre-se.</small>
+      </div>
+      <div class="field col-12">
+            <span class="p-float-label p-input-icon-left col-12 mt-4 mb-5">
+                <i class="pi pi-envelope"></i>
+                <input type="email"
+                       name="email"
+                       id="inputtext-left"
+                       pInputText
+                       [(ngModel)]="emailInstituicao"
+                       email="true"
+                       required>
+                <label for="inputtext-left">E-mail Instituição</label>
+            </span>
+        </div>
+    </div>
+
+
+  <ng-template pTemplate="footer">
+    <div class="col-12 text-center pt-3">
+      <p-button label="Convidar" icon="pi pi-check" (click)="convidar()"></p-button>
+      <p-button label="Cancelar" icon="pi pi-times" (click)="showDialog = false"></p-button>
+    </div>
+  </ng-template>
+
+</p-dialog>
