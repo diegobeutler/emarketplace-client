@@ -25,7 +25,7 @@ export class AnuncioFormComponent extends SimpleCrudComponent<Anuncio> {
   operacoesSugestions: Operacao[];
   instituicoes: Usuario[];
   readonly operacoesValorRequerid = [Operacao.DOACAO_VALOR, Operacao.VENDA];
-  readonly operacoesHasValor = [ Operacao.EMPRESTIMO].concat(this.operacoesValorRequerid);
+  readonly operacoesHasValor = [Operacao.EMPRESTIMO].concat(this.operacoesValorRequerid);
   readonly operacoesHasInstituicao = [Operacao.DOACAO_VALOR, Operacao.DOACAO_PRODUTO];
   showDialog: boolean = false;
   emailInstituicao: any;
@@ -37,10 +37,11 @@ export class AnuncioFormComponent extends SimpleCrudComponent<Anuncio> {
     super(anuncioService, injector);
   }
 
-  afterCarregarRegistroExistente(): void{
+  afterCarregarRegistroExistente(): void {
     this.caracteristicas = this.arrayByJson(this.registro.caracteristicas);
   }
-  afterCriarNovoRegistro(): void{
+
+  afterCriarNovoRegistro(): void {
     this.registro.imagens = [];
     this.resetValoresOperacoes();
   }
@@ -121,7 +122,7 @@ export class AnuncioFormComponent extends SimpleCrudComponent<Anuncio> {
   }
 
   removerImage(imagemRemover: ImagemAnuncio): void {
-    this.registro.imagens = this.registro.imagens.filter( imagem => imagem!=imagemRemover);
+    this.registro.imagens = this.registro.imagens.filter(imagem => imagem != imagemRemover);
   }
 
   valorRequered(): boolean {
@@ -132,9 +133,9 @@ export class AnuncioFormComponent extends SimpleCrudComponent<Anuncio> {
     return !!this.registro?.usuarioDestino;
   }
 
-  resetValoresOperacoes(){
+  resetValoresOperacoes() {
     this.registro.valor = 0;
-    this.registro.dataDevolocao = new Date();
+    this.registro.dataDevolocao = null!;
     this.registro.produtosTroca = '';
     this.registro.produtosTroca = '';
     this.registro.usuarioInstituicao = undefined;

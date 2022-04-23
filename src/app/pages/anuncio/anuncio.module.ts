@@ -22,8 +22,7 @@ import {MoneyFormatPipeModule} from "../../shared/pipes/moneyFormat/moneyFormat.
 import {CalendarModule} from "primeng/calendar";
 import {OnlyNumberModule} from "../../shared/dierective/onlyNumber/onlyNumber.module";
 import {NgxCurrencyModule} from "ngx-currency";
-import {AnuncioCardComponent} from './list/card/anuncio-card/anuncio-card.component';
-import {AnunciosComponent} from './list/anuncios/anuncios.component';
+import {DialogModule} from "primeng/dialog";
 
 
 const routes: Routes = [
@@ -52,23 +51,22 @@ const routes: Routes = [
     CalendarModule,
     OnlyNumberModule,
     NgxCurrencyModule,
+    DialogModule,
   ],
-    declarations: [
-        AnuncioComponent,
-        AnuncioFormComponent,
-        CaracteristicasComponent,
-        AnuncioCardComponent,
-        AnunciosComponent,
-    ],
-    providers: [
-        AnuncioService,
-        TokenInterceptor,
+  declarations: [
+    AnuncioComponent,
+    AnuncioFormComponent,
+    CaracteristicasComponent,
+  ],
+  providers: [
+    AnuncioService,
+    TokenInterceptor,
 
-        // interceptors
-        {provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true,},
-    ],
+    // interceptors
+    {provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true,},
+  ],
   exports: [
-    AnuncioFormComponent
+    AnuncioFormComponent,
   ]
 })
 export class AnuncioModule {

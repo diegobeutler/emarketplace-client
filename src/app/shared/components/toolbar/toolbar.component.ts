@@ -47,23 +47,7 @@ export class ToolbarComponent implements OnInit {
             {
               label: 'Comprar',
               icon: 'pi pi-fw pi-shopping-cart',
-              items: [
-                {
-                  label: 'Filter',
-                  icon: 'pi pi-fw pi-filter',
-                  items: [
-                    {
-                      label: 'Print',
-                      icon: 'pi pi-fw pi-print'
-                    }
-                  ]
-                },
-                {
-                  icon: 'pi pi-fw pi-bars',
-                  label: 'List',
-                  url:'anuncio/list'
-                }
-              ]
+              url:'home'
             }
           ]
         },

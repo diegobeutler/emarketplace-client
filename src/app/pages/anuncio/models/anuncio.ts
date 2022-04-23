@@ -2,7 +2,7 @@ import {Operacao} from "../enumeration/operacao";
 import {Status} from "../enumeration/status";
 import {Usuario} from "../../usuario/models/usuario";
 import {Categoria} from "../../categoria/models/categoria";
-import {ImagemAnuncio} from "./ImagemAnuncio";
+import {ImagemAnuncio} from "./imagemAnuncio";
 
 export class Anuncio {
   id?: number;
@@ -13,7 +13,7 @@ export class Anuncio {
   operacao: Operacao;
   status: Status;
   categoria: Categoria;
-  valor: number = 0;
+  valor: number;
   produtosTroca: string;
   dataPublicacao: Date;
   dataDevolocao: Date;

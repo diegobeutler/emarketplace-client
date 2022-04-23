@@ -94,7 +94,8 @@
                  pInputText
                  [disabled]="false"
                  [required] = "valorRequered()"
-                 [ngModel]="registro.valor"/>
+                 type="text"
+                 [(ngModel)]="registro.valor"/>
         </div>
       </div>
       <div *ngIf="showDataDevolucao()" class="col-12 col-md col-xl-6">

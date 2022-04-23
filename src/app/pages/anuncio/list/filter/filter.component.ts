@@ -23,8 +23,8 @@ import {Status} from "../../enumeration/status";
 export class FilterComponent implements OnInit {
 
   filter: AnuncioFilter;
-  showFilter: boolean;
-  isAuthenticated:boolean;
+  showFilter: boolean = true;
+  isAuthenticated: boolean;
   @Output()
   anuncios = new EventEmitter<Anuncio[]>();
 
@@ -73,9 +73,12 @@ export class FilterComponent implements OnInit {
   }
 
 
-  applyFilter() {
+  applyFilter(): void {
     this.anuncioService.findAnunciosByFilter(this.filter)
-      .subscribe( anuncios => this.anuncios.emit(anuncios));
+      .subscribe(anuncios => {
+        this.anuncios.emit(anuncios)
+        this.showFilter = false;
+      });
   }
 
   getTooltip$(...values: any[]): Observable<string> {
@@ -92,7 +95,7 @@ export class FilterComponent implements OnInit {
     );
   }
 
-  resetFilter() {
+  resetFilter(): void {
     this.filter = new AnuncioFilter();
   }
 }
