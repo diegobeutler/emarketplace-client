@@ -23,7 +23,7 @@
             <label for="ehInstituicao">Instituição</label>
             <p-checkbox
               [(ngModel)]="registro.ehInstitution"
-              [disabled]="registro.vadationInstitution "
+              [disabled]="!!registro.id"
               binary="true"
               inputId="ehInstitution"
               name="ehInstituicao"></p-checkbox>
@@ -106,7 +106,6 @@
                           (onClear)="clearEstado()"
                           (completeMethod)="estadoComplete($event)"
                           (onSelect)="registro.cidade = null"
-                          [title]="getTooltip$(estado?.uf, estado?.nome)  | async"
                           [pTooltip]="getTooltip$(estado?.uf, estado?.nome)  | async">
             <ng-template let-estado pTemplate="estado">
               <span class="id w-35-px">{{estado?.uf}}</span>
@@ -131,8 +130,7 @@
                           [disabled]="!estado || registro.vadationInstitution "
                           (onClear)="registro.cidade = null"
                           (completeMethod)="cidadeComplete($event)"
-                          [pTooltip]="getTooltip$(registro?.cidade?.estado?.uf, registro?.cidade?.nome) | async"
-                          [title]="getTooltip$(registro?.cidade?.estado?.uf, registro?.cidade?.nome) | async">
+                          [pTooltip]="getTooltip$(registro?.cidade?.estado?.uf, registro?.cidade?.nome) | async">
             <ng-template let-cidade pTemplate="cidade">
               <span>{{cidade?.nome}}</span>
             </ng-template>
@@ -196,7 +194,7 @@
     </div>
   </p-card>
   <div class="col-12 text-center pt-3 pb-3">
-    <p-button *ngIf="registro.vadationInstitution; else btnSalvar" [disabled] = "registro.ativo" label="Validar Cadastro" icon="pi pi-check" (click)="validarCadastro()"></p-button>
-    <ng-template #btnSalvar><p-button label="Salvar" icon="pi pi-check" (click)="salvar(registro)"></p-button></ng-template>
+    <p-button *ngIf="registro.vadationInstitution; else btnSalvar" [disabled] = "registro.ativo" label="Validar Cadastro" icon="pi pi-check" (onClick)="validarCadastro()"></p-button>
+    <ng-template #btnSalvar><p-button label="Salvar" icon="pi pi-check" (onClick)="salvar(registro)"></p-button></ng-template>
   </div>
 </form>

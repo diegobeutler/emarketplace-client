@@ -1,13 +1,13 @@
-<p-card>
+<p-card class="card-caracteristicas">
   <p-header>Características</p-header>
 
   <p-table #table
            [value]="caracteristicas">
     <ng-template pTemplate="header">
       <tr>
-        <th class="w-p-45">Informação</th>
-        <th class="w-p-45">Valor</th>
-        <th class="w-p-10"></th>
+        <th class="w-p-45">Título</th>
+        <th class="w-p-45">Descrição</th>
+        <th class="w-p-10" *ngIf="!readOnly"></th>
 
       </tr>
     </ng-template>
@@ -19,6 +19,7 @@
                    [id]="'caracteristicaKey' + rowIndex"
                    [name]="'caracteristicaKey' + rowIndex"
                    (ngModelChange)="change()"
+                   [disabled]="readOnly"
                    pInputText
                    required
                    [(ngModel)]="rowData.key"/>
@@ -32,11 +33,12 @@
                    (ngModelChange)="change()"
                    pInputText
                    required
+                   [disabled]="readOnly"
                    [(ngModel)]="rowData.value"/>
           </div>
         </td>
 
-        <td>
+        <td *ngIf="!readOnly" >
           <i class="btn pi pi-trash "
              (click)="remover(rowIndex)"></i>
         </td>
@@ -44,9 +46,9 @@
     </ng-template>
   </p-table>
   <p-footer>
-    <div class="col-12 text-center pt-3 pb-3">
-      <p-button label="Adicionar" icon="pi pi-plus" (click)="adicionar()"></p-button>
+    <div class="col-12 text-center pt-0 pb-3">
+      <p-button *ngIf="isAnuncioCard; else btnAdicionar" label="Fechar" icon="pi pi-times" (onClick)="showDialogCaracteristicasChange.emit(false)" ></p-button>
+      <ng-template #btnAdicionar> <p-button label="Adicionar" icon="pi pi-plus" (onClick)="adicionar()" [disabled]="readOnly"></p-button></ng-template>
     </div>
-
   </p-footer>
 </p-card>

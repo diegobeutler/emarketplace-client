@@ -7,6 +7,13 @@ import {AnuncioCardComponent} from "./card/anuncio-card/anuncio-card.component";
 import {CardModule} from "primeng/card";
 import {ButtonModule} from "primeng/button";
 import {GalleriaModule} from "primeng/galleria";
+import {DialogModule} from "primeng/dialog";
+import {CaracteristicasModule} from "../form/caracteristicas/caracteristicas.module";
+import {AutoCompleteModule} from "primeng/autocomplete";
+import {FormsModule} from "@angular/forms";
+import {TooltipModule} from "primeng/tooltip";
+import {InputTextModule} from "primeng/inputtext";
+import {DisabledLabelAndSpanModule} from "../../../shared/dierective/disabledLabelSpan/disabled-label-and-span.module";
 
 @NgModule({
   declarations: [
@@ -20,6 +27,13 @@ import {GalleriaModule} from "primeng/galleria";
     CardModule,
     ButtonModule,
     GalleriaModule,
+    DialogModule,
+    CaracteristicasModule,
+    AutoCompleteModule,
+    FormsModule,
+    TooltipModule,
+    InputTextModule,
+    DisabledLabelAndSpanModule
   ],
   exports: [
     AnuncioListComponent,

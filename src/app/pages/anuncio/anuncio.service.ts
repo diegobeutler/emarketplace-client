@@ -23,4 +23,8 @@ export class AnuncioService extends CrudService<Anuncio> {
   convidarInstituicao(emailInstituicao: string): Observable<void> {
     return this.http.post<void>(`${this.baseUrl}${this.url}/convidar-instituicao`, emailInstituicao)
   }
+
+  updateStatus(anuncio: Anuncio): Observable<Anuncio> {
+    return this.http.post<Anuncio>(`${this.baseUrl}${this.url}/update-status`, anuncio);
+  }
 }

@@ -10,7 +10,6 @@ export class AnunciosComponent implements OnInit {
 
   @Input()
   anuncios: Anuncio[];
-  rows: any[];
 
   constructor() {
   }

@@ -36,8 +36,7 @@
                         [suggestions]="categorias"
                         (onClear)="filter.categoria = null"
                         (completeMethod)="categoriaComplete($event)"
-                        [pTooltip]="getTooltip$(filter.categoria?.descricao) | async"
-                        [title]="getTooltip$(filter?.categoria?.descricao) | async">
+                        [pTooltip]="getTooltip$(filter.categoria?.descricao) | async">
           <ng-template let-categoria pTemplate="categoria">
             <span>{{categoria?.descricao}}</span>
           </ng-template>
@@ -56,8 +55,7 @@
                         (onClear)="filter.operacao = null"
                         [suggestions]="operacoesSugestions"
                         (completeMethod)="operacaoComplete($event)"
-                        [pTooltip]="getTooltip$(filter.operacao?.toString()) | async"
-                        [title]="getTooltip$(filter?.operacao?.toString()) | async">>
+                        [pTooltip]="getTooltip$(filter.operacao?.toString()) | async">
         </p-autoComplete>
       </div>
     </div>
@@ -73,8 +71,7 @@
                         (onClear)="filter.status = null"
                         [suggestions]="statusSugestions"
                         (completeMethod)="statusComplete($event)"
-                        [pTooltip]="getTooltip$(filter.status?.toString()) | async"
-                        [title]="getTooltip$(filter?.status?.toString()) | async">>
+                        [pTooltip]="getTooltip$(filter.status?.toString()) | async">
         </p-autoComplete>
       </div>
     </div>
@@ -128,7 +125,6 @@
                         (onClear)="clearEstado()"
                         (completeMethod)="estadoComplete($event)"
                         (onSelect)="filter.cidade = null"
-                        [title]="getTooltip$(filter.estado?.uf, filter.estado?.nome)  | async"
                         [pTooltip]="getTooltip$(filter.estado?.uf, filter.estado?.nome)  | async">
           <ng-template let-estado pTemplate="estado">
             <span class="id w-35-px">{{estado?.uf}}</span>
@@ -151,8 +147,7 @@
                         [disabled]="!filter.estado"
                         (onClear)="filter.cidade = null"
                         (completeMethod)="cidadeComplete($event)"
-                        [pTooltip]="getTooltip$(filter?.cidade?.estado?.uf, filter?.cidade?.nome) | async"
-                        [title]="getTooltip$(filter?.cidade?.estado?.uf, filter?.cidade?.nome) | async">
+                        [pTooltip]="getTooltip$(filter?.cidade?.estado?.uf, filter?.cidade?.nome) | async">
           <ng-template let-cidade pTemplate="cidade">
             <span>{{cidade?.nome}}</span>
           </ng-template>
@@ -190,9 +185,9 @@
 
 
   <p-button class="btn-filter-sidebar btn-apply-filter" label="Filtrar" icon="pi pi-search"
-            (click)="applyFilter()"></p-button>
+            (onClick)="applyFilter()"></p-button>
   <p-button class="btn-filter-sidebar btn-clear-filter" label="Limpar" icon="pi pi-trash"
-            (click)="resetFilter()"></p-button>
+            (onClick)="resetFilter()"></p-button>
 </p-sidebar>
 
-<p-button type="button" class="btn-filter" (click)="showFilter = true" icon="pi pi-filter"></p-button>
+<p-button type="button" class="btn-filter" (onClick)="showFilter = true" icon="pi pi-filter"></p-button>

@@ -6,13 +6,13 @@
     </p-header>
     <div class="row">
       <div class="col-12">
-        <div class="form-group" [disabledLabelAndSpan]="registro.readOnly">
+        <div class="form-group" [disabledLabelAndSpan]="readOnly">
           <label for="titulo">Título</label>
           <span class="obrigatorio">*</span>
           <input type="text"
                  name="titulo"
                  id="titulo"
-                 [disabled]="registro.readOnly"
+                 [disabled]="readOnly"
                  pInputText
                  required
                  [(ngModel)]="registro.titulo"/>
@@ -21,12 +21,12 @@
     </div>
     <div class="row">
       <div class="col-12">
-        <div class="form-group" [disabledLabelAndSpan]="registro.readOnly">
+        <div class="form-group" [disabledLabelAndSpan]="readOnly">
           <label for="descricao">Descrição</label>
           <span class="obrigatorio">*</span>
           <textarea [(ngModel)]="registro.descricao"
                     id="descricao"
-                    [disabled]="registro.readOnly "
+                    [disabled]="readOnly"
                     name="descricao"
                     type="text"
                     rows="2"
@@ -38,8 +38,23 @@
       </div>
     </div>
     <div class="row">
-      <div class="col-12 col-md col-xl-6">
+      <!--lembrar de desativar se ja estiver finalizado-->
+      <div class="col-12 col-md col-xl-4">
         <div class="form-group" [disabledLabelAndSpan]="false">
+          <label for="status">Status</label>
+          <p-autoComplete name="status"
+                          id="status"
+                          required
+                          [(ngModel)]="registro.status"
+                          [dropdown]="true"
+                          [forceSelection]="true"
+                          [disabled]="true"
+                          [pTooltip]="getTooltip$(registro.status?.toString()) | async">
+          </p-autoComplete>
+        </div>
+      </div>
+      <div class="col-12 col-md col-xl-4">
+        <div class="form-group" [disabledLabelAndSpan]="readOnly">
           <label for="categoria">Categoria</label>
           <span class="obrigatorio">*</span>
           <p-autoComplete name="categoria"
@@ -50,19 +65,18 @@
                           [(ngModel)]="registro.categoria"
                           field="descricao"
                           [suggestions]="categorias"
-                          [disabled]="false"
+                          [disabled]="readOnly"
                           (onClear)="registro.categoria = null"
                           (completeMethod)="categoriaComplete($event)"
-                          [pTooltip]="getTooltip$(registro.categoria?.descricao) | async"
-                          [title]="getTooltip$(registro?.categoria?.descricao) | async">
+                          [pTooltip]="getTooltip$(registro.categoria?.descricao) | async">
             <ng-template let-categoria pTemplate="categoria">
               <span>{{categoria?.descricao}}</span>
             </ng-template>
           </p-autoComplete>
         </div>
       </div>
-      <div class="col-12 col-md col-xl-6">
-        <div class="form-group" [disabledLabelAndSpan]="false">
+      <div class="col-12 col-md col-xl-4">
+        <div class="form-group" [disabledLabelAndSpan]="readOnly">
           <label for="operacao">Operação</label>
           <span class="obrigatorio">*</span>
           <p-autoComplete name="operacao"
@@ -74,32 +88,32 @@
                           (onClear)="resetValoresOperacoes()"
                           (onSelect)="resetValoresOperacoes()"
                           [suggestions]="operacoesSugestions"
+                          [disabled]="readOnly"
                           (completeMethod)="operacaoComplete($event)"
-                          [pTooltip]="getTooltip$(registro.operacao?.toString()) | async"
-                          [title]="getTooltip$(registro?.operacao?.toString()) | async">>
+                          [pTooltip]="getTooltip$(registro.operacao?.toString()) | async">
           </p-autoComplete>
         </div>
       </div>
     </div>
-<!--    Variam de acordo com a operação-->
+    <!--    Variam de acordo com a operação-->
     <div class="row">
       <div *ngIf="showValor()" class="col-12 col-md col-xl-6">
-        <div class="form-group" [disabledLabelAndSpan]="false">
+        <div class="form-group" [disabledLabelAndSpan]="readOnly">
           <label for="valor">Valor</label>
-          <span *ngIf="valorRequered()"class="obrigatorio">*</span>
+          <span *ngIf="valorRequered()" class="obrigatorio">*</span>
           <input name="valor"
                  id="valor"
                  maxlength="12"
                  currencyMask
                  pInputText
-                 [disabled]="false"
-                 [required] = "valorRequered()"
+                 [disabled]="readOnly"
+                 [required]="valorRequered()"
                  type="text"
                  [(ngModel)]="registro.valor"/>
         </div>
       </div>
       <div *ngIf="showDataDevolucao()" class="col-12 col-md col-xl-6">
-        <div class="form-group" [disabledLabelAndSpan]="false">
+        <div class="form-group" [disabledLabelAndSpan]="readOnly">
           <label for="dataDevolucao">
             Data de Devolução
           </label>
@@ -108,6 +122,7 @@
                       [monthNavigator]="true"
                       [showIcon]="true"
                       [yearRange]="'2022:2100'"
+                      [disabled]="readOnly"
                       dataType="string"
                       dateFormat="dd/mm/yy"
                       id="dataDevolucao"
@@ -115,12 +130,12 @@
         </div>
       </div>
       <div *ngIf="showProdutosTroca()" class="col-12">
-        <div class="form-group" [disabledLabelAndSpan]="registro.readOnly">
+        <div class="form-group" [disabledLabelAndSpan]="readOnly">
           <label for="produtosTroca">Produtos Aceitos na Troca</label>
           <span class="obrigatorio">*</span>
           <textarea [(ngModel)]="registro.produtosTroca"
                     id="produtosTroca"
-                    [disabled]="registro.readOnly "
+                    [disabled]="readOnly "
                     name="produtosTroca"
                     type="text"
                     rows="1"
@@ -130,8 +145,8 @@
                     required></textarea>
         </div>
       </div>
-      <div  *ngIf="showInstituicao()" class="col-12 col-md col-xl-6">
-        <div class="form-group" [disabledLabelAndSpan]="false">
+      <div *ngIf="showInstituicao()" class="col-12 col-md col-xl-6">
+        <div class="form-group" [disabledLabelAndSpan]="readOnly">
           <label for="instituicao">Instituição</label>
           <span class="obrigatorio">*</span>
           <p-autoComplete name="instituicao"
@@ -142,16 +157,15 @@
                           [(ngModel)]="registro.usuarioInstituicao"
                           field="nome"
                           [suggestions]="instituicoes"
-                          [disabled]="false"
+                          [disabled]="readOnly"
                           (onClear)="registro.usuarioInstituicao = null"
                           (completeMethod)="instituicaoComplete($event)"
-                          [pTooltip]="getTooltip$(registro.usuarioInstituicao?.nome) | async"
-                          [title]="getTooltip$(registro?.usuarioInstituicao?.nome) | async">
+                          [pTooltip]="getTooltip$(registro.usuarioInstituicao?.nome) | async">
             <ng-template let-instituicao pTemplate="instituicao">
               <span>{{instituicao?.nome}}</span>
             </ng-template>
           </p-autoComplete>
-          <div class="text-end">
+          <div class="text-end" *ngIf="!readOnly">
             <small>Não está listada? <a class="small_a" (click)="showDialog=true">Convide</a></small>
           </div>
         </div>
@@ -173,7 +187,7 @@
               <div><img [src]="imagem.url" width="80" alt="image product" class="img-thumbnail"></div>
               <div class="text-center">{{imagem.nome}}</div>
               <div class="text-end">
-                <button type="button" class="p-button p-component p-button-icon-only"
+                <button [disabled]="readOnly" type="button" class="p-button p-component p-button-icon-only"
                         (click)="removerImage(imagem)"><span
                   class="p-button-icon pi pi-times"
                   aria-hidden="true"></span><span
@@ -182,7 +196,8 @@
             </div>
           </div>
           <div class="my-file-upload-buttonbar">
-            <p-button type="file" label="Selecionar" icon="pi pi-plus" (click)="showUpfile()"></p-button>
+            <p-button type="file" label="Selecionar" icon="pi pi-plus" (onClick)="showUpfile()"
+                      [disabled]="readOnly"></p-button>
             <div [hidden]="true"><input id="upfile" type="file" value="upload" (change)="onUpload($event)" multiple
                                         accept="image/*"/></div>
           </div>
@@ -192,17 +207,22 @@
   </p-card>
 
   <div class="separador-card"></div>
-  <app-caracteristicas [(caracteristicas)]="caracteristicas"></app-caracteristicas>
+  <app-caracteristicas [(caracteristicas)]="caracteristicas" [readOnly]="readOnly"></app-caracteristicas>
   <div class="col-12 text-center pt-3 pb-3">
-    <p-button label="Salvar" icon="pi pi-check" (click)="salvar(registro)"></p-button>
+    <p-button label="Salvar" icon="pi pi-check" (onClick)="salvar(registro)" [disabled]="readOnly"></p-button>
+    <p-button *ngIf="this.registro?.id" class="ps-2" [disabled]="disableRemover()" label="Excluir"
+              icon="pi pi-trash" (onClick)="remover(registro.id)" [disabled]="readOnly"></p-button>
   </div>
 </form>
-<p-dialog header="Convide uma instituição" [(visible)]="showDialog" [baseZIndex]="10000" [style]="{width: '50vw', maxWidth:'600px', minWidth:'400px'}">
-    <div class="row">
-      <div class="col-12">
-        <small>Para convidar uma instituição, informe um e-mail que entraremos em contato passando as instruções e solcitando que a mesma cadastre-se.</small>
-      </div>
-      <div class="field col-12">
+
+<p-dialog header="Convide uma instituição" [(visible)]="showDialog" [baseZIndex]="10000"
+          [style]="{width: '50vw', maxWidth:'600px', minWidth:'400px'}">
+  <div class="row">
+    <div class="col-12">
+      <small>Para convidar uma instituição, informe um e-mail que entraremos em contato passando as instruções e
+        solcitando que a mesma cadastre-se.</small>
+    </div>
+    <div class="field col-12">
             <span class="p-float-label p-input-icon-left col-12 mt-4 mb-5">
                 <i class="pi pi-envelope"></i>
                 <input type="email"
@@ -214,15 +234,14 @@
                        required>
                 <label for="inputtext-left">E-mail Instituição</label>
             </span>
-        </div>
     </div>
+  </div>
 
 
   <ng-template pTemplate="footer">
     <div class="col-12 text-center pt-3">
-      <p-button label="Convidar" icon="pi pi-check" (click)="convidar()"></p-button>
-      <p-button label="Cancelar" icon="pi pi-times" (click)="showDialog = false"></p-button>
+      <p-button label="Convidar" icon="pi pi-check" (onClick)="convidar()"></p-button>
+      <p-button label="Cancelar" icon="pi pi-times" (onClick)="showDialog = false"></p-button>
     </div>
   </ng-template>
-
 </p-dialog>

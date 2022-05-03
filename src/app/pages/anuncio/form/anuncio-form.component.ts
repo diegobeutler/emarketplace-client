@@ -13,6 +13,7 @@ import {Usuario} from "../../usuario/models/usuario";
 import {ImagemAnuncio} from "../models/imagemAnuncio";
 import * as $ from 'jquery';
 import {errorTransform} from "../../../shared/pipes/error-transform";
+import {Status} from "../enumeration/status";
 
 @Component({
   selector: 'app-anuncio-form',
@@ -20,7 +21,7 @@ import {errorTransform} from "../../../shared/pipes/error-transform";
   styleUrls: ['./anuncio-form.component.scss']
 })
 export class AnuncioFormComponent extends SimpleCrudComponent<Anuncio> {
-  caracteristicas: Array<KeyValue<string, string>> = [];
+  caracteristicas: Array<KeyValue<string, string>>;
   categorias: Categoria[];
   operacoesSugestions: Operacao[];
   instituicoes: Usuario[];
@@ -29,6 +30,7 @@ export class AnuncioFormComponent extends SimpleCrudComponent<Anuncio> {
   readonly operacoesHasInstituicao = [Operacao.DOACAO_VALOR, Operacao.DOACAO_PRODUTO];
   showDialog: boolean = false;
   emailInstituicao: any;
+  readOnly = false;
 
   constructor(protected anuncioService: AnuncioService,
               private categoriaService: CategoriaService,
@@ -39,10 +41,14 @@ export class AnuncioFormComponent extends SimpleCrudComponent<Anuncio> {
 
   afterCarregarRegistroExistente(): void {
     this.caracteristicas = this.arrayByJson(this.registro.caracteristicas);
+    this.readOnly = this.registro.status === Status.FINALIZADO;
   }
 
   afterCriarNovoRegistro(): void {
     this.registro.imagens = [];
+    this.caracteristicas = [];
+    this.caracteristicas.push({key: '', value: ''});
+    this.registro.status = Status.DISPONIVEL;
     this.resetValoresOperacoes();
   }
 
@@ -129,21 +135,16 @@ export class AnuncioFormComponent extends SimpleCrudComponent<Anuncio> {
     return this.operacoesValorRequerid.includes(this.registro.operacao)
   }
 
-  disableRemover(): boolean {
-    return !!this.registro?.usuarioDestino;
-  }
-
   resetValoresOperacoes() {
     this.registro.valor = 0;
     this.registro.dataDevolocao = null!;
-    this.registro.produtosTroca = '';
-    this.registro.produtosTroca = '';
-    this.registro.usuarioInstituicao = undefined;
+    this.registro.produtosTroca = null!;
+    this.registro.usuarioInstituicao = null!;
   }
 
   convidar() {
     this.loaderService.show(true, "Aguarde, enviando...");
-    this.anuncioService.convidarInstituicao(this.emailInstituicao).subscribe(e => {
+    this.anuncioService.convidarInstituicao(this.emailInstituicao).subscribe(() => {
       this.loaderService.show(false);
       this.showDialog = false;
       this.messageService.add({severity: 'success', detail: "Convite enviado com sucesso!"});
@@ -151,5 +152,9 @@ export class AnuncioFormComponent extends SimpleCrudComponent<Anuncio> {
       this.loaderService.show(false);
       this.messageService.add({severity: 'error', detail: errorTransform(error)})
     });
+  }
+
+  disableRemover() {
+    return this.registro.status !== Status.DISPONIVEL || this.readOnly;
   }
 }

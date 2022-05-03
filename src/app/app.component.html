@@ -1,4 +1,8 @@
-<app-toolbar></app-toolbar>
-<p-toast></p-toast>
-<app-loader></app-loader>
-<router-outlet></router-outlet>
+<section class="position-fixed w-100 z-index10000">
+  <app-toolbar></app-toolbar>
+</section>
+<div class="espacamento-toolbar">
+  <p-toast [baseZIndex]="10000"></p-toast>
+  <app-loader></app-loader>
+  <router-outlet></router-outlet>
+</div>

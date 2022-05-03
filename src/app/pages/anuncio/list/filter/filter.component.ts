@@ -14,6 +14,9 @@ import {SuggestionsUtils} from "../../../../shared/utils/suggestionsUtils";
 import {CategoriaService} from "../../../categoria/categoria.service";
 import {LoginService} from "../../../login/login.service";
 import {Status} from "../../enumeration/status";
+import {LoaderService} from "../../../../shared/components/loader/loader.service";
+import {MessageService} from "primeng/api";
+import {errorTransform} from "../../../../shared/pipes/error-transform";
 
 @Component({
   selector: 'app-filter',
@@ -38,7 +41,9 @@ export class FilterComponent implements OnInit {
               private estadoService: EstadoService,
               private categoriaService: CategoriaService,
               private loginService: LoginService,
-              private cidadeService: CidadeService) {
+              private cidadeService: CidadeService,
+              private loaderService: LoaderService,
+              private messageService: MessageService) {
   }
 
   ngOnInit(): void {
@@ -78,6 +83,8 @@ export class FilterComponent implements OnInit {
       .subscribe(anuncios => {
         this.anuncios.emit(anuncios)
         this.showFilter = false;
+      }, error => {
+        this.messageService.add({severity: 'error', detail: errorTransform(error)});
       });
   }
 

@@ -79,6 +79,7 @@ export abstract class SimpleCrudComponent<T> implements CrudComponent<T>, OnInit
           (<FormControl>this.form.controls[eachControl]).markAsDirty();
           (<FormControl>this.form.controls[eachControl]).updateValueAndValidity();
         }
+        this.messageService.add({severity: 'warn', detail: 'Os campos marcados com (*) são de preenchimento obrigatório.'});
       }
     }
   }

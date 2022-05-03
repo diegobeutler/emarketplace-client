@@ -1,24 +1,57 @@
-<p-card header="{{anuncio.titulo}}" subheader="{{anuncio.descricao}}" styleClass="p-card-shadow">
+<p-card header="{{anuncio.titulo}}" styleClass="p-card-shadow">
   <ng-template pTemplate="header">
-    <p-galleria [value]="anuncio.imagens" [containerStyle]="{'max-width': '640px'}"
+    <p-galleria [value]="anuncio.imagens"
                 [circular]="true" [showItemNavigators]="true" [showThumbnails]="false"
                 [showItemNavigatorsOnHover]="true">
       <ng-template pTemplate="item" let-imagem>
         <img [src]="imagem.url" style="width: 100%; display: block;"/>
       </ng-template>
-      <ng-template pTemplate="thumbnail" let-imagem>
-        <div class="p-grid p-nogutter p-justify-center">
-          <img [src]="imagem.url" style="display: block; height: 80px!important;"/>
-        </div>
-      </ng-template>
     </p-galleria>
   </ng-template>
-  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore sed consequuntur error repudiandae numquam
-    deserunt
-    quisquam repellat libero asperiores earum nam nobis, culpa ratione quam perferendis esse, cupiditate neque quas!</p>
+  <div class="position-relative">
+    <p>{{anuncio.descricao}}</p>
+    <p class="publicado-em">Publicado em: {{anuncio.dataPublicacao}}</p>
+    <p>Categoria: {{anuncio.categoria.descricao}}</p>
+    <p>Operação: {{anuncio.operacao}}</p>
+    <div class="row">
+      <label for="status" class="col-4" style="align-self: center;">Status </label>
+      <p-autoComplete name="status"
+                      id="status"
+                      required
+                      [(ngModel)]="anuncio.status"
+                      (onClear)="onClearStatus()"
+                      (onSelect)="updateStatus($event)"
+                      (completeMethod)="statusComplete($event)"
+                      [suggestions]="statusSugestions"
+                      [dropdown]="true"
+                      [forceSelection]="true"
+                      [ngClass]="'col-8'"
+                      appendTo="body"
+                      [disabled]="!showUpdateStatusDono()"
+                      [pTooltip]="getTooltip$(anuncio.status?.toString()) | async">
+      </p-autoComplete>
+    </div>
+
+    <p>Caracteristicas: <a class="small_a" (click)="showDialogCaracteristicas=true">Exibir</a></p>
+  </div>
   <ng-template pTemplate="footer">
-    <p-button label="Save" icon="pi pi-check"></p-button>
-    <p-button label="Cancel" icon="pi pi-times" styleClass="p-button-secondary"
-              [style]="{'margin-left': '.5em'}"></p-button>
+    <div *ngIf="anuncio.ehUsuarioOrigem; else btnUpdateStatus" class="text-center btn-card">
+      <a class="text-decoration-none" href="http://localhost:4200/anuncio/form?id={{anuncio?.id}}">
+        <p-button label="Acessar Cadastro" icon="pi pi-check"></p-button>
+      </a>
+    </div>
+    <ng-template #btnUpdateStatus>
+      <div class="text-center btn-card">
+        <p-button label="{{getLabel()}}" icon="pi pi-check" (onClick)="updateStatusUsuarioLogado()"
+                  [disabled]="updateStatusDisabled()"></p-button>
+      </div>
+    </ng-template>
   </ng-template>
 </p-card>
+
+
+<p-dialog [showHeader]="false" [(visible)]="showDialogCaracteristicas" [baseZIndex]="10000"
+          [style]="{width: '50vw', maxWidth:'1000px', minWidth:'800px'}">
+  <app-caracteristicas [caracteristicas]="caracteristicas" [readOnly]="true" [isAnuncioCard]="true"
+                       [(showDialogCaracteristicas)]="showDialogCaracteristicas"></app-caracteristicas>
+</p-dialog>

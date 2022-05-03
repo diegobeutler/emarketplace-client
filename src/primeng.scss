@@ -55,9 +55,38 @@ body .p-card {
   border-radius: 0.25em !important;
 }
 
+.p-card .p-card-content {
+  padding: 10px 25px;
+}
+
+.p-datatable .p-datatable-thead > tr > th {
+  border-top: none !important;
+}
+
 .p-card .p-card-body {
   padding: 0;
   clear: left;
+}
+
+app-anuncio-card p-card .p-card .p-card-body {
+  padding: 1rem 0.5rem 1.5rem 1rem;
+}
+
+app-anuncio-card p-card .p-card-content {
+  padding: 1rem 0.5rem 1.5rem 1rem !important;
+}
+
+app-anuncio-card app-caracteristicas p-card .p-card .p-card-body {
+  padding: 0rem 1rem;
+}
+
+app-anuncio-card app-caracteristicas p-card .p-card-content {
+  padding: 0 !important;
+}
+
+app-anuncio-card p-card .p-card {
+  position: relative;
+  height: 100% !important;
 }
 
 .p-card .p-card-content {
@@ -126,7 +155,7 @@ p-card p-header {
 
 .p-sidebar {
   top: 64px !important;
-  width:450px!important;
+  width: 450px !important;
 }
 
 .p-sidebar-header {
@@ -146,4 +175,16 @@ p-card p-header {
   z-index: 99999999 !important;
 }
 
+.p-galleria .p-galleria-item-nav .p-galleria-item-next-icon {
+  font-size: 1.5rem;
+}
+
+.p-galleria .p-galleria-item-nav .p-galleria-item-prev-icon {
+  font-size: 1.5rem;
+}
+
+app-anuncio-card .p-dialog .p-dialog-content {
+  padding: 0;
+  border-radius: 0.25em !important;
+}
 

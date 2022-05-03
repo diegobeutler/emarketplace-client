@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {MenuItem, MessageService} from "primeng/api";
+import {MenuItem} from "primeng/api";
 import {LoginService} from "../../../pages/login/login.service";
 import {UsuarioService} from "../../../pages/usuario/usuario.service";
 
@@ -10,14 +10,11 @@ import {UsuarioService} from "../../../pages/usuario/usuario.service";
 })
 export class ToolbarComponent implements OnInit {
 
-  constructor(private loginService: LoginService, private usuarioService: UsuarioService, private messageService: MessageService) {
+  constructor(private loginService: LoginService,
+              private usuarioService: UsuarioService) {
   }
 
-  //
-  id = 14;
   items: MenuItem[];
-  item: MenuItem;
-  usuarioLogado;
 
   ngOnInit() {
 
@@ -47,16 +44,13 @@ export class ToolbarComponent implements OnInit {
             {
               label: 'Comprar',
               icon: 'pi pi-fw pi-shopping-cart',
-              url:'home'
+              url: 'home'
             }
           ]
         },
       ];
 
-
-      this.usuarioLogado = e;
       if (e) {
-        // const index = this.items.findIndex(i => i.label=='Usuário')
         // @ts-ignore
         this.items[1].items.push({
           label: 'Perfil',
@@ -64,7 +58,6 @@ export class ToolbarComponent implements OnInit {
           url: ' /usuario/form?id=' + e.id
 
         });
-        console.log(this.items)
       } else {
         // @ts-ignore
         this.items[1].items.push({
@@ -73,7 +66,10 @@ export class ToolbarComponent implements OnInit {
           url: ' /usuario/form'
         })
       }
-
+    }, error => {
+      if (error.status == 401) {
+        this.logout()
+      }
     });
 
   }

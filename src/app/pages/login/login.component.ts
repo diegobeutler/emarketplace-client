@@ -29,7 +29,7 @@ export class LoginComponent {
         this.loaderService.show(false);
       }, () => {
         this.loaderService.show(false);
-        this.messageService.add({severity: 'error', detail: 'Usuário ou senha incorreto'});
+        this.messageService.add({severity: 'error', detail: 'Usuário inativo ou credencias inválidas'});
       });
 
     } else {// todo melhorar, isolar em uma classe util

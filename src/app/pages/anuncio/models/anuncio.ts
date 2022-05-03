@@ -23,6 +23,8 @@ export class Anuncio {
 
   // variáveis de controle
   readOnly: false;
-  imagensDeleted: string[] = [];// talvez fazer no back
+  ehUsuarioOrigem: boolean;
+  ehUsuarioDestino: boolean;
+  ehUsuarioInstituicao: boolean;
 
 }

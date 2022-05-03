@@ -9,6 +9,14 @@ import {KeyValue} from "@angular/common";
 export class CaracteristicasComponent implements OnInit {
 
   @Input()
+  readOnly = false;
+  @Input()
+  isAnuncioCard = false;
+  @Input()
+  showDialogCaracteristicas: boolean;
+  @Output()
+  showDialogCaracteristicasChange=  new EventEmitter<boolean>();
+  @Input()
   caracteristicas: Array<KeyValue<string, string>>;
   @Output()
   caracteristicasChange = new EventEmitter<Array<KeyValue<string, string>>>();

@@ -13,7 +13,6 @@ import {DisabledLabelAndSpanModule} from "../../shared/dierective/disabledLabelS
 import {InputTextModule} from "primeng/inputtext";
 import {InputTextareaModule} from "primeng/inputtextarea";
 import {TableModule} from "primeng/table";
-import {CaracteristicasComponent} from './form/caracteristicas/caracteristicas.component';
 import {AutoCompleteModule} from "primeng/autocomplete";
 import {DropdownModule} from "primeng/dropdown";
 import {TooltipModule} from "primeng/tooltip";
@@ -23,6 +22,7 @@ import {CalendarModule} from "primeng/calendar";
 import {OnlyNumberModule} from "../../shared/dierective/onlyNumber/onlyNumber.module";
 import {NgxCurrencyModule} from "ngx-currency";
 import {DialogModule} from "primeng/dialog";
+import {CaracteristicasModule} from "./form/caracteristicas/caracteristicas.module";
 
 
 const routes: Routes = [
@@ -42,7 +42,7 @@ const routes: Routes = [
     AutoCompleteModule,
     DropdownModule,
     TooltipModule,
-
+    CaracteristicasModule,
 
     DisabledLabelAndSpanModule,
     CategoriaModule,
@@ -56,7 +56,6 @@ const routes: Routes = [
   declarations: [
     AnuncioComponent,
     AnuncioFormComponent,
-    CaracteristicasComponent,
   ],
   providers: [
     AnuncioService,

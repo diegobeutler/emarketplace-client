@@ -1,20 +1,22 @@
-import { HttpErrorResponse } from "@angular/common/http";
+import {HttpErrorResponse} from "@angular/common/http";
 
-export const ERROR_DETAIL = '. Por favor, tente novamente mais tarde ou entre em contato com o suporte técnico.'
 
 export function errorTransform(error: HttpErrorResponse): string {
-    if (error) {
-        if (error.error && error.error.message) {
-            return error.error.message;
-        }
-        if (error.message) {
-            switch (error.status) {
-                case 403:
-                    return 'Acesso inválido' + ERROR_DETAIL;
-                default:
-                    return error.message;
-            }
-        }
+  if (error) {
+    if (error.error && error.error.message && error.status != 403) {
+      return error.error.message;
     }
-    return 'Não foi possível concluir a operação' + ERROR_DETAIL;
+    if (error.message) {
+      switch (error.status) {
+        case 401:
+          return 'Token expirado. Favor autentique-se novamente no sistema.'
+        case 403:
+          return 'Acesso negado. Usuário não possui as permissões necessárias.'
+
+        default:
+          return error.message;
+      }
+    }
+  }
+  return 'Não foi possível concluir a operação. Por favor, tente novamente mais tarde ou entre em contato com o suporte técnico.';
 }
