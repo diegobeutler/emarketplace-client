@@ -10,6 +10,7 @@ import {LoaderService} from "../../../../../shared/components/loader/loader.serv
 import {MessageService} from "primeng/api";
 import {errorTransform} from "../../../../../shared/pipes/error-transform";
 import {SuggestionsUtils} from "../../../../../shared/utils/suggestionsUtils";
+import {Operacao} from "../../../enumeration/operacao";
 
 @Component({
   selector: 'app-anuncio-card',
@@ -45,9 +46,9 @@ export class AnuncioCardComponent implements OnInit {
   getLabel(): string {
     switch (this.anuncio.status) {
       case Status.DISPONIVEL:
-        return 'Tenho Interesse'
+        return this.anuncio.operacao === Operacao.DOACAO_PRODUTO ? 'Aceitar Doação' : 'Tenho Interesse';
       case Status.EM_NEGOCIACAO:
-        return 'Em Negociacao'
+        return 'Em Negociação'
       default:
         return 'Finalizado'
     }
@@ -57,9 +58,9 @@ export class AnuncioCardComponent implements OnInit {
     if (this.isAuthenticated) {
       switch (this.anuncio.status) {
         case Status.DISPONIVEL:
-          return false
+          return !(this.anuncio.operacao !== Operacao.DOACAO_PRODUTO || this.anuncio.ehUsuarioInstituicao);
         case Status.EM_NEGOCIACAO:
-          return !this.anuncio.ehUsuarioDestino
+          return !(this.anuncio.ehUsuarioDestino || this.anuncio.operacao === Operacao.DOACAO_PRODUTO && this.anuncio.ehUsuarioInstituicao)
         default:
           return true
       }
@@ -97,10 +98,15 @@ export class AnuncioCardComponent implements OnInit {
     this.anuncio.status = Status.EM_NEGOCIACAO;
   }
 
-  updateStatus(status: Status) {
-    alert(status)
+  updateStatus() {
     this.anuncioService.updateStatus(this.anuncio).subscribe(e => {
       this.anuncio = e;
+      if (e.ehUsuarioOrigem && e.operacao === Operacao.DOACAO_PRODUTO && e.status === Status.DISPONIVEL) {
+        this.messageService.add({
+          severity: 'warn',
+          detail: "Status foi atualizado, porém deve-se alterar a instituição no anúncio"
+        });
+      }
     })
   }
 

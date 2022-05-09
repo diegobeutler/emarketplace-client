@@ -13,20 +13,10 @@ import {LoginRequest} from '../../shared/models/login-request';
 @Injectable({ providedIn: 'root' })
 export class LoginService {
 
-    /**
-     * @description Armazena a url base do sistema
-     */
-
     private _url = environment.api;
 
-    /**
-     * @description Evento de login
-     */
     private _loginEvent: Subject<boolean>;
 
-    /**
-     * @description Subscription do interval das chamadas de atualização do token
-     */
     private _refreshSubscription?: Subscription;
 
     constructor(
@@ -36,32 +26,14 @@ export class LoginService {
         this._loginEvent = new Subject();
     }
 
-    /**
-     * @description Retorna as informações do usuário logado
-     */
     public get authInfo(): string | null {
         return localStorage.getItem('access_token');
     }
 
-    /**
-     * @description Retorna true se o usuário estiver autenticado
-     */
     public get isAuthenticated(): boolean {
         return !!localStorage.getItem('access_token');
     }
 
-    /**
-     * @description Observable do evento de login
-     */
-    public get onLoginEvent(): Observable<boolean> {
-        return this._loginEvent.asObservable();
-    }
-
-    /**
-     * @description Loga no sistema
-     * @returns Flag que identifica sucesso do login
-     * @param request Request de login com email/username e senha
-     */
     public login(request: LoginRequest): Observable<boolean> {
         return new Observable(observer => {
             if (!request) {
@@ -89,9 +61,6 @@ export class LoginService {
         });
     }
 
-    /**
-     * @description Armazena/remove o token de acesso
-     */
     private storeToken(response?: { access_token: string }): void {
         const token = response ? response['access_token'] : null;
 
@@ -104,9 +73,6 @@ export class LoginService {
         this._loginEvent.next(this.isAuthenticated);
     }
 
-    /**
-     * @description Inicia a sequência de chamadas refresh com intervalo de 60 minutos
-     */
     private startRefreshInterval(): void {
         if (this._refreshSubscription && !this._refreshSubscription.closed) {
             this._refreshSubscription.unsubscribe();
@@ -120,16 +86,10 @@ export class LoginService {
         this._refreshSubscription.add(subRefresh);
     }
 
-    /**
-     * @description Aborta as chamadas de refresh token
-     */
     private stopRefreshInterval(): void {
         this._refreshSubscription?.unsubscribe();
     }
 
-    /**
-     * @description Atualiza o token de acesso
-     */
     private refreshToken(): void {
         this._http.get<{ access_token: string }>(this._url + 'refresh-token').subscribe(response => {
             this.storeToken(response);
@@ -139,10 +99,6 @@ export class LoginService {
         });
     }
 
-
-    /**
-     * @description Desloga do sistema
-     */
     public logout() {
         localStorage.removeItem('access_token');
         this._loginEvent.next(false);

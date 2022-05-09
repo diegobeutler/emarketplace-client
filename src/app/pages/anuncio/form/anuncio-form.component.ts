@@ -41,7 +41,7 @@ export class AnuncioFormComponent extends SimpleCrudComponent<Anuncio> {
 
   afterCarregarRegistroExistente(): void {
     this.caracteristicas = this.arrayByJson(this.registro.caracteristicas);
-    this.readOnly = this.registro.status === Status.FINALIZADO;
+    this.readOnly = this.registro.status !== Status.DISPONIVEL;
   }
 
   afterCriarNovoRegistro(): void {
@@ -152,9 +152,5 @@ export class AnuncioFormComponent extends SimpleCrudComponent<Anuncio> {
       this.loaderService.show(false);
       this.messageService.add({severity: 'error', detail: errorTransform(error)})
     });
-  }
-
-  disableRemover() {
-    return this.registro.status !== Status.DISPONIVEL || this.readOnly;
   }
 }

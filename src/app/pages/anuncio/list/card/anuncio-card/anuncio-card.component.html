@@ -4,7 +4,7 @@
                 [circular]="true" [showItemNavigators]="true" [showThumbnails]="false"
                 [showItemNavigatorsOnHover]="true">
       <ng-template pTemplate="item" let-imagem>
-        <img [src]="imagem.url" style="width: 100%; display: block;"/>
+        <img [src]="imagem?.url" [alt]="imagem?.nome" style="width: 100%; display: block;"/>
       </ng-template>
     </p-galleria>
   </ng-template>
@@ -20,7 +20,7 @@
                       required
                       [(ngModel)]="anuncio.status"
                       (onClear)="onClearStatus()"
-                      (onSelect)="updateStatus($event)"
+                      (onSelect)="updateStatus()"
                       (completeMethod)="statusComplete($event)"
                       [suggestions]="statusSugestions"
                       [dropdown]="true"

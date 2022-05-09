@@ -210,7 +210,7 @@
   <app-caracteristicas [(caracteristicas)]="caracteristicas" [readOnly]="readOnly"></app-caracteristicas>
   <div class="col-12 text-center pt-3 pb-3">
     <p-button label="Salvar" icon="pi pi-check" (onClick)="salvar(registro)" [disabled]="readOnly"></p-button>
-    <p-button *ngIf="this.registro?.id" class="ps-2" [disabled]="disableRemover()" label="Excluir"
+    <p-button *ngIf="this.registro?.id" class="ps-2" label="Excluir"
               icon="pi pi-trash" (onClick)="remover(registro.id)" [disabled]="readOnly"></p-button>
   </div>
 </form>
