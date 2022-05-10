@@ -20,10 +20,11 @@ import {Operacao} from "../../../enumeration/operacao";
 export class AnuncioCardComponent implements OnInit {
 
   @Input()
-  private anuncio: Anuncio;
+  anuncio: Anuncio;
 
   isAuthenticated: boolean
   showDialogCaracteristicas: boolean;
+  showDialogUsuario: boolean;
   caracteristicas: any;
   statusSugestions: any;
 

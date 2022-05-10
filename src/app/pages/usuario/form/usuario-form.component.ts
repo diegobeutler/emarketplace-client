@@ -1,4 +1,4 @@
-import {Component, Injector} from '@angular/core';
+import {Component, Injector, Input} from '@angular/core';
 import {SimpleCrudComponent} from "../../../shared/components/crud/simple-crud.component";
 import {Usuario} from "../models/usuario";
 import {UsuarioService} from "../usuario.service";
@@ -16,7 +16,7 @@ const DEFAULT_IMAGE = 'https://s3.sa-east-1.amazonaws.com/e-marketplace/images/u
   templateUrl: './usuario-form.component.html',
   styleUrls: ['./usuario-form.component.scss']
 })
-export class UsuarioFormComponent extends SimpleCrudComponent<Usuario>{
+export class UsuarioFormComponent extends SimpleCrudComponent<Usuario> {
   estados: Estado[];
   estado: Estado;
   cidades: Cidade[];
@@ -83,7 +83,7 @@ export class UsuarioFormComponent extends SimpleCrudComponent<Usuario>{
       this.messageService.add({severity: 'success', detail: 'Registro validado com sucesso'});
       this.registro.ativo = true;
       this.loaderService.show(false);
-    },error => {
+    }, error => {
       this.loaderService.show(false);
       this.messageService.add({severity: 'error', detail: errorTransform(error)});
     })

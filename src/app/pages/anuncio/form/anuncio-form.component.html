@@ -215,7 +215,11 @@
   </div>
 </form>
 
-<p-dialog header="Convide uma instituição" [(visible)]="showDialog" [baseZIndex]="10000"
+<p-dialog header="Convide uma instituição"
+          [(visible)]="showDialog"
+          [baseZIndex]="10000"
+          [modal]="true"
+          [closable]="true"
           [style]="{width: '50vw', maxWidth:'600px', minWidth:'400px'}">
   <div class="row">
     <div class="col-12">

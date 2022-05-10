@@ -84,10 +84,6 @@ export abstract class SimpleCrudComponent<T> implements CrudComponent<T>, OnInit
     }
   }
 
-  /**
-   * @description Remove o registro do banco
-   * @param registroId Id do registro a ser removido
-   */
   public remover(registroId: number): void {
     this.loaderService.show(true, 'Aguarde, excluindo...');
     this.service.remover(registroId).subscribe(() => {
@@ -134,9 +130,6 @@ export abstract class SimpleCrudComponent<T> implements CrudComponent<T>, OnInit
       distinctUntilChanged(),
       take(1)
     );
-  }
-
-  beforeOnInit(): void {
   }
 
   public afterCarregarRegistroExistente(): void {

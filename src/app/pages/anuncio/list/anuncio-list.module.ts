@@ -14,12 +14,15 @@ import {FormsModule} from "@angular/forms";
 import {TooltipModule} from "primeng/tooltip";
 import {InputTextModule} from "primeng/inputtext";
 import {DisabledLabelAndSpanModule} from "../../../shared/dierective/disabledLabelSpan/disabled-label-and-span.module";
+import {UsuarioDialogComponent} from "./card/usuario-dialog/usuario-dialog.component";
+import {CheckboxModule} from "primeng/checkbox";
 
 @NgModule({
   declarations: [
     AnuncioListComponent,
     AnunciosComponent,
-    AnuncioCardComponent
+    AnuncioCardComponent,
+    UsuarioDialogComponent
   ],
   imports: [
     CommonModule,
@@ -33,12 +36,14 @@ import {DisabledLabelAndSpanModule} from "../../../shared/dierective/disabledLab
     FormsModule,
     TooltipModule,
     InputTextModule,
-    DisabledLabelAndSpanModule
+    DisabledLabelAndSpanModule,
+    CheckboxModule
   ],
   exports: [
     AnuncioListComponent,
     AnunciosComponent,
-    AnuncioCardComponent
+    AnuncioCardComponent,
+    UsuarioDialogComponent
   ]
 })
 export class AnuncioListModule {

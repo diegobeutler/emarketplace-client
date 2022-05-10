@@ -58,3 +58,9 @@ small, .small {
   font-size: 0.75em;
   color: #505050;
 }
+
+.adjust-text {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

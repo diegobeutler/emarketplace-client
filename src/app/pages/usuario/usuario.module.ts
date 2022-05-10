@@ -50,17 +50,20 @@ const routes: Routes = [
         DisabledLabelAndSpanModule,
         PasswordValidationModule
     ],
-  declarations: [
-    UsuarioFormComponent,
-    ResetPasswordComponent,
-    UpdatePasswordComponent,
-  ],
-  providers: [
-    UsuarioService,
-    TokenInterceptor,
+    declarations: [
+        UsuarioFormComponent,
+        ResetPasswordComponent,
+        UpdatePasswordComponent,
+    ],
+    providers: [
+        UsuarioService,
+        TokenInterceptor,
 
-    // interceptors
-    { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true, },
-  ],
+        // interceptors
+        {provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true,},
+    ],
+    exports: [
+        UsuarioFormComponent
+    ]
 })
 export class UsuarioModule { }

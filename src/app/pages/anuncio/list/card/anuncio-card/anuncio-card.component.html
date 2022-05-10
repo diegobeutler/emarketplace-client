@@ -11,10 +11,12 @@
   <div class="position-relative">
     <p>{{anuncio.descricao}}</p>
     <p class="publicado-em">Publicado em: {{anuncio.dataPublicacao}}</p>
-    <p>Categoria: {{anuncio.categoria.descricao}}</p>
-    <p>Operação: {{anuncio.operacao}}</p>
     <div class="row">
-      <label for="status" class="col-4" style="align-self: center;">Status </label>
+      <p class="col-5 adjust-text" [pTooltip]="'Categoria'">Categoria</p>
+      <p class="col-7">{{anuncio.categoria.descricao}}</p>
+      <p class="col-5 adjust-text" [pTooltip]="'Operação'">Operação</p>
+      <p class="col-7">{{anuncio.operacao}}</p>
+      <label for="status" class="col-5 m-b-26px" style="align-self: center;">Status</label>
       <p-autoComplete name="status"
                       id="status"
                       required
@@ -25,14 +27,16 @@
                       [suggestions]="statusSugestions"
                       [dropdown]="true"
                       [forceSelection]="true"
-                      [ngClass]="'col-8'"
+                      [ngClass]="'col-7'"
                       appendTo="body"
                       [disabled]="!showUpdateStatusDono()"
                       [pTooltip]="getTooltip$(anuncio.status?.toString()) | async">
       </p-autoComplete>
+      <p class="col-5 adjust-text" [pTooltip]="'Caracteristicas'">Caracteristicas</p>
+      <a class="small_a col-7" (click)="showDialogCaracteristicas=true">Exibir</a>
+      <p class="col-5 adjust-text" [pTooltip]="'Anunciante'">Anunciante</p>
+      <a class="small_a col-7" (click)="showDialogUsuario=true">Exibir</a>
     </div>
-
-    <p>Caracteristicas: <a class="small_a" (click)="showDialogCaracteristicas=true">Exibir</a></p>
   </div>
   <ng-template pTemplate="footer">
     <div *ngIf="anuncio.ehUsuarioOrigem; else btnUpdateStatus" class="text-center btn-card">
@@ -49,9 +53,21 @@
   </ng-template>
 </p-card>
 
-
-<p-dialog [showHeader]="false" [(visible)]="showDialogCaracteristicas" [baseZIndex]="10000"
+<p-dialog [showHeader]="true"
+          [(visible)]="showDialogCaracteristicas"
+          [baseZIndex]="10000"
+          [modal]="true"
+          [closable]="true"
           [style]="{width: '50vw', maxWidth:'1000px', minWidth:'800px'}">
   <app-caracteristicas [caracteristicas]="caracteristicas" [readOnly]="true" [isAnuncioCard]="true"
                        [(showDialogCaracteristicas)]="showDialogCaracteristicas"></app-caracteristicas>
+</p-dialog>
+
+<p-dialog [showHeader]="true"
+          [(visible)]="showDialogUsuario"
+          [baseZIndex]="10000"
+          [closable]="true"
+          [modal]="true"
+          [style]="{width: '50vw', maxWidth:'1000px', minWidth:'800px'}">
+  <app-usuario-dialog [usuario]="anuncio.usuarioOrigem" [(showDialogUsuario)]="showDialogUsuario"></app-usuario-dialog>
 </p-dialog>

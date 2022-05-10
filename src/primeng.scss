@@ -188,3 +188,12 @@ app-anuncio-card .p-dialog .p-dialog-content {
   border-radius: 0.25em !important;
 }
 
+app-anuncio-card .p-dialog .p-dialog-header {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  z-index: 1;
+  padding: 0;
+  border: none;
+}
+
