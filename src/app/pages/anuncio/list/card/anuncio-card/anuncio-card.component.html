@@ -15,8 +15,8 @@
       <p class="col-5 adjust-text" [pTooltip]="'Categoria'">Categoria</p>
       <p class="col-7">{{anuncio.categoria.descricao}}</p>
       <p class="col-5 adjust-text" [pTooltip]="'Operação'">Operação</p>
-      <p class="col-7">{{anuncio.operacao}}</p>
-      <label for="status" class="col-5 m-b-26px" style="align-self: center;">Status</label>
+      <p class="col-7 adjust-text" [pTooltip]="anuncio.operacao">{{anuncio.operacao}}</p>
+      <label for="status" class="col-5 label-complete" style="align-self: center;">Status</label>
       <p-autoComplete name="status"
                       id="status"
                       required
@@ -45,11 +45,7 @@
       <!--    Variam de acordo com a operação-->
       <div *ngIf="showInstituicao()" class="d-flex">
         <div class="col-5"><p class="adjust-text" [pTooltip]="'Instituição'">Instituição</p></div>
-        <a class="small_a col-7" (click)="showDialogAnunciante=true">Exibir</a>
-      </div>
-      <div *ngIf="showValor()" class="d-flex">
-        <div class="col-5"><p class="adjust-text" [pTooltip]="'Valor'">Valor</p></div>
-        <p class="col-7">{{(anuncio.valor ? anuncio.valor : 0) | moneyFormat}}</p>
+        <a class="small_a col-7" (click)="showDialogInstituicao=true">Exibir</a>
       </div>
       <div *ngIf="showDataDevolucao()" class="d-flex">
         <div class="col-5"><p class="adjust-text" [pTooltip]="'Data de Devolução'">Devolução</p></div>
@@ -58,6 +54,10 @@
       <div *ngIf="showProdutosTroca()" class="d-flex">
         <div class="col-5"><p class="adjust-text" [pTooltip]="'Produtos Aceitos na Troca'">Troca-se por</p></div>
         <div class="col-7"><p class="adjust-text" [pTooltip]="anuncio.produtosTroca">{{anuncio.produtosTroca}}</p></div>
+      </div>
+      <div *ngIf="showValor()" class="d-flex">
+        <div class="col-5"><b class="adjust-text" [pTooltip]="'Valor'">Valor</b></div>
+        <b class="col-7 m-b-10px">{{(anuncio.valor ? anuncio.valor : 0) | moneyFormat}}</b>
       </div>
     </div>
   </div>
