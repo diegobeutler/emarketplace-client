@@ -24,9 +24,14 @@ export class AnuncioCardComponent implements OnInit {
 
   isAuthenticated: boolean
   showDialogCaracteristicas: boolean;
-  showDialogUsuario: boolean;
+  showDialogAnunciante: boolean;
+  showDialogAdquirente: boolean;
+  showDialogInstituicao: boolean;
   caracteristicas: any;
   statusSugestions: any;
+  readonly operacoesValorRequerid = [Operacao.DOACAO_VALOR, Operacao.VENDA];
+  readonly operacoesHasValor = [Operacao.EMPRESTIMO].concat(this.operacoesValorRequerid);
+  readonly operacoesHasInstituicao = [Operacao.DOACAO_VALOR, Operacao.DOACAO_PRODUTO];
 
   constructor(private anuncioService: AnuncioService,
               private loginService: LoginService,
@@ -131,5 +136,29 @@ export class AnuncioCardComponent implements OnInit {
       statusSugestionsFiltered.splice(index, 1);
     }
     this.statusSugestions = statusSugestionsFiltered;
+  }
+
+  showValor(): boolean {
+    return this.operacoesHasValor.includes(this.anuncio?.operacao);
+  }
+
+  showDataDevolucao(): boolean {
+    return Operacao.EMPRESTIMO === this.anuncio?.operacao;
+  }
+
+  showProdutosTroca(): boolean {
+    return Operacao.TROCA === this.anuncio?.operacao;
+  }
+
+  showInstituicao(): boolean {
+    return this.isAuthenticated && this.operacoesHasInstituicao.includes(this.anuncio.operacao);
+  }
+
+  showAdquirinte(): boolean {
+    return this.isAuthenticated && this.anuncio.ehUsuarioOrigem && this.anuncio.status !== Status.DISPONIVEL
+  }
+
+  showAnunciante(): boolean  {
+    return this.isAuthenticated && !this.anuncio.ehUsuarioOrigem
   }
 }

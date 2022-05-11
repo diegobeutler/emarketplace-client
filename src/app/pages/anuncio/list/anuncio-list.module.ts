@@ -16,6 +16,7 @@ import {InputTextModule} from "primeng/inputtext";
 import {DisabledLabelAndSpanModule} from "../../../shared/dierective/disabledLabelSpan/disabled-label-and-span.module";
 import {UsuarioDialogComponent} from "./card/usuario-dialog/usuario-dialog.component";
 import {CheckboxModule} from "primeng/checkbox";
+import {MoneyFormatPipeModule} from "../../../shared/pipes/moneyFormat/moneyFormat.pipe.module";
 
 @NgModule({
   declarations: [
@@ -24,21 +25,22 @@ import {CheckboxModule} from "primeng/checkbox";
     AnuncioCardComponent,
     UsuarioDialogComponent
   ],
-  imports: [
-    CommonModule,
-    FilterModule,
-    CardModule,
-    ButtonModule,
-    GalleriaModule,
-    DialogModule,
-    CaracteristicasModule,
-    AutoCompleteModule,
-    FormsModule,
-    TooltipModule,
-    InputTextModule,
-    DisabledLabelAndSpanModule,
-    CheckboxModule
-  ],
+    imports: [
+        CommonModule,
+        FilterModule,
+        CardModule,
+        ButtonModule,
+        GalleriaModule,
+        DialogModule,
+        CaracteristicasModule,
+        AutoCompleteModule,
+        FormsModule,
+        TooltipModule,
+        InputTextModule,
+        DisabledLabelAndSpanModule,
+        CheckboxModule,
+        MoneyFormatPipeModule
+    ],
   exports: [
     AnuncioListComponent,
     AnunciosComponent,

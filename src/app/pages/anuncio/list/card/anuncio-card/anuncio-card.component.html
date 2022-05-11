@@ -9,7 +9,7 @@
     </p-galleria>
   </ng-template>
   <div class="position-relative">
-    <p>{{anuncio.descricao}}</p>
+    <p class="adjust-text" [pTooltip]="anuncio.descricao">{{anuncio.descricao}}</p>
     <p class="publicado-em">Publicado em: {{anuncio.dataPublicacao}}</p>
     <div class="row">
       <p class="col-5 adjust-text" [pTooltip]="'Categoria'">Categoria</p>
@@ -32,10 +32,33 @@
                       [disabled]="!showUpdateStatusDono()"
                       [pTooltip]="getTooltip$(anuncio.status?.toString()) | async">
       </p-autoComplete>
-      <p class="col-5 adjust-text" [pTooltip]="'Caracteristicas'">Caracteristicas</p>
+      <div class="col-5"><p class="adjust-text" [pTooltip]="'Caracteristicas'">Caracteristicas</p></div>
       <a class="small_a col-7" (click)="showDialogCaracteristicas=true">Exibir</a>
-      <p class="col-5 adjust-text" [pTooltip]="'Anunciante'">Anunciante</p>
-      <a class="small_a col-7" (click)="showDialogUsuario=true">Exibir</a>
+      <div *ngIf="showAnunciante()" class="d-flex">
+        <div class="col-5"><p class="adjust-text" [pTooltip]="'Anunciante'">Anunciante</p></div>
+        <a class="small_a col-7" (click)="showDialogAnunciante=true">Exibir</a>
+      </div>
+      <div *ngIf="showAdquirinte()" class="d-flex">
+        <div class="col-5"><p class="adjust-text" [pTooltip]="'Adquirente'">Adquirente</p></div>
+        <a class="small_a col-7" (click)="showDialogAdquirente=true">Exibir</a>
+      </div>
+      <!--    Variam de acordo com a operação-->
+      <div *ngIf="showInstituicao()" class="d-flex">
+        <div class="col-5"><p class="adjust-text" [pTooltip]="'Instituição'">Instituição</p></div>
+        <a class="small_a col-7" (click)="showDialogAnunciante=true">Exibir</a>
+      </div>
+      <div *ngIf="showValor()" class="d-flex">
+        <div class="col-5"><p class="adjust-text" [pTooltip]="'Valor'">Valor</p></div>
+        <p class="col-7">{{(anuncio.valor ? anuncio.valor : 0) | moneyFormat}}</p>
+      </div>
+      <div *ngIf="showDataDevolucao()" class="d-flex">
+        <div class="col-5"><p class="adjust-text" [pTooltip]="'Data de Devolução'">Devolução</p></div>
+        <p class="col-7">{{anuncio.dataDevolocao}}</p>
+      </div>
+      <div *ngIf="showProdutosTroca()" class="d-flex">
+        <div class="col-5"><p class="adjust-text" [pTooltip]="'Produtos Aceitos na Troca'">Troca-se por</p></div>
+        <div class="col-7"><p class="adjust-text" [pTooltip]="anuncio.produtosTroca">{{anuncio.produtosTroca}}</p></div>
+      </div>
     </div>
   </div>
   <ng-template pTemplate="footer">
@@ -64,10 +87,31 @@
 </p-dialog>
 
 <p-dialog [showHeader]="true"
-          [(visible)]="showDialogUsuario"
+          [(visible)]="showDialogAnunciante"
           [baseZIndex]="10000"
           [closable]="true"
           [modal]="true"
           [style]="{width: '50vw', maxWidth:'1000px', minWidth:'800px'}">
-  <app-usuario-dialog [usuario]="anuncio.usuarioOrigem" [(showDialogUsuario)]="showDialogUsuario"></app-usuario-dialog>
+  <app-usuario-dialog [usuario]="anuncio.usuarioOrigem"
+                      [(showDialogUsuario)]="showDialogAnunciante"></app-usuario-dialog>
+</p-dialog>
+
+<p-dialog [showHeader]="true"
+          [(visible)]="showDialogAdquirente"
+          [baseZIndex]="10000"
+          [closable]="true"
+          [modal]="true"
+          [style]="{width: '50vw', maxWidth:'1000px', minWidth:'800px'}">
+  <app-usuario-dialog [usuario]="anuncio.usuarioDestino"
+                      [(showDialogUsuario)]="showDialogAdquirente"></app-usuario-dialog>
+</p-dialog>
+
+<p-dialog [showHeader]="true"
+          [(visible)]="showDialogInstituicao"
+          [baseZIndex]="10000"
+          [closable]="true"
+          [modal]="true"
+          [style]="{width: '50vw', maxWidth:'1000px', minWidth:'800px'}">
+  <app-usuario-dialog [usuario]="anuncio.usuarioInstituicao"
+                      [(showDialogUsuario)]="showDialogInstituicao"></app-usuario-dialog>
 </p-dialog>
