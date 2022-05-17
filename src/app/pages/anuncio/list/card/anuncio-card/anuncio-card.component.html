@@ -4,60 +4,69 @@
                 [circular]="true" [showItemNavigators]="true" [showThumbnails]="false"
                 [showItemNavigatorsOnHover]="true">
       <ng-template pTemplate="item" let-imagem>
-        <img [src]="imagem?.url" [alt]="imagem?.nome" style="width: 100%; display: block;"/>
+        <img [src]="imagem?.url" [alt]="imagem?.nome"
+             style="width: 100%; height: 100%; max-height: 460px; display: block;"/>
       </ng-template>
     </p-galleria>
   </ng-template>
   <div class="position-relative">
-    <p class="adjust-text" [pTooltip]="anuncio.descricao">{{anuncio.descricao}}</p>
+    <h5 class="adjust-text descricao" [pTooltip]="anuncio.descricao">{{anuncio.descricao}}</h5>
     <p class="publicado-em">Publicado em: {{anuncio.dataPublicacao}}</p>
     <div class="row">
-      <p class="col-5 adjust-text" [pTooltip]="'Categoria'">Categoria</p>
-      <p class="col-7">{{anuncio.categoria.descricao}}</p>
-      <p class="col-5 adjust-text" [pTooltip]="'Operação'">Operação</p>
-      <p class="col-7 adjust-text" [pTooltip]="anuncio.operacao">{{anuncio.operacao}}</p>
-      <label for="status" class="col-5 label-complete" style="align-self: center;">Status</label>
-      <p-autoComplete name="status"
-                      id="status"
-                      required
-                      [(ngModel)]="anuncio.status"
-                      (onClear)="onClearStatus()"
-                      (onSelect)="updateStatus()"
-                      (completeMethod)="statusComplete($event)"
-                      [suggestions]="statusSugestions"
-                      [dropdown]="true"
-                      [forceSelection]="true"
-                      [ngClass]="'col-7'"
-                      appendTo="body"
-                      [disabled]="!showUpdateStatusDono()"
-                      [pTooltip]="getTooltip$(anuncio.status?.toString()) | async">
-      </p-autoComplete>
-      <div class="col-5"><p class="adjust-text" [pTooltip]="'Caracteristicas'">Caracteristicas</p></div>
-      <a class="small_a col-7" (click)="showDialogCaracteristicas=true">Exibir</a>
+      <div class="d-flex">
+        <p class="col-5 adjust-text secundary-font" [pTooltip]="'Categoria'">Categoria</p>
+        <p class="col-7 primary-font">{{anuncio.categoria.descricao}}</p>
+      </div>
+      <div class="d-flex">
+        <p class="col-5 adjust-text secundary-font" [pTooltip]="'Operação'">Operação</p>
+        <p class="col-7 adjust-text primary-font" [pTooltip]="anuncio.operacao">{{anuncio.operacao}}</p>
+      </div>
+      <div class="d-flex">
+        <label for="status" class="col-5 label-complete secundary-font" style="align-self: center;">Status</label>
+        <p-autoComplete name="status"
+                        id="status"
+                        required
+                        [(ngModel)]="anuncio.status"
+                        (onClear)="onClearStatus()"
+                        (onSelect)="updateStatus()"
+                        (completeMethod)="statusComplete($event)"
+                        [suggestions]="statusSugestions"
+                        [dropdown]="true"
+                        [forceSelection]="true"
+                        [ngClass]="'col-7'"
+                        appendTo="body"
+                        [disabled]="!showUpdateStatusDono()"
+                        [pTooltip]="getTooltip$(anuncio.status?.toString()) | async">
+        </p-autoComplete>
+      </div>
+      <div class="d-flex">
+        <div class="col-5"><p class="adjust-text secundary-font" [pTooltip]="'Caracteristicas'">Caracteristicas</p></div>
+        <a class="small_a col-7" (click)="showDialogCaracteristicas=true">Exibir</a>
+      </div>
       <div *ngIf="showAnunciante()" class="d-flex">
-        <div class="col-5"><p class="adjust-text" [pTooltip]="'Anunciante'">Anunciante</p></div>
+        <div class="col-5"><p class="adjust-text secundary-font" [pTooltip]="'Anunciante'">Anunciante</p></div>
         <a class="small_a col-7" (click)="showDialogAnunciante=true">Exibir</a>
       </div>
       <div *ngIf="showAdquirinte()" class="d-flex">
-        <div class="col-5"><p class="adjust-text" [pTooltip]="'Adquirente'">Adquirente</p></div>
+        <div class="col-5"><p class="adjust-text secundary-font" [pTooltip]="'Adquirente'">Adquirente</p></div>
         <a class="small_a col-7" (click)="showDialogAdquirente=true">Exibir</a>
       </div>
       <!--    Variam de acordo com a operação-->
       <div *ngIf="showInstituicao()" class="d-flex">
-        <div class="col-5"><p class="adjust-text" [pTooltip]="'Instituição'">Instituição</p></div>
+        <div class="col-5"><p class="adjust-text secundary-font" [pTooltip]="'Instituição'">Instituição</p></div>
         <a class="small_a col-7" (click)="showDialogInstituicao=true">Exibir</a>
       </div>
       <div *ngIf="showDataDevolucao()" class="d-flex">
-        <div class="col-5"><p class="adjust-text" [pTooltip]="'Data de Devolução'">Devolução</p></div>
-        <p class="col-7">{{anuncio.dataDevolocao}}</p>
+        <div class="col-5"><p class="adjust-text secundary-font" [pTooltip]="'Data de Devolução'">Devolução</p></div>
+        <p class="col-7 primary-font">{{anuncio.dataDevolocao}}</p>
       </div>
       <div *ngIf="showProdutosTroca()" class="d-flex">
-        <div class="col-5"><p class="adjust-text" [pTooltip]="'Produtos Aceitos na Troca'">Troca-se por</p></div>
-        <div class="col-7"><p class="adjust-text" [pTooltip]="anuncio.produtosTroca">{{anuncio.produtosTroca}}</p></div>
+        <div class="col-5"><p class="adjust-text secundary-font" [pTooltip]="'Produtos Aceitos na Troca'">Troca-se por</p></div>
+        <div class="col-7"><p class="adjust-text primary-font" [pTooltip]="anuncio.produtosTroca">{{anuncio.produtosTroca}}</p></div>
       </div>
       <div *ngIf="showValor()" class="d-flex">
-        <div class="col-5"><b class="adjust-text" [pTooltip]="'Valor'">Valor</b></div>
-        <b class="col-7 m-b-10px">{{(anuncio.valor ? anuncio.valor : 0) | moneyFormat}}</b>
+        <div class="col-5"><p class="adjust-text secundary-font" [pTooltip]="'Valor'">Valor</p></div>
+        <b class="col-7 m-b-10px primary-font">{{(anuncio.valor ? anuncio.valor : 0) | moneyFormat}}</b>
       </div>
     </div>
   </div>
