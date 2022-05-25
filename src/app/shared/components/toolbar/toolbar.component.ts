@@ -36,13 +36,13 @@ export class ToolbarComponent implements OnInit {
           label: 'Anúncios',
           items: [
             {
-              label: 'Anunciar',
+              label: 'Novo',
               icon: 'pi pi-fw pi-volume-up',
               url: 'anuncio/form'
 
             },
             {
-              label: 'Comprar',
+              label: 'Listagem',
               icon: 'pi pi-fw pi-shopping-cart',
               url: 'home'
             }

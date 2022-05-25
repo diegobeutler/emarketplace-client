@@ -164,7 +164,7 @@ p-card p-header {
 
 .p-sidebar-content {
   position: absolute;
-  height: calc(100% - #{$height-toolbar});
+  height: calc(100vh - #{$height-toolbar});
 }
 
 .p-tooltip {
@@ -204,3 +204,11 @@ app-anuncio-card .p-card .p-card-title {
   text-shadow: #605e5e 0.02em 0.05em 0.2em;
 }
 
+.p-galleria .p-galleria-item-nav:not(.p-disabled):hover{
+  background: #b0adad!important;
+}
+
+
+.p-galleria .p-galleria-item-nav {
+  background: #d9d8d8;
+}

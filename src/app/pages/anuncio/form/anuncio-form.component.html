@@ -112,7 +112,7 @@
         </div>
       </div>
       <div *ngIf="showDataDevolucao()" class="col-12 col-md col-xl-6">
-        <div class="form-group" [disabledLabelAndSpan]="readOnly">
+        <div class="form-group" [disabledLabelAndSpan]="naoEhFinalizado()">
           <label for="dataDevolucao">
             Data de Devolução
           </label>
@@ -121,7 +121,7 @@
                       [monthNavigator]="true"
                       [showIcon]="true"
                       [yearRange]="'2022:2100'"
-                      [disabled]="readOnly"
+                      [disabled]="naoEhFinalizado()"
                       dataType="string"
                       dateFormat="dd/mm/yy"
                       id="dataDevolucao"
@@ -129,12 +129,12 @@
         </div>
       </div>
       <div *ngIf="showProdutosTroca()" class="col-12">
-        <div class="form-group" [disabledLabelAndSpan]="readOnly">
+        <div class="form-group" [disabledLabelAndSpan]="naoEhFinalizado()">
           <label for="produtosTroca">Produtos Aceitos na Troca</label>
           <span class="obrigatorio">*</span>
           <textarea [(ngModel)]="registro.produtosTroca"
                     id="produtosTroca"
-                    [disabled]="readOnly "
+                    [disabled]="naoEhFinalizado() "
                     name="produtosTroca"
                     type="text"
                     rows="1"

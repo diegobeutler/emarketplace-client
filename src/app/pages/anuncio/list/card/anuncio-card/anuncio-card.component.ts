@@ -54,9 +54,9 @@ export class AnuncioCardComponent implements OnInit {
       case Status.DISPONIVEL:
         return this.anuncio.operacao === Operacao.DOACAO_PRODUTO ? 'Aceitar Doação' : 'Tenho Interesse';
       case Status.EM_NEGOCIACAO:
-        return 'Em Negociação'
+        return  Status.EM_NEGOCIACAO.toString();
       default:
-        return 'Finalizado'
+        return Status.FINALIZADO.toString()
     }
   }
 
@@ -155,10 +155,10 @@ export class AnuncioCardComponent implements OnInit {
   }
 
   showAdquirinte(): boolean {
-    return this.isAuthenticated && this.anuncio.ehUsuarioOrigem && this.anuncio.status !== Status.DISPONIVEL
+    return this.isAuthenticated && this.anuncio.ehUsuarioOrigem && this.anuncio.status !== Status.DISPONIVEL;
   }
 
   showAnunciante(): boolean  {
-    return this.isAuthenticated && !this.anuncio.ehUsuarioOrigem
+    return this.isAuthenticated && !this.anuncio.ehUsuarioOrigem;
   }
 }

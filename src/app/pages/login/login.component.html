@@ -1,5 +1,6 @@
-<form id="form" #form="ngForm" class="my-form width-card-p-35 mt-5">
-  <p-card >
+
+<form id="form" #form="ngForm" class="my-form center-card">
+  <p-card>
     <p-header>
       Login
     </p-header>
@@ -13,7 +14,7 @@
                        id="inputtext-left"
                        pInputText
                        [(ngModel)]="registro.username"
-                        required>
+                       required>
                 <label for="inputtext-left">Usuário</label>
             </span>
         </div>
@@ -21,7 +22,7 @@
       <div class="field col-12">
         <div class="form-group">
            <span class="p-float-label p-input-icon-left col-12">
-                <i class="pi pi-unlock" ></i>
+                <i class="pi pi-unlock"></i>
                 <p-password class="col-12"
                             [inputId]="'password'"
                             name="password"
@@ -30,7 +31,7 @@
                             [strongRegex]="'^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.{6,})'"
                             id="component-password"
                             [toggleMask]="true"
-                            [promptLabel]="'Adicione uma senha'"
+                            [promptLabel]="'Adicione sua senha'"
                             [weakLabel]="'Fraca'"
                             [mediumLabel]="'Média'"
                             [strongLabel]="'Forte'"
@@ -41,29 +42,19 @@
             </span>
           <div class="text-end">
             <small>Esqueceu a senha? <a class="small_a"
-                                                                href="/usuario/resetPassWord">Redefinir</a></small>
+                                        href="/usuario/resetPassWord">Redefinir</a></small>
           </div>
 
         </div>
       </div>
     </div>
     <div class="col-12 text-center pt-3">
-      <p-button label="Acessar" icon="pi pi-check" [disabled]="loginService.isAuthenticated" (onClick)="acessar()"></p-button>
+      <p-button label="Acessar" icon="pi pi-check" [disabled]="loginService.isAuthenticated"
+                (onClick)="acessar()"></p-button>
       <div class="row  col-12 mt-2">
-        <small>Não é cadastrado ? <a class="small_a"
+        <small>Não é cadastrado? <a class="small_a"
                                      href="/usuario/form">Cadastre-se</a></small>
       </div>
     </div>
-
-    <!-- Loading -->
-    <div class="d-flex justify-center">
-      <p-progressBar mode="indeterminate" [style]="{'height': '6px'}"></p-progressBar>
-    </div>
   </p-card>
-  <div class="d-flex justify-center">
-    <p-progressBar mode="indeterminate" [style]="{'height': '6px'}"></p-progressBar>
-  </div>
 </form>
-<div class="d-flex justify-center">
-  <p-progressBar mode="indeterminate" [style]="{'height': '6px'}"></p-progressBar>
-</div>

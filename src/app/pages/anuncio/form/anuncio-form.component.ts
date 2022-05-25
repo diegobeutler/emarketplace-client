@@ -153,4 +153,8 @@ export class AnuncioFormComponent extends SimpleCrudComponent<Anuncio> {
       this.messageService.add({severity: 'error', detail: errorTransform(error)})
     });
   }
+
+  naoEhFinalizado(): boolean {
+    return this.registro.status != Status.FINALIZADO;
+  }
 }
