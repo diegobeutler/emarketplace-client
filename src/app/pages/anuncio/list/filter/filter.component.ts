@@ -79,11 +79,14 @@ export class FilterComponent implements OnInit {
 
 
   applyFilter(): void {
+    this.loaderService.show(true, "Aguarde, filtrando...");
+    this.showFilter = false;
     this.anuncioService.findAnunciosByFilter(this.filter)
       .subscribe(anuncios => {
+        this.loaderService.show(false);
         this.anuncios.emit(anuncios)
-        this.showFilter = false;
       }, error => {
+        this.loaderService.show(false);
         this.messageService.add({severity: 'error', detail: errorTransform(error)});
       });
   }
