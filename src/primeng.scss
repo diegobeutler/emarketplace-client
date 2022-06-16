@@ -204,11 +204,16 @@ app-anuncio-card .p-card .p-card-title {
   text-shadow: #605e5e 0.02em 0.05em 0.2em;
 }
 
-.p-galleria .p-galleria-item-nav:not(.p-disabled):hover{
-  background: #b0adad!important;
-}
+//.p-galleria .p-galleria-item-nav:not(.p-disabled):hover{
+//  background: #b0adad!important;
+//}
+//
+//
+//.p-galleria .p-galleria-item-nav {
+//  background: #d9d8d8;
+//}
 
 
-.p-galleria .p-galleria-item-nav {
-  background: #d9d8d8;
+.p-autocomplete .p-autocomplete-panel {
+  max-height: 220px!important;
 }

@@ -9,7 +9,7 @@ import {CidadeService} from "../../endereco/cidade.service";
 import * as $ from 'jquery';
 import {errorTransform} from "../../../shared/pipes/error-transform";
 
-const DEFAULT_IMAGE = 'https://s3.sa-east-1.amazonaws.com/e-marketplace/images/users/defaultImage.jpg';
+const DEFAULT_IMAGE = 'https://e-marketplace.s3.sa-east-1.amazonaws.com/images/users/defaultImage.jpg';
 
 @Component({
   selector: 'app-usuario-form',

@@ -25,8 +25,7 @@ export class AnuncioFormComponent extends SimpleCrudComponent<Anuncio> {
   categorias: Categoria[];
   operacoesSugestions: Operacao[];
   instituicoes: Usuario[];
-  readonly operacoesValorRequerid = [Operacao.DOACAO_VALOR, Operacao.VENDA];
-  readonly operacoesHasValor = [Operacao.EMPRESTIMO].concat(this.operacoesValorRequerid);
+  readonly operacoesHasValor = [Operacao.EMPRESTIMO, Operacao.DOACAO_VALOR, Operacao.VENDA];
   readonly operacoesHasInstituicao = [Operacao.DOACAO_VALOR, Operacao.DOACAO_PRODUTO];
   showDialog: boolean = false;
   emailInstituicao: any;
@@ -105,7 +104,7 @@ export class AnuncioFormComponent extends SimpleCrudComponent<Anuncio> {
 
   isValidForm(): boolean {
     if (!this.registro.imagens?.length) {
-      this.messageService.add({severity: 'warn', detail: "Deve-se carregar ao menos uma imagem."});
+      this.messageService.add({severity: 'warn', detail: "Deve-se selecionar ao menos uma imagem."});
       return false;
     }
     return super.isValidForm();
@@ -131,10 +130,6 @@ export class AnuncioFormComponent extends SimpleCrudComponent<Anuncio> {
     this.registro.imagens = this.registro.imagens.filter(imagem => imagem != imagemRemover);
   }
 
-  valorRequered(): boolean {
-    return this.operacoesValorRequerid.includes(this.registro.operacao)
-  }
-
   resetValoresOperacoes() {
     this.registro.valor = 0;
     this.registro.dataDevolocao = null!;
@@ -154,7 +149,7 @@ export class AnuncioFormComponent extends SimpleCrudComponent<Anuncio> {
     });
   }
 
-  naoEhFinalizado(): boolean {
-    return this.registro.status != Status.FINALIZADO;
+  ehFinalizado(): boolean {
+    return this.registro.status == Status.FINALIZADO;
   }
 }
