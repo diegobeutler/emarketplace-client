@@ -10,7 +10,6 @@ import {PanelModule} from "primeng/panel";
 import {AutoCompleteModule} from "primeng/autocomplete";
 import {UsuarioFormComponent} from "./form/usuario-form.component";
 import {UsuarioService} from "./usuario.service";
-import {NgxMaskModule} from "ngx-mask";
 import {EnderecoModule} from "../endereco/endereco.module";
 import {DisabledLabelAndSpanModule} from "../../shared/dierective/disabledLabelSpan/disabled-label-and-span.module";
 import {TooltipModule} from "primeng/tooltip";
@@ -22,6 +21,7 @@ import {ResetPasswordComponent} from './reset-password/reset-password.component'
 import {UpdatePasswordComponent} from './update-password/update-password.component';
 import {CheckboxModule} from "primeng/checkbox";
 import {PasswordValidationModule} from "../../shared/dierective/passwordValidation/password-validation.module";
+import {NgxMaskModule} from "ngx-mask";
 
 const routes: Routes = [
   { path: '', component: UsuarioFormComponent }

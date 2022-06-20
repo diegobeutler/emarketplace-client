@@ -17,6 +17,7 @@ import {DisabledLabelAndSpanModule} from "../../../shared/dierective/disabledLab
 import {UsuarioDialogComponent} from "./card/usuario-dialog/usuario-dialog.component";
 import {CheckboxModule} from "primeng/checkbox";
 import {MoneyFormatPipeModule} from "../../../shared/pipes/moneyFormat/moneyFormat.pipe.module";
+import {NgxMaskModule} from "ngx-mask";
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import {MoneyFormatPipeModule} from "../../../shared/pipes/moneyFormat/moneyForm
         InputTextModule,
         DisabledLabelAndSpanModule,
         CheckboxModule,
-        MoneyFormatPipeModule
+        MoneyFormatPipeModule,
+        NgxMaskModule.forRoot(),
     ],
   exports: [
     AnuncioListComponent,
